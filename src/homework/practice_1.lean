@@ -1,7 +1,8 @@
 /-
 
 secret code name: groundhog
-github url: https://github.com/yashaviprakash/cs2120f21.git
+Yashavi Prakash, yp3ez, github url: https://github.com/yashaviprakash/cs2120f21.git
+Jacqueline Chao, jc7rw, github url: https://github.com/arte-et-marte/my_cs2120f21.git
 -/
 
 /-
