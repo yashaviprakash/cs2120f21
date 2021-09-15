@@ -56,6 +56,8 @@ that we we have a proof) that Joe chews gum.
 Give an English proof of the proposition that
 (Joe is tall) ∨ (Joe chews gum).
 
+Answer: this is true by the right or introduction rule
+
 Proof: Apply the right introduction rule for
 ∨ to (1) our proof that Joe chews gum, and
 (2) the proposition that Joe is tall. The 
@@ -71,7 +73,7 @@ In Lean, the rules are called or.intro_left
 and or.intro_right.
 -/
 
-#check @or.intro_left
+#check @or.intro_left /- curly braces mean that the a argument can actually be inferred-/
 #check @or.intro_right
 
 /-
@@ -85,12 +87,15 @@ inferred from other arguments are given in {}.
 Let's formalize our example in Lean.
 -/
 
+/- both are propositions-/
 axioms (Joe_is_tall Joe_chews_gum : Prop)
+/- assuming on this line that Joe_chews_gum is true, by proof jcg-/
 axiom jcg: Joe_chews_gum
 
 theorem jcg_or_jit: Joe_chews_gum ∨ Joe_is_tall :=
-  or.intro_left Joe_is_tall jcg 
-
+begin
+  apply or.intro_left Joe_is_tall jcg,
+end
 /-
 Exercise: Formalize our second version of this
 proposition and a proof of it.
