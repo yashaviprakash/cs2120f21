@@ -20,7 +20,4 @@ line to data
 Is this form of reasoning *sound* or *not sound*
 
 
-
-
-
 -/
