@@ -1,39 +1,4 @@
 /-
--/
-theorem and_associative : ∀ (P Q R: Prop), (P ∧ Q) ∧ R → P ∧ (Q ∧ R) :=
-begin
-  assume P Q R,
-  assume h, /-assume you have proof of h-/ /-paranthesis dropped because and is considered to be right associative-/
-  have pq: P ∧ Q:= and.elim_left h, /-can give exactly a proof of P-/
-  have p : P := and.elim_left pq,
-  have q : Q := and.elim_right pq,
-  have r: R := and.elim_right h, 
-  /- how to use exact in this scenario to prove p separately as a subgoal: apply and.intro _ (and.intro q r), exact p, -/
-  exact and.intro p (and.intro q r),
-
-end
-
-/- difference between exact and apply
-
-exact has no placeholders
-
-apply has placeholders (and they can become subgoals)
-apply is really useful if arguments are really complicated
-allows for a top down approach, and elaborate what the arguments are separately
-subroutines are holes you can go in later to fill in
-
-wherever you use exact you can use apply, but not vice versa
--/
-
-/-
-The or connective, ∨, in predicate logic
-join any two propositions, P, Q, into a
-larger proposition, P ∨ Q. This proposition
-is judged as true if either (or both) P, Q
-are true.
--/
-
-/-
 Introduction rules (two of them).
 
 There are two ways to prove a proposition,
@@ -56,7 +21,7 @@ that we we have a proof) that Joe chews gum.
 Give an English proof of the proposition that
 (Joe is tall) ∨ (Joe chews gum).
 
-Answer: this is true by the right or introduction rule
+Answer: this is true by the right introduction rule of or
 
 Proof: Apply the right introduction rule for
 ∨ to (1) our proof that Joe chews gum, and
@@ -94,7 +59,7 @@ axiom jcg: Joe_chews_gum
 
 theorem jcg_or_jit: Joe_chews_gum ∨ Joe_is_tall :=
 begin
-  apply or.intro_left Joe_is_tall jcg,
+  apply or.intro_left Joe_is_tall jcg, /- why left intro rule and not right since thats what was true-/
 end
 /-
 Exercise: Formalize our second version of this
@@ -140,7 +105,7 @@ Let's add a few assumptions and see this rule in action.
 -/
 axioms (P Q R : Prop) (pq : P ∨ Q) (pr : P → R) (qr : Q → R) 
 
-example : R := _
+example : R := or.elim pq pr qr
 
 axioms 
   (Joe_is_funny : Prop) 
@@ -187,7 +152,7 @@ Here it is formally!
 example : Joe_is_funny :=
 begin
   cases torf, -- applies or.elim
-  apply tf h,
+  apply tf h, /-where is h?-/
   apply gf h,
 end
 

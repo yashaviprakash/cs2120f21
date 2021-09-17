@@ -145,7 +145,7 @@ applying ev to various arguments (of type ℕ).
 #reduce ev 2  -- yay 
 #reduce ev 3  -- boo
 #reduce ev 4  -- yay
-#reduce ev 5  -- boo
+#reduce ev 5  -- boo 
 
 /-
 A predicate in effect defines a *set of values:
@@ -306,7 +306,39 @@ Exercise: formalize the proposition and
 a proof of it.
 -/
 
-theorem and_associative : _ := _
+theorem and_associative : ∀ (P Q R: Prop), (P ∧ Q) ∧ R → P ∧ (Q ∧ R) :=
+begin
+  assume P Q R,
+  assume h, /-assume you have proof of h-/ /-paranthesis dropped because and is considered to be right associative-/
+  have pq: P ∧ Q:= and.elim_left h, /-can give exactly a proof of P-/
+  have p : P := and.elim_left pq,
+  have q : Q := and.elim_right pq,
+  have r: R := and.elim_right h, 
+  /- how to use exact in this scenario to prove p separately as a subgoal: apply and.intro _ (and.intro q r), exact p, -/
+  exact and.intro p (and.intro q r),
+
+end
+
+/- difference between exact and apply
+
+exact has no placeholders
+
+apply has placeholders (and they can become subgoals)
+apply is really useful if arguments are really complicated
+allows for a top down approach, and elaborate what the arguments are separately
+subroutines are holes you can go in later to fill in
+
+wherever you use exact you can use apply, but not vice versa
+-/
+
+/-
+The or connective, ∨, in predicate logic
+join any two propositions, P, Q, into a
+larger proposition, P ∨ Q. This proposition
+is judged as true if either (or both) P, Q
+are true.
+-/
+
 
 -- Lean's proof of associativity
 #check @and.assoc
