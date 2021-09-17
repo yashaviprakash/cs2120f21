@@ -1,4 +1,27 @@
 /-
+-/
+
+theorem and_associative : 
+  ∀ (P Q R : Prop), (P ∧ Q) ∧ R → P ∧ (Q ∧ R) :=
+begin
+  assume P Q R,
+  assume h,
+  have pq : P ∧ Q := and.elim_left h,
+  have p : P := and.elim_left pq,
+  have q : Q := and.elim_right pq,
+  have r : R := and.elim_right h,
+  exact and.intro p (and.intro q r),
+end
+
+/-
+The or connective, ∨, in predicate logic
+join any two propositions, P, Q, into a
+larger proposition, P ∨ Q. This proposition
+is judged as true if either (or both) P, Q
+are true.
+-/
+
+/-
 Introduction rules (two of them).
 
 There are two ways to prove a proposition,
@@ -61,11 +84,6 @@ theorem jcg_or_jit: Joe_chews_gum ∨ Joe_is_tall :=
 begin
   apply or.intro_left Joe_is_tall jcg, /- why left intro rule and not right since thats what was true-/
 end
-/-
-Exercise: Formalize our second version of this
-proposition and a proof of it.
--/
-
 /-
 We thus have two inference rules (axioms) that we
 can use to create a proof of a "disjunction". 
