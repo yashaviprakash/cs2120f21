@@ -126,9 +126,21 @@ begin
     apply or.intro_left Q p,
 end
 
-/- 10 -/
+/- 10 (solved)-/
 example : ∀ (P Q : Prop), P ∨ (P ∧ Q) ↔ P := 
 begin
+  assume P Q,
+  apply iff.intro _ _,
+  -- forward
+  assume porpq,
+  apply or.elim porpq,
+  assume p,
+  exact p,
+  assume h,
+  exact and.elim_left h,
+  --backward
+  assume p,
+  apply or.intro_left (P ∧ Q) p,
 end
 
 /- 11 (solved)-/
