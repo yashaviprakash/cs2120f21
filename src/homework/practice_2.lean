@@ -6,15 +6,18 @@ in the sense that they identify all the axioms
 and/or theorems that you use.
 -/
 
+/- 1 -/
 example : true := true.intro
 
 /- 
 false is uninhabited proposition type, a type with no values at all, no way to construct a proof of false
 for an proposition to be false, there is no proof of it (true propositions have a truth to it)
 -/
-example : false :=    -- trick question? why? yes, bc there is no proof of false. 
+/- 2 -/
+example : false :=   -- trick question? why? yes, bc there is no proof of false. 
 
 /- for any propposition P, P or P is true if and only if P is true-/
+/- 3 -/
 example : ∀ (P : Prop), P ∨ P ↔ P := 
 begin
     assume P, 
@@ -36,7 +39,7 @@ end
 
 if p or p is true, then eiether p is true or p is true. 
 do case disjuction analysis on left side and on right side.-/
-
+/- 4 -/
 example : ∀ (P : Prop), P ∧ P ↔ P := 
 begin
   assume P,
@@ -50,6 +53,7 @@ begin
 
 end
 
+/- 5 -/
 example : ∀ (P Q : Prop), P ∨ Q ↔ Q ∨ P := 
 begin
   assume P Q,
@@ -70,6 +74,7 @@ begin
     apply or.intro_left Q p, 
 end
 
+/- 6 -/
 example : ∀ (P Q : Prop), P ∧ Q ↔ Q ∧ P := 
 begin
   assume P Q, 
@@ -86,22 +91,54 @@ begin
     apply and.elim_left h,
 end
 
+/- 7 -/
 example : ∀ (P Q R : Prop), P ∧ (Q ∨ R) ↔ (P ∧ Q) ∨ (P ∧ R) := 
 begin
+  assume P Q R,
+  apply iff.intro _ _,
+  -- forward
+    assume h,
+    have qr : Q ∨ R := and.elim_right h,
+    have p: P := and.elim_left h,
+    
+  -- backward
 end
 
+axioms (P Q R : Prop)
+  
+#check P ∨ Q ∧ R
+  
+#check P ∨ (Q ∧ R)
+  
+#check (P ∨ Q) ∨ R
+ 
+/- 8 -/
 example : ∀ (P Q R : Prop), P ∨ (Q ∧ R) ↔ (P ∨ Q) ∧ (P ∨ R) := 
 begin
 end
 
+/- 9 -/
 example : ∀ (P Q : Prop), P ∧ (P ∨ Q) ↔ P := 
 begin
+  assume P Q,
+  apply iff.intro _ _,
+  -- forward
+    assume h,
+    have p: P := and.elim_left h,
+    exact p,
+  -- backwrad
+    assume p,
+    apply and.intro _ _,
+    exact p,
+    apply or.intro_left p Q,
 end
 
+/- 10 -/
 example : ∀ (P Q : Prop), P ∨ (P ∧ Q) ↔ P := 
 begin
 end
 
+/- 11 -/
 example : ∀ (P : Prop), P ∨ true ↔ true := 
 begin
   assume P,
@@ -111,10 +148,14 @@ begin
     apply or.elim port,
     assume p,
     apply true.intro,
-    
+    assume t,
+    exact t,
   -- backward
+    assume t,
+    apply or.intro_right P t,
 end
 
+/- 12 -/
 example : ∀ (P : Prop), P ∨ false ↔ P := 
 begin
   assume P,
@@ -125,17 +166,38 @@ begin
     assume p,
     exact p,
     /- anything false has on proof, do i just leave it blank?-/
+    assume f,
   -- backward
 
-
 end
 
+/- 13 -/
 example : ∀ (P : Prop), P ∧ true ↔ P := 
 begin
+  assume P,
+  apply iff.intro _ _,
+  -- forward
+    assume pant,
+    apply and.elim_left pant,
+  -- backward
+    assume p,
+    apply and.intro _ _,
+    exact p,
+    apply true.intro,
 end
 
+/- 14 -/
 example : ∀ (P : Prop), P ∧ false ↔ false := 
 begin
+  assume P,
+  apply iff.intro _ _,
+  -- forward
+    assume pandf,
+    apply and.elim_right pandf,
+  -- backward
+    assume f,
+    apply and.intro _ _,
+    
 end
 
 
