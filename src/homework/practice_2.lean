@@ -20,20 +20,20 @@ example : false :=   -- trick question? why? yes, bc there is no proof of false.
 /- 3 (solved)-/
 example : ∀ (P : Prop), P ∨ P ↔ P := 
 begin
-    assume P, 
-    apply iff.intro _ _,
-    -- forward
-      assume porp, 
-      apply or.elim porp,
-      -- left disjunct is true
-        assume p,
-        exact p,
-      -- right disjunct is true
-        assume p,
-        exact p,
+  assume P, 
+  apply iff.intro _ _,
+  -- forward
+    assume porp,
+    apply or.elim porp,
+    -- left disjunct is true
+      assume p,
+      exact p,
+    -- right disjunct is true
+      assume p,
+      exact p,
   -- backwards
-    assume p, 
-    exact or.intro_left P p, /- or intor rule takes two arguments, a propostion and a proof-/
+    assume p,
+    exact or.intro_left P p,
 end
 /- english language prooof:
 
@@ -104,13 +104,6 @@ begin
   -- backward
 end
 
-axioms (P Q R : Prop)
-  
-#check P ∨ Q ∧ R
-  
-#check P ∨ (Q ∧ R)
-  
-#check (P ∨ Q) ∨ R
  
 /- 8 -/
 example : ∀ (P Q R : Prop), P ∨ (Q ∧ R) ↔ (P ∨ Q) ∧ (P ∨ R) := 
