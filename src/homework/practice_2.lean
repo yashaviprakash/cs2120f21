@@ -58,9 +58,16 @@ begin
     assume porq,
     apply or.elim porq,
     assume p,
-    apply or.intro_left 
-
-
+    apply or.intro_right Q p,
+    assume q,
+    apply or.intro_left P q,
+  -- backward
+    assume porq,
+    apply or.elim porq,
+    assume q,
+    apply or.intro_right P q,
+    assume p,
+    apply or.intro_left Q p, 
 end
 
 example : ∀ (P Q : Prop), P ∧ Q ↔ Q ∧ P := 
@@ -97,10 +104,30 @@ end
 
 example : ∀ (P : Prop), P ∨ true ↔ true := 
 begin
+  assume P,
+  apply iff.intro _ _,
+  -- forward
+    assume port,
+    apply or.elim port,
+    assume p,
+    apply true.intro,
+    
+  -- backward
 end
 
 example : ∀ (P : Prop), P ∨ false ↔ P := 
 begin
+  assume P,
+  apply iff.intro _ _,
+  -- forward
+    assume porf,
+    apply or.elim porf,
+    assume p,
+    exact p,
+    /- anything false has on proof, do i just leave it blank?-/
+  -- backward
+
+
 end
 
 example : ∀ (P : Prop), P ∧ true ↔ P := 
