@@ -6,18 +6,18 @@ in the sense that they identify all the axioms
 and/or theorems that you use.
 -/
 
-/- 1 -/
+/- 1 (solved)-/
 example : true := true.intro
 
 /- 
 false is uninhabited proposition type, a type with no values at all, no way to construct a proof of false
 for an proposition to be false, there is no proof of it (true propositions have a truth to it)
 -/
-/- 2 -/
+/- 2 (solved)-/
 example : false :=   -- trick question? why? yes, bc there is no proof of false. 
 
 /- for any propposition P, P or P is true if and only if P is true-/
-/- 3 -/
+/- 3 (solved)-/
 example : ∀ (P : Prop), P ∨ P ↔ P := 
 begin
     assume P, 
@@ -39,7 +39,7 @@ end
 
 if p or p is true, then eiether p is true or p is true. 
 do case disjuction analysis on left side and on right side.-/
-/- 4 -/
+/- 4 (solved)-/
 example : ∀ (P : Prop), P ∧ P ↔ P := 
 begin
   assume P,
@@ -53,7 +53,7 @@ begin
 
 end
 
-/- 5 -/
+/- 5 (solved)-/
 example : ∀ (P Q : Prop), P ∨ Q ↔ Q ∨ P := 
 begin
   assume P Q,
@@ -74,7 +74,7 @@ begin
     apply or.intro_left Q p, 
 end
 
-/- 6 -/
+/- 6 (solved)-/
 example : ∀ (P Q : Prop), P ∧ Q ↔ Q ∧ P := 
 begin
   assume P Q, 
@@ -117,7 +117,7 @@ example : ∀ (P Q R : Prop), P ∨ (Q ∧ R) ↔ (P ∨ Q) ∧ (P ∨ R) :=
 begin
 end
 
-/- 9 -/
+/- 9 (solved)-/
 example : ∀ (P Q : Prop), P ∧ (P ∨ Q) ↔ P := 
 begin
   assume P Q,
@@ -130,7 +130,7 @@ begin
     assume p,
     apply and.intro _ _,
     exact p,
-    apply or.intro_left p Q,
+    apply or.intro_left Q p,
 end
 
 /- 10 -/
@@ -138,7 +138,7 @@ example : ∀ (P Q : Prop), P ∨ (P ∧ Q) ↔ P :=
 begin
 end
 
-/- 11 -/
+/- 11 (solved)-/
 example : ∀ (P : Prop), P ∨ true ↔ true := 
 begin
   assume P,
@@ -155,7 +155,7 @@ begin
     apply or.intro_right P t,
 end
 
-/- 12 -/
+/- 12 (solved)-/
 example : ∀ (P : Prop), P ∨ false ↔ P := 
 begin
   assume P,
@@ -166,12 +166,17 @@ begin
     assume p,
     exact p,
     /- anything false has on proof, do i just leave it blank?-/
+    /- have no idea how i answered this????????-/
     assume f,
+    apply false.elim,
+    exact f,
   -- backward
-
+    assume p,
+    apply or.intro_left false p,
+    
 end
 
-/- 13 -/
+/- 13 (solved)-/
 example : ∀ (P : Prop), P ∧ true ↔ P := 
 begin
   assume P,
@@ -186,7 +191,7 @@ begin
     apply true.intro,
 end
 
-/- 14 -/
+/- 14 (solved)-/
 example : ∀ (P : Prop), P ∧ false ↔ false := 
 begin
   assume P,
@@ -197,7 +202,9 @@ begin
   -- backward
     assume f,
     apply and.intro _ _,
-    
+    apply false.elim,
+    exact f,
+    exact f,
 end
 
 
