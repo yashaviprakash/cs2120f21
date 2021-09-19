@@ -8,6 +8,8 @@ and/or theorems that you use.
 
 /- 1 (solved)-/
 example : true := true.intro
+/-English Language Proof: Anything true needs a proof of true, 
+and that is done by the introduction rule for true.-/
 
 /- 
 false is uninhabited proposition type, a type with no values at all, no way to construct a proof of false
@@ -15,6 +17,8 @@ for an proposition to be false, there is no proof of it (true propositions have 
 -/
 /- 2 (solved)-/
 example : false :=   -- trick question? why? yes, bc there is no proof of false. 
+/-English Language Proof: If anything true means that it needs
+a proof of true, anything false will need a proof of false as well.-/
 
 /- for any propposition P, P or P is true if and only if P is true-/
 /- 3 (solved)-/
@@ -35,7 +39,7 @@ begin
     assume p,
     exact or.intro_left P p,
 end
-/- english language prooof:
+/- english language prooof: We prove 
 
 if p or p is true, then eiether p is true or p is true. 
 do case disjuction analysis on left side and on right side.-/
