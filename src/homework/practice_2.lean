@@ -6,7 +6,7 @@ in the sense that they identify all the axioms
 and/or theorems that you use.
 -/
 
-/- 1 (solved)-/
+/- 1 (solved with proof)-/
 example : true := true.intro
 /-Proof: Anything true needs a proof of true, 
 and that is done by the introduction rule 
@@ -17,7 +17,7 @@ false is uninhabited proposition type, a type with no values at all, no way to c
 for an proposition to be false, there is no proof of it (true propositions have a truth to it)
 -/
 
-/- 2 (solved)-/
+/- 2 (solved with proof)-/
 example : false :=   -- trick question? why? yes, bc there is no proof of false. 
 /-Proof: If anything true means that it needs
 a proof of true, anything false will need a 
@@ -27,7 +27,7 @@ would result in it having a truth value. QED.-/
 
 /- for any propposition P, P or P is true if and only if P is true-/
 
-/- 3 (solved)-/
+/- 3 (solved with proof)-/
 example : ∀ (P : Prop), P ∨ P ↔ P := 
 begin
   assume P, 
@@ -45,39 +45,31 @@ begin
     assume p,
     exact or.intro_left P p,
 end
-/- Proof : First, we assume that P is an 
-arbitrary, but specific proposition. Then, 
-we must apply the introduction rule of if 
-and only if, to prove the beginning proposition 
-in two ways: forwards and backwards. For the
-forwards proposition, we must prove that P or P 
-implies theproposition P. To do so, it is 
-necessary first to assume that P or P is true 
-(let's call it porp), and, from there it is 
-necessary to split up the proof with a left disjunct 
-and a right disjunct by the application of the or 
-elimination rule. With the left disjunct, a proof of 
-P can be assumed, which gives an exact proof of the 
-implication, thus accomplishing our goal for the left 
-disjunct. The same can be applied to the right disjunct, 
-as well. Now, addressing the backwards proof, a proof 
-of P must be assumed, and to prove that P implies 
-P or P, a single proof of P can be applied to the left 
-proposition of the or proposition to fully accomplish 
-the intial goal of proving the beginning proposition. 
-QED.-/
+/- Proof : First, we assume that P is an arbitrary, but specific proposition. Then, 
+we must apply the introduction rule of if and only if, to prove the beginning proposition 
+(if and only if P ∨ P implies P then P implies P ∨ P) in two ways: forwards and backwards. 
+To construct the forwards proof, it is necessary first to assume that P or P is true 
+(let's call it porp) by the introduction rule for implies, and, from there it is necessary to 
+split up the proof with a left disjunct and a right disjunct by the application of the or elimination rule. 
+With the left disjunct, a proof of P can be assumed true by the introduction rule for applies (let's call this p), 
+which gives an exact proof of the implication, thus accomplishing our goal for the left disjunct. 
+The same proof can be applied to the right disjunct, as well. Now, addressing the backwards proof, a proof 
+of P must be assumed by the introduction rule for implies (let's call it p), and to prove that P implies 
+P or P, an exact proof of P ∨ P can be made using proof p by the left or introduction rule, thus
+accomplishing the goal of the beginning proposition. QED.-/
 
 /-if p or p is true, then eiether p is true or p is true. 
 do case disjuction analysis on left side and on right side.-/
 
-/- 4 (solved)-/
+/- 4 (solved with proof)-/
 example : ∀ (P : Prop), P ∧ P ↔ P := 
 begin
   assume P,
   apply iff.intro _ _,
   -- forward
     assume pandp,
-    apply and.elim_left pandp,
+    have p: P := and.elim_left pandp,
+    exact p,
   -- backward
     assume p,
     exact and.intro p p,
@@ -85,17 +77,18 @@ begin
 end
 /-Proof: First, we assume that P is an arbitrary, but
 specific proposition. Then,to prove that if and only if 
-P and P implies P then P implies P and P, it is necessary 
+P and P implies P then P implies P ∧ P, it is necessary 
 to apply the introduction rule for if and only if to construct 
 a forward proof and a backward proof. To prove the forward 
-proof that P and P implies P, it must be assumed that P and P 
-is true. By the application left elimination rule for and, the 
-implication of P can be proven true. To prove the backward proof 
-that P implies P and P, it must be assumed that P is true, from 
-which we can construct a proof for P and P by the use of the and 
-introduction rule using the proof of P. QED. -/
+proof, it must be assumed that P ∧ P is true by the introduction 
+rule for implies. By the application left elimination rule for and, we can
+derive a proof of proposition P (let's call it p). This proof gives the exact proof of the
+implication, which accomplishes the goals of the forward proof. To prove the backward proof 
+that P implies P ∧ P, it must be assumed that P is true by the introduction rule
+for implies (let's call this p), from which we can construct a proof for P ∧ P by the use 
+of the and introduction rule using the proof p. QED. -/
 
-/- 5 (solved)-/
+/- 5 (solved with proof)-/
 example : ∀ (P Q : Prop), P ∨ Q ↔ Q ∨ P := 
 begin
   assume P Q,
@@ -103,33 +96,42 @@ begin
   -- forward
     assume porq,
     apply or.elim porq,
+    -- left disjunct
     assume p,
     apply or.intro_right Q p,
+    -- right disjunct
     assume q,
     apply or.intro_left P q,
   -- backward
     assume qorp,
     apply or.elim qorp,
+    --left disjunct
     assume q,
     apply or.intro_right P q,
+    --right disjunct
     assume p,
     apply or.intro_left Q p, 
 end
 /-Proof: First, we assume that P and Q are arbitrary, but specific propositions.
  To prove that if and only if P or Q is true, then Q or P is also true, it is 
- necessary to apply the introduction rule for the if and only if introduction
- rule to construct forward and backward proofs. To construct a forward proof,
- it is necessary to assume that P or Q is true (let's call it porq). To construct 
- a proof that Q or P is true, it is necessary to use the elimination rules 
- for or to conduct a case disjunct analysis, then apply the right and left or introduction
- rule to apply to Q or P to construct a proof for the implication that
- Q or P is true. To construct a backward proof that if Q or P is true then, by
+ necessary to apply the if and only if introduction rule to construct forward 
+ and backward proofs. To construct a forward proof,
+ it is necessary to assume that P or Q is true (let's call it porq) by the 
+ introduction rule for implies. To construct a proof that Q or P is true, it is 
+ necessary to use the or elimination rules to porq to conduct a case disjunct analysis. 
+ To prove the left disjunct, it must first be assumed that there is a proof of proposition P
+ (let's call it p) to prove the disjunct by applying left or introduction rule using proof p.
+ To prove the right disjjunct, it must first be assumed that there is a proof of proposition Q
+ (let's call it q) to prove the disjunct by applying the right or introduction rule using proof q.
+ To construct a backward proof that if Q or P is true then, by
  implication, P or Q is true, it is necessary to first assume that Q or P is 
- true (let's call it qorp). To prove that P or Q is true, it is necessary
- to use the or elimination rule to split up the solutions and conduct a 
- case disjunct analysis, which will prove the left disjunct and the right disjunct. 
- To do so, the use of the right and left or introduction rules are brought in to 
- result in a proof of true for the backwards proof. QED.-/
+ true (let's call it qorp) by the introduction rule for implies. To prove that P or Q is true, it is necessary
+ to use the or elimination rule to conduct a case disjunct analysis, which will help construct
+ proofs of the left disjunct and the right disjunct. To prove the left disjunct, it must first be 
+ assumed that there is a proof of proposition Q (let's call it q) to prove the disjunct by 
+ applying right or introduction rule using proof q. To prove the right disjunct, it must first 
+ be assumed that there is a proof of proposition P (let's call it p) to prove the disjunct by 
+ applying the right or introduction rule using proof p. QED.-/
 
 /- 6 (solved)-/
 example : ∀ (P Q : Prop), P ∧ Q ↔ Q ∧ P := 
@@ -210,12 +212,10 @@ begin
     assume p,
     apply or.intro_left (Q ∧ R) p,
     apply or.elim porr,
-
-    
     
 end
 
-/- 9 (solved)-/
+/- 9 (solved with proof)-/
 example : ∀ (P Q : Prop), P ∧ (P ∨ Q) ↔ P := 
 begin
   assume P Q,
@@ -224,12 +224,27 @@ begin
     assume h,
     have p: P := and.elim_left h,
     exact p,
-  -- backwrad
+  -- backward
     assume p,
     apply and.intro _ _,
     exact p,
     apply or.intro_left Q p,
 end
+/-Proof: First, we must assume that P and Q are arbitrary but specific propositions.
+To construct a proof that if and only if P ∧ (P ∨ Q) implies P then P implies P ∧ (P ∨ Q), 
+the if and only if introduction rule must be applied to construct forwards and backwards 
+proofs. To begin constructing the forward proof, it must first be assumed that P ∧ (P ∨ Q) is true
+by the introduction rule for implies (let's call it h). From here, we can create a proof 
+for p by the left and elimination rule to h (let's call it p). This proof of P can be applied 
+to the right of the implciation (which is proposition P) by the elimination rule for 
+implies to accomplish the goals for the forward proof. To begin the backward proof, 
+it can first be assumed that P is true (let's call it p) by the introduction rule for implies. 
+To construct the proof of P ∧ (P ∨ Q), the application of the and
+introduction rule is necessary to create a top-down approach to proving the implication.
+This can be proved by applying the proof p to the proposition P as the elimination rule
+for implies, and by applying the left introduction rule of or to the proposition Q using
+the proof p. QED. 
+-/
 
 /- 10 (solved)-/
 example : ∀ (P Q : Prop), P ∨ (P ∧ Q) ↔ P := 
