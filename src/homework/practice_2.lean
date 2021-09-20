@@ -133,7 +133,7 @@ end
  be assumed that there is a proof of proposition P (let's call it p) to prove the disjunct by 
  applying the right or introduction rule using proof p. QED.-/
 
-/- 6 (solved)-/
+/- 6 (solved with proof)-/
 example : ∀ (P Q : Prop), P ∧ Q ↔ Q ∧ P := 
 begin
   assume P Q, 
@@ -158,7 +158,7 @@ is true (let's call this h). To construct a proof of Q ∧ P, we must first spli
 the and proposition and find individual proofs of propositions P and Q that 
 can be made possible by the usage of the and introduction rule and and elimination rule, respectively.
 First, with the application of the introduction rule for and, we are given the two propositions
-that make up P ∧ Q. Then with the application fo the right elimination rule and the left
+that make up P ∧ Q. Then with the application of the right elimination rule and the left
 elimination rule, we can construct a proof of Q ∧ P using the proofs of Q and P individually
 using teh elimination rules. To begin with the backward proposition, the same rules apply
 such that it can first be assumed that Q ∧ P is true to construct a proof that P ∧ Q is true.
@@ -262,6 +262,12 @@ begin
   assume p,
   apply or.intro_left (P ∧ Q) p,
 end
+/-Proof: We must first assume that P and Q are arbitrary but specific propositions. 
+To prove that if and only if P ∨ (P ∧ Q) implies P then P implies P ∨ (P ∧ Q), the 
+application of the if and only if introduction rule can be applied to construct
+forwards and backwards proofs to prove the beginning proposition. To construct the
+forward proof, it must first be assumed that P ∨ (P ∧ Q) is true by the introduction
+rule for implies.  -/
 
 /- 11 (solved)-/
 example : ∀ (P : Prop), P ∨ true ↔ true := 
@@ -293,8 +299,7 @@ begin
     /- anything false has on proof, do i just leave it blank?-/
     /- have no idea how i answered this????????-/
     assume f,
-    apply false.elim,
-    exact f,
+    cases f,
   -- backward
     assume p,
     apply or.intro_left false p,
