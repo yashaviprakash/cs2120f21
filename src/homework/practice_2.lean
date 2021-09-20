@@ -264,8 +264,7 @@ begin
   -- backward
     assume f,
     apply and.intro _ _,
-    apply false.elim,
-    exact f,
+    cases f,
     exact f,
 end
 
