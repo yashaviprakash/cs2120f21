@@ -116,7 +116,7 @@ begin
   exact f,
 end
 
-/- if you've made an assumption of something that's
+/-  if you've made an assumption of something that's
 false, you do a case analysis on that proof, and if you do that 
 in this case that there will be nothing left to prove-/
 example : ¬ (0 = 1) := -- no way to construct this proof

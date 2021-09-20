@@ -157,6 +157,11 @@ begin
     assume h,
     have qr : Q ∨ R := and.elim_right h,
     have p: P := and.elim_left h,
+    apply or.elim qr,
+    --left disjunct
+    assume q,
+    
+    
     
   -- backward
 end
@@ -165,6 +170,30 @@ end
 /- 8 -/
 example : ∀ (P Q R : Prop), P ∨ (Q ∧ R) ↔ (P ∨ Q) ∧ (P ∨ R) := 
 begin
+  assume P Q R,
+  apply iff.intro _ _,
+  --forward
+    assume h,
+    apply or.elim h,
+    -- left disjunct
+    assume p,
+    apply and.intro _ _,
+    apply or.intro_left Q p,
+    apply or.intro_left R p,
+    --right disjunct
+    assume h,
+    have q : Q := and.elim_left h,
+    have r : R := and.elim_right h,
+    apply and.intro _ _,
+    apply or.intro_right P q,
+    apply or.intro_right P r,
+  --backward
+    assume h,
+    have porq : P ∨ Q := and.elim_left h,
+    have porr : P ∨ R := and.elim_right h,
+    apply or.elim porq,
+    assume p,
+
 end
 
 /- 9 (solved)-/
