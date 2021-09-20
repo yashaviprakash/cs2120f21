@@ -147,6 +147,22 @@ begin
     apply and.elim_right h,
     apply and.elim_left h,
 end
+/-Proof: First, we must assume that P and Q are arbitrary, but specific 
+propositions. To prove that if and only if P ∧ Q is true then Q ∧ P is 
+true as well, we must apply the introduction rule for if and only if
+to create a backwards and forward proposition to prove. To begin the
+forward proposition that P ∧ Q → Q ∧ P, we must first assume that P ∧ Q
+is true (let's call this h). To construct a proof of Q ∧ P, we must first split up 
+the and proposition and find individual proofs of propositions P and Q that 
+can be made possible by the usage of the and introduction rule and and elimination rule, respectively.
+First, with the application of the introduction rule for and, we are given the two propositions
+that make up P ∧ Q. Then with the application fo the right elimination rule and the left
+elimination rule, we can construct a proof of Q ∧ P using the proofs of Q and P individually
+using teh elimination rules. To begin with the backward proposition, the same rules apply
+such that it can first be assumed that Q ∧ P is true to construct a proof that P ∧ Q is true.
+By the use of the and introduction rule and the right and left and elimination rule, the proof
+of P ∧ Q can be constructed. QED. 
+-/
 
 /- 7 -/
 example : ∀ (P Q R : Prop), P ∧ (Q ∨ R) ↔ (P ∧ Q) ∨ (P ∧ R) := 
@@ -160,13 +176,12 @@ begin
     apply or.elim qr,
     --left disjunct
     assume q,
-    
+    apply or.intro_left (P ∧ R) (q ∧ P),
     
     
   -- backward
 end
 
- 
 /- 8 -/
 example : ∀ (P Q R : Prop), P ∨ (Q ∧ R) ↔ (P ∨ Q) ∧ (P ∨ R) := 
 begin
@@ -193,7 +208,11 @@ begin
     have porr : P ∨ R := and.elim_right h,
     apply or.elim porq,
     assume p,
+    apply or.intro_left (Q ∧ R) p,
+    apply or.elim porr,
 
+    
+    
 end
 
 /- 9 (solved)-/
