@@ -166,7 +166,7 @@ By the use of the and introduction rule and the right and left and elimination r
 of P ∧ Q can be constructed. QED. 
 -/
 
-/- 7 (solved)-/
+/- 7 (solved with proof)-/
 example : ∀ (P Q R : Prop), P ∧ (Q ∨ R) ↔ (P ∧ Q) ∨ (P ∧ R) := 
 begin
   assume P Q R,
@@ -266,16 +266,14 @@ begin
     apply or.intro_left (Q ∧ R) p,
     --right disjunct
     assume q,
-    
+    apply or.elim porr,
+    assume p,
+    apply or.intro_left (Q ∧ R) p,
+    assume r,
+    apply or.intro_right P _,
+    apply and.intro q r,
 end
-
-axioms (P Q R : Prop)
-  
-#check P ∨ Q ∧ R
-  
-#check P ∨ (Q ∧ R)
-  
-#check (P ∨ Q) ∨ R
+/- Proof: -/
 
 /- 9 (solved with proof)-/
 example : ∀ (P Q : Prop), P ∧ (P ∨ Q) ↔ P := 
