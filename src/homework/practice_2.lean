@@ -283,7 +283,7 @@ by the usage of the introduction rule for implies (let's call it p). The applica
 the left or itnroduction rule to P ∧ Q using the proof p will construct the backward proof 
 and proving the beginning proposition. QED. -/
 
-/- 11 (solved)-/
+/- 11 (solved with proof)-/
 example : ∀ (P : Prop), P ∨ true ↔ true := 
 begin
   assume P,
@@ -305,7 +305,7 @@ end
 if and only if P ∨ true implies true then true implies P ∨ true, the introduction rule
 for if and only if must be applied to construct forward and backward proof. To begin the forward
 proof, we must first assume that the proposition P ∨ true is true by the introduction rule
-for implies. To construct a proof that P ∨ tue is true, it is 
+for implies. To construct a proof that P ∨ true is true, it is 
 necessary to use the or elimination rules to porq to conduct a case disjunct analysis. This
 will help to construct a left disjunct and right disjunct. To begin the left disjunct, it must
 first be that the prosition P is true by the usage of the introduction rule for implies (let's call it p). To 
@@ -319,7 +319,7 @@ for or. This will accomplish the goal of the backwrad proof nad the prove beginn
 QED.
 -/
 
-/- 12 (solved)-/
+/- 12 (solved with proof)-/
 example : ∀ (P : Prop), P ∨ false ↔ P := 
 begin
   assume P,
@@ -327,19 +327,35 @@ begin
   -- forward
     assume porf,
     apply or.elim porf,
+    -- left disjunct
     assume p,
     exact p,
-    /- anything false has on proof, do i just leave it blank?-/
-    /- have no idea how i answered this????????-/
+    -- right disjunct
     assume f,
     cases f,
   -- backward
     assume p,
-    apply or.intro_left false p,
-    
+    apply or.intro_left false p,  
 end
+/-Proof: We must first assume that P is an arbitrary but specific proposition. To prove that
+if and only if P ∨ false implies P then P implies P ∨ false, the introduction rule
+for if and only if must be applied to construct forward and backward proof. To begin the 
+forward proof, it must first be assumed that P ∨ false is true by the usage of the introduction
+rule for implies (let's call it porq). To construct a proof that P ∨ false is true, it is 
+necessary to use the or elimination rules to porq to conduct a case disjunct analysis. This
+will help to construct a left disjunct and right disjunct. To begin the left disjunct, it must
+firs tbe assumed that the proposition P is true by the usage of the introduction rule for implies
+(let's call it p), which produces an exact proof of the implication of the left disjunct.
+To begin the right disjunct, it must be assumed that false is true by the use of the introduction
+rule for implies. As there can be no proofs for false, it must first be asked from lean how 
+many case analysis there can be to prove that false is true. The absence of any accomplishes the
+goal for the right disjunct. To prove the backwards proof, it must first be assumed that the 
+proposition P is true (let's call it p) by the introduction rule for implies. To prove that 
+P ∨ false is true the proof of p must be applied using the left or introduction rule. This 
+proves the backward proof and the beginning proposition. QED.
+-/
 
-/- 13 (solved)-/
+/- 13 (solved with proof)-/
 example : ∀ (P : Prop), P ∧ true ↔ P := 
 begin
   assume P,
@@ -353,8 +369,22 @@ begin
     exact p,
     apply true.intro,
 end
+/-Proof: We must first assume that P is an arbitrary but specific proposition. To prove that
+if and only if P ∧ true implies P then P implies P ∧ true, the introduction rule
+for if and only if must be applied to construct forward and backward proof. To begin the 
+forward proof, it must first be assumed that P ∧ true is true by the usage of the introduction
+rule for implies. To begin constructing the forward proof, it must be assumed that P ∧ true
+is true by the usage of the introduction rule for implies (let's call it pant). The proof
+of P can thus be proved by the application fot he left and elimination rule, which concludes
+the forward proof. To begin the backward proof, it must first be assumed that the proposition P
+is true (let's call it p). Then by the top-down approach, the application of the and introduction
+rule can construct a proof that P ∧ true is true. The proposition P can be true as it is an exact
+proof of proof p that was intially assumed. The proposition true can be true by the application
+of the introduction rule of true, thus proving the backward proof and the beginning proposition. QED.
+-/
 
-/- 14 (solved)-/
+
+/- 14 (solved with proof)-/
 example : ∀ (P : Prop), P ∧ false ↔ false := 
 begin
   assume P,
@@ -368,5 +398,22 @@ begin
     cases f,
     exact f,
 end
+/-Proof: We must first assume that P is an arbitrary but specific proposition. To prove that
+if and only if P ∧ false implies false then false implies P ∧ false, the introduction rule
+for if and only if must be applied to construct forward and backward proof. To begin the 
+forward proof, it must first be assumed that P ∧ false is true by the usage of the introduction
+rule for implies (let's call it pandf). The proof of the implication false can be proven by the
+the application of the right and elimination rule to pandf. This concludes and proves the forward
+proof. To begin the backward proof, it must first be assumed that false is true by the usage of the introduction
+rule for implies (let's call it f). From there a top-down approach can be implemented, by applying
+the and introduction rule. By the top-down approach, the implication of P can be proven true
+by asking lean to assess the case analysis of the proposition. As there can be no proofs for false, 
+it must first be asked from lean how many case analysis there can be to prove that false is true. The absence of
+any cases accomplishes the goal of filling in the left proof of the and introduction rule. Lastly, 
+to prove that false → false in the backward proof, exact can be used as the intital assumption that
+false is true produces the exact proof of the implication, thus completing the backward proof and proving 
+the beginning proposition. QED.
+-/
+
 
 
