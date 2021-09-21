@@ -178,10 +178,29 @@ begin
     apply or.elim qr,
     --left disjunct
     assume q,
-    apply or.intro_left (P ∧ R) (q ∧ P),
-    
-    
+    apply or.intro_left (P ∧ R) _,
+    apply and.intro p q,
+    -- right disjunct
+    assume r,
+    apply or.intro_right (P ∧ Q) _,
+    apply and.intro p r,
   -- backward
+  assume h,
+  apply or.elim h,
+  --left disjunct
+  assume pandq,
+  have p: P := and.elim_left pandq,
+  have q: Q := and.elim_right pandq,
+  apply and.intro _ _,
+  exact p,
+  apply or.intro_left R q,
+  --right disjunct
+  assume pandr,
+  have p: P := and.elim_left pandr,
+  have r: R := and.elim_right pandr,
+  apply and.intro _ _,
+  exact p,
+  apply or.intro_right Q r,
 end
 
 /- 8 -/
@@ -211,7 +230,13 @@ begin
     apply or.elim porq,
     assume p,
     apply or.intro_left (Q ∧ R) p,
-    apply or.elim porr,
+    assume q,
+    apply or.intro_right P _,
+    apply and.intro q _,
+    
+    
+
+    
     
 end
 
