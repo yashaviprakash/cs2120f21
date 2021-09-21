@@ -166,7 +166,7 @@ By the use of the and introduction rule and the right and left and elimination r
 of P ∧ Q can be constructed. QED. 
 -/
 
-/- 7 -/
+/- 7 (solved)-/
 example : ∀ (P Q R : Prop), P ∧ (Q ∨ R) ↔ (P ∧ Q) ∨ (P ∧ R) := 
 begin
   assume P Q R,
@@ -185,22 +185,22 @@ begin
     apply or.intro_right (P ∧ Q) _,
     apply and.intro p r,
   -- backward
-  assume h,
-  apply or.elim h,
-  --left disjunct
-  assume pandq,
-  have p: P := and.elim_left pandq,
-  have q: Q := and.elim_right pandq,
-  apply and.intro _ _,
-  exact p,
-  apply or.intro_left R q,
-  --right disjunct
-  assume pandr,
-  have p: P := and.elim_left pandr,
-  have r: R := and.elim_right pandr,
-  apply and.intro _ _,
-  exact p,
-  apply or.intro_right Q r,
+    assume h,
+    apply or.elim h,
+    --left disjunct
+    assume pandq,
+    have p: P := and.elim_left pandq,
+    have q: Q := and.elim_right pandq,
+    apply and.intro _ _,
+    exact p,
+    apply or.intro_left R q,
+    --right disjunct
+    assume pandr,
+    have p: P := and.elim_left pandr,
+    have r: R := and.elim_right pandr,
+    apply and.intro _ _,
+    exact p,
+    apply or.intro_right Q r,
 end
 
 /- 8 -/
@@ -228,16 +228,15 @@ begin
     have porq : P ∨ Q := and.elim_left h,
     have porr : P ∨ R := and.elim_right h,
     apply or.elim porq,
+    --left disjunct
     assume p,
     apply or.intro_left (Q ∧ R) p,
+    --right disjunct
     assume q,
     apply or.intro_right P _,
     apply and.intro q _,
-    
-    
 
-    
-    
+
 end
 
 /- 9 (solved with proof)-/
