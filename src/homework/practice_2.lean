@@ -202,6 +202,39 @@ begin
     exact p,
     apply or.intro_right Q r,
 end
+/-Proof: It must first be assumed that P Q and R are arbitrary but specific
+propositions. To construct a proof that if and only if P ∧ (Q ∨ R) implies (P ∧ Q) ∨ (P ∧ R)
+then (P ∧ Q) ∨ (P ∧ R) implies P ∧ (Q ∨ R), the if and only if introduction rule must be applied 
+to construct forwards and backwards proofs. To construct the forward proof, it must first be 
+assumed that P ∧ (Q ∨ R) is true by the introduction rule for implies (let's call it h). From here,
+we can accomplish the goals of the forward proof by using the right and left and elimination rules to h, respectively.
+To construct a proof that h is true, it is necessary to use the or elimination rules to h to conduct a 
+case disjunct analysis. This will help to construct a left disjunct and right disjunct. To begin with the left disjunct
+The begin with the left disjunct, we can assume that Q is true by the introduction rule of implies (let's call it q). 
+From here we can apply the left or introduction rule to (P ∧ R) and prove that (P ∧ Q) is true by the 
+application of the introduction rule for and with the use of the previously derived proof of p and the assumed
+proof of q. To begin with the right disjunct we can assume that R is true by the introduction rule of implies (let's call it r). 
+From here we can apply the left or introduction rule to (P ∧ Q) and prove that (P ∧ R) is true by the 
+application of the introduction rule for and with the use of the previously derived proof of p and the assumed
+proof of r. This concludes the forward proof. To begin the backward proof, it must first be assumed that
+(P ∧ Q) ∨ (P ∧ R) is true by the introduction rule for implies (let's call it h). From here,
+we can accomplish the goals fo the backward proof by using the right and left and elimination rules to h, respectively.
+To construct a proof that h is true, it is necessary to use the or elimination rules to h to conduct a 
+case disjunct analysis. This will help to construct a left disjunct and right disjunct.To begin with the left
+disjunct it must be assumed that P ∧ Q is true by the application of the introduction rule for 
+implies (let's call it pandq). To construct further proofs, the proofs of P and Q must be derived, which can be acquired
+by apply the left and introduction rule and the right introduction rule to pandq (let's call it p and q respectively), respectively. From here,
+a top-down approach can be implemented. The top-down approach can be fulfilled by filling in the individual
+proof of P and Q ∨ R, by first acknowledging that the previously determined proof of p is the exact proof
+of proposition P. It can them be acknowledged taht the proof of Q ∨ R can be determiend by applying the 
+right or introduction rule to R by using the previously determined proof of q. To begin with the right disjunct, 
+it must be assumed that P ∧ R is true by the application of the introduction rule for 
+implies (let's call it pandr). To construct further proofs, the proofs of P and R must be derived, which can be acquired
+by apply the left and introduction rule and the right introduction rule to pandq (let's call it p and r, respectively), respectively. From here,
+a top-down approach can be implemented. The top-down approach can be fulfilled by filling in the individual
+proof of P and Q ∨ R, by first acknowledging that the previously determined proof of p is the exact proof
+of proposition P. It can them be acknowledged taht the proof of Q ∨ R can be determiend by applying the 
+right or introduction rule to Q by using the previously determined proof of r. QED.-/
 
 /- 8 -/
 example : ∀ (P Q R : Prop), P ∨ (Q ∧ R) ↔ (P ∨ Q) ∧ (P ∨ R) := 
@@ -233,11 +266,16 @@ begin
     apply or.intro_left (Q ∧ R) p,
     --right disjunct
     assume q,
-    apply or.intro_right P _,
-    apply and.intro q _,
-
-
+    
 end
+
+axioms (P Q R : Prop)
+  
+#check P ∨ Q ∧ R
+  
+#check P ∨ (Q ∧ R)
+  
+#check (P ∨ Q) ∨ R
 
 /- 9 (solved with proof)-/
 example : ∀ (P Q : Prop), P ∧ (P ∨ Q) ↔ P := 
