@@ -236,7 +236,7 @@ proof of P and Q ∨ R, by first acknowledging that the previously determined pr
 of proposition P. It can them be acknowledged taht the proof of Q ∨ R can be determiend by applying the 
 right or introduction rule to Q by using the previously determined proof of r. QED.-/
 
-/- 8 -/
+/- 8 (solved with proof)-/
 example : ∀ (P Q R : Prop), P ∨ (Q ∧ R) ↔ (P ∨ Q) ∧ (P ∨ R) := 
 begin
   assume P Q R,
@@ -267,13 +267,45 @@ begin
     --right disjunct
     assume q,
     apply or.elim porr,
-    assume p,
-    apply or.intro_left (Q ∧ R) p,
-    assume r,
-    apply or.intro_right P _,
-    apply and.intro q r,
+      -- left disjunct of porr
+      assume p,
+      apply or.intro_left (Q ∧ R) p,
+      --right disjunct of porr
+      assume r,
+      apply or.intro_right P _,
+      apply and.intro q r,
 end
-/- Proof: -/
+/- Proof: It must first be assumed that P Q and R are arbitrary but specific propositions. To construct a proof 
+that if and only if P ∨ (Q ∧ R) implies (P ∨ Q) ∧ (P ∨ R)
+then (P ∨ Q) ∧ (P ∨ R) implies P ∧ (Q ∨ R), the if and only if introduction rule must be applied 
+to construct forwards and backwards proofs. To begin to construct the forward proof, it is necessary
+to first assume that P ∨ (Q ∧ R) is true by the introduction rule of implies (let's call it h). From here,
+it is necessary to use the or elimination rules to h to conduct a 
+case disjunct analysis. This will help to construct a left disjunct and right disjunct. To begin with 
+the left disjunct, it must first be assumed that proposition P is true by the introduction rule
+for implies (let's call it p). From here, a top-down approach can be implemented by applying the and introduction rule.
+To complete the left disjunct proof using the and introduction rule, it is necessary to apply the left
+or introduction rule to proposition Q using proof p and a right or introduction rule to proposition R using
+proof p, respectively. To begin with the right disjunct, it is necessary to first assume that Q ∧ R is true 
+by the introduction rule of implies (let's call it h). From this proof h, we can derive a proof of q and r
+by the application of the left and elimination rule and the right and elimination rule, respectively. From here, a top-down
+approach can be implemented by applying the and introduction rule. To complete the right disjunct proof using the and introduction
+rule, it is necessary to apply the right or introduction rule to P using proof q and a left or introduction rule using 
+proof r, respectively. This completes the forard proof. To begin the backward proof, it is necessary to assume that 
+(P ∨ Q) ∧ (P ∨ R) is true by the introduction rule for implies (let's call it h). From here, we can derive two proofs
+for P ∨ Q (let's call it porq) and P ∨ R (let's call it porr), respectively, by the use of the left and elimination rule 
+and the right and elimination rule, respectively. From here, it is necessary to use the or elimination rules to porq to conduct a 
+case disjunct analysis. This will give a left and right disjunct. To begin the left disjunct, it is necessary to first
+assume that proposition P is true by the introduction rule for implies (let's call it p). From here, the left disjunct can be proven true
+by applying the left or introduction rule to (Q ∧ R) with proof p. To begin the right disjunct, it must be first assumed
+that proposition Q is true by the introduction rule for implies (let's call it q). From here, it is necessary to use the or elimination
+rules to porr to conduct a case disjunct analysis to relate propositions Q *and* R to proposition P. This will help
+prove the initial if and only if proposition. From here a left disjunct and a right disjunct is given. The proof of the 
+left disjunct is the same as the initial left disjunct for the backwards proof. To begin the right disjunct, it must
+be assumed that proposition R is true by the introduction rule for implies (let's call it r). From here the right 
+or introduction rule can be applied to P with the proof of (Q ∧ R) that is constructed with proofs q and r using the 
+introduction rule for and. QED.
+-/
 
 /- 9 (solved with proof)-/
 example : ∀ (P Q : Prop), P ∧ (P ∨ Q) ↔ P := 
