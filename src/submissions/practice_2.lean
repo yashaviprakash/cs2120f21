@@ -6,14 +6,14 @@ in the sense that they identify all the axioms
 and/or theorems that you use.
 -/
 
-/- 1 (solved with proof)-/
+/- 1 -/
 example : true := true.intro
 /-Proof: Anything true needs a proof of true, 
 and that is done by the introduction rule 
 for true. QED. -/
 
 
-/- 2 (solved with proof)-/
+/- 2 -/
 example : false :=   -- trick question? why? yes, bc there is no proof of false. 
 /-Proof: If anything true means that it needs
 a proof of true, anything false will need a 
@@ -21,7 +21,7 @@ proof of false as well. Therefore, a proof
 of false must be empty as any proof of it
 would result in it having a truth value. QED.-/
 
-/- 3 (solved with proof)-/
+/- 3 -/
 example : ∀ (P : Prop), P ∨ P ↔ P := 
 begin
   assume P, 
@@ -52,10 +52,7 @@ of P must be assumed by the introduction rule for implies (let's call it p), and
 P or P, an exact proof of P ∨ P can be made using proof p by the left or introduction rule, thus
 accomplishing the goal of the beginning proposition. QED.-/
 
-/-if p or p is true, then eiether p is true or p is true. 
-do case disjuction analysis on left side and on right side.-/
-
-/- 4 (solved with proof)-/
+/- 4 -/
 example : ∀ (P : Prop), P ∧ P ↔ P := 
 begin
   assume P,
@@ -82,7 +79,7 @@ that P implies P ∧ P, it must be assumed that P is true by the introduction ru
 for implies (let's call this p), from which we can construct a proof for P ∧ P by the use 
 of the and introduction rule using the proof p. QED. -/
 
-/- 5 (solved with proof)-/
+/- 5 -/
 example : ∀ (P Q : Prop), P ∨ Q ↔ Q ∨ P := 
 begin
   assume P Q,
@@ -127,7 +124,7 @@ end
  be assumed that there is a proof of proposition P (let's call it p) to prove the disjunct by 
  applying the right or introduction rule using proof p. QED.-/
 
-/- 6 (solved with proof)-/
+/- 6 -/
 example : ∀ (P Q : Prop), P ∧ Q ↔ Q ∧ P := 
 begin
   assume P Q, 
@@ -160,7 +157,7 @@ By the use of the and introduction rule and the right and left and elimination r
 of P ∧ Q can be constructed. QED. 
 -/
 
-/- 7 (solved with proof)-/
+/- 7 -/
 example : ∀ (P Q R : Prop), P ∧ (Q ∨ R) ↔ (P ∧ Q) ∨ (P ∧ R) := 
 begin
   assume P Q R,
@@ -301,7 +298,7 @@ or introduction rule can be applied to P with the proof of (Q ∧ R) that is con
 introduction rule for and. QED.
 -/
 
-/- 9 (solved with proof)-/
+/- 9 -/
 example : ∀ (P Q : Prop), P ∧ (P ∨ Q) ↔ P := 
 begin
   assume P Q,
@@ -332,7 +329,7 @@ for implies, and by applying the left introduction rule of or to the proposition
 the proof p. QED. 
 -/
 
-/- 10 (solved with proof)-/
+/- 10 -/
 example : ∀ (P Q : Prop), P ∨ (P ∧ Q) ↔ P := 
 begin
   assume P Q,
@@ -369,7 +366,7 @@ by the usage of the introduction rule for implies (let's call it p). The applica
 the left or itnroduction rule to P ∧ Q using the proof p will construct the backward proof 
 and proving the beginning proposition. QED. -/
 
-/- 11 (solved with proof)-/
+/- 11 -/
 example : ∀ (P : Prop), P ∨ true ↔ true := 
 begin
   assume P,
@@ -405,7 +402,7 @@ for or. This will accomplish the goal of the backwrad proof nad the prove beginn
 QED.
 -/
 
-/- 12 (solved with proof)-/
+/- 12 -/
 example : ∀ (P : Prop), P ∨ false ↔ P := 
 begin
   assume P,
@@ -441,7 +438,7 @@ P ∨ false is true the proof of p must be applied using the left or introductio
 proves the backward proof and the beginning proposition. QED.
 -/
 
-/- 13 (solved with proof)-/
+/- 13 -/
 example : ∀ (P : Prop), P ∧ true ↔ P := 
 begin
   assume P,
@@ -470,7 +467,7 @@ of the introduction rule of true, thus proving the backward proof and the beginn
 -/
 
 
-/- 14 (solved with proof)-/
+/- 14 -/
 example : ∀ (P : Prop), P ∧ false ↔ false := 
 begin
   assume P,
