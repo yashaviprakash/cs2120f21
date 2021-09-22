@@ -481,7 +481,7 @@ begin
     cases f,
     exact f,
 end
-/-Proof: We must first assume that P is an arbitrary but specific proposition. To prove that
+/-Proof:  We must first assume that P is an arbitrary but specific proposition. To prove that
 if and only if P ∧ false implies false then false implies P ∧ false, the introduction rule
 for if and only if must be applied to construct forward and backward proof. To begin the 
 forward proof, it must first be assumed that P ∧ false is true by the usage of the introduction
