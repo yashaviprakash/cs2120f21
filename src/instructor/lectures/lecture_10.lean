@@ -131,6 +131,9 @@ begin
   cases f,
 end
 
+/- false implies anything, from false anything follows
+(Ex false quod libet or ex falso)-/
+
 /-
 This, then, is the general principle for false
 elimination: ANYTHING FOLLOWS FROM FALSE. This
@@ -174,8 +177,22 @@ end
 SOME THEOREMS INVOLVING FALSE AND NEGATION
 -/
 
+/-proposition: no proposition can be both true and false-/
+
+/- for any proposition P, it's not the case that there is a 
+proof of P and a proof of not P
+
+way to say that no contradictions are possible-/
+/-there can't be a proof of P and not P at the same time-/
 theorem no_contradiction : ∀ (P : Prop), ¬(P ∧ ¬P) :=
 begin
+  assume P,
+  assume h, -- P ∧ ¬ P must imply false
+  have p := and.elim_left h,
+  have np := and.elim_right h, /-p implies false is what np means-/
+  /-this is where p and np is a proof of p implies false-/
+  have f:= np p, --*** core of today's lecture, when you have a contradiction, you end up with an object and a proof if you have that object you can obtain a proof of false
+  exact f,
 end
 
 /-
@@ -195,6 +212,7 @@ and mathematics where we don't know either way. If you
 call one of those propositions, P, and try to prove P
 ∨ ¬P in Lean, you just get stuck.
 -/
+/- is a proposition true or false? it's a conjecture it hasn't been proven yet-/
 theorem excluded_middle' : ∀ (P : Prop), (P ∨ ¬P) :=
 begin
   assume P,
