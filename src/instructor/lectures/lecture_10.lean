@@ -122,6 +122,9 @@ because if you have a proof of false, then false
 is true, so whether a given proposition is true 
 or false, it's true, because even if it's false,
 well, false is true, so it's also true!
+
+WHY IS THIS? IS IT BECAUSE A PROOF OF FALSE IS A CONTRADICTION, 
+SO BY THAT EVERYTHING IS TRUE?
 -/
 
 theorem false_elim : ∀ (P : Prop), false → P :=
@@ -177,7 +180,6 @@ end
 SOME THEOREMS INVOLVING FALSE AND NEGATION
 -/
 
-<<<<<<< HEAD
 /-proposition: no proposition can be both true and false-/
 
 /- for any proposition P, it's not the case that there is a 
@@ -193,8 +195,7 @@ begin
   have np := and.elim_right h, /-p implies false is what np means-/
   /-this is where p and np is a proof of p implies false-/
   have f:= np p, --*** core of today's lecture, when you have a contradiction, you end up with an object and a proof if you have that object you can obtain a proof of false
-=======
-
+  exact f,
 -- NO CONTRADICTION
 
 theorem no_contradiction : ∀ (P : Prop), ¬(P ∧ ¬P) :=
@@ -204,7 +205,6 @@ begin
   have p := h.left,
   have np := h.right,
   have f := np p,
->>>>>>> 4ea7cd3ed5117ff5290bff4fa004d89509acccfe
   exact f,
 end
 
@@ -227,6 +227,8 @@ There are many important questions in computer science
 and mathematics where we don't know either way. If you
 call one of those propositions, P, and try to prove P
 ∨ ¬P in Lean, you just get stuck.
+
+WHY CAN'T I GET A PROOF OF P OR NOT P?
 -/
 /- is a proposition true or false? it's a conjecture it hasn't been proven yet-/
 theorem excluded_middle' : ∀ (P : Prop), (P ∨ ¬P) :=
@@ -332,6 +334,12 @@ of either side.
 Here is an example where we apply excluded middle 
 to the proposition, ItsRaining, to obtain a proof
 of ItsRaining ∨ ¬ItsRaining. 
+
+ITS RAINING OR ITS NOT RAINING... DOES THAT MEAN THAT YOU 
+DON'T KNOW IF IT'S RAINING OR IT'S NOT RAINING MAKING IT A CONJECTURE.
+AND IF IT'S A CONJECTURE, YOU PROVING THIS CONJECURE USING THE EXCLUDED MIDDLE
+DOES WHAT? WHAT DOES THE PROOF MEAN THAT YOU DON'T A HAVE A PROOF THAT ITS RAINING
+OR YOU HAVE A PROOF THAT ITS RAINING?
 -/
 
 axiom ItsRaining : Prop -- assume ItsRaining is any proposition
@@ -388,7 +396,8 @@ have a proof of equality is by the reflexive
 property of =. But the reflexive property
 doesn't imply that there's a proof of 0 = 1. 
 So there can be no proof of 0 = 1, and the
-assumption that 0 = 1 is thus a contradiction.
+assumption that 0 = 1 is thus a contradiction. 
+CAN THERE BE A PROOF USING ASSUMPTION AND CONTRADICITON LIKE LECTURE 10
 
 We finish the proof by case analysis on the
 possible proofs of 0 = 1, of which there are
@@ -405,4 +414,5 @@ begin
   cases h,                -- there are *zero* ways to build a proof of 0 = 1
                           -- case analysis discharges our "proof obligation"
 end
+
 

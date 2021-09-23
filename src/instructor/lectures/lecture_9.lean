@@ -96,6 +96,11 @@ Well, it's of no use at all in deriving a proof
 of false, and in fact you can never derive one
 from true premises, because our logic is sound(*).
 
+HOW COULD YOU DERVIE TRUE FROM FALSE PREMISE BUT NOT FALSE
+FROM TRUE PREMISE? IS IT BECAUSE FROM FALSE, ANYTHING FOLLOWS BECAUSE
+IT WAS PROVED BY CONTRADICTION, BUT TRUE PREMISES HAVE A TRUTH AND A PROOF, 
+SO FALSE CANNOT BE PROVED TRUE SINCE THERE IS NO CONTRADICTION?
+
 -/
 example : true → false :=
 begin
@@ -138,6 +143,9 @@ Example. Prove ¬ 0 = 1.
 Ok, we'll let's make another little diversion.
 -/
 
+/- clarify difference in OH
+NOT FALSE MEANS THAT THERE IS NO PROOF OF FALSE
+AND THAT IS WHAT YOU ARE TRYING TO PROVE AND SO ITS TRUE-/
 example : false := 
 begin                     -- no way to prove this 
 end
@@ -247,6 +255,8 @@ time instead of using the assumed proof of
 false to prove false, we do case analysis on
 the given proof of false. There are no cases
 to consider, so the proof is complete!
+
+HOW DOES THIS DIFFER FROM ASSUME F, EXACT F, THIS IS CASE ANALYSIS BUT WHAT WAS THAT?
 -/
 example : false → false :=
 begin
@@ -279,6 +289,8 @@ is that if you have a proof of false, you are
 already in a situation that can't possible happen
 "in reality" -- there is no proof of false -- so
 you can just ignore this situation.
+
+ASK TO EXPLAIN THIS AGAIN
 -/
 
 theorem false_elim (P : Prop) (f : false) : P :=
@@ -293,6 +305,8 @@ derive a proof, f, of false, then all you have
 to do to finish your proof is to say, "this is
 situation can't happen, so we need not consider
 it any further." Or, formally, (false.elim f). 
+
+HOW DO THE THREE FALSE → FALSE EXAMPLES COMPARE TO EACH OTHER (assume f, cases f, false.elim f)
 -/
 
 example : false → false :=
