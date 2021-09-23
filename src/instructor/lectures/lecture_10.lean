@@ -340,9 +340,13 @@ DON'T KNOW IF IT'S RAINING OR IT'S NOT RAINING MAKING IT A CONJECTURE.
 AND IF IT'S A CONJECTURE, YOU PROVING THIS CONJECURE USING THE EXCLUDED MIDDLE
 DOES WHAT? WHAT DOES THE PROOF MEAN THAT YOU DON'T A HAVE A PROOF THAT ITS RAINING
 OR YOU HAVE A PROOF THAT ITS RAINING?
+
+The proof that its always raining or not raining. Either could be true or false, 
+so to prove it and get it out of the way, you use excluded middle
 -/
 
 axiom ItsRaining : Prop -- assume ItsRaining is any proposition
+
 
 #check excluded_middle ItsRaining     -- apply em to ItsRaining
 
