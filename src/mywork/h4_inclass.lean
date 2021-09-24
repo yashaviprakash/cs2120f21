@@ -96,3 +96,24 @@ begin
   -- or exact false.elim f,
 
 end
+
+-- for any proposition p, it's true that either p is true or not p is true
+-- makes em a function, giving proposition as an argument, gives back proof of p ∨ ¬ p
+-- what can you do with a proof of a disjunction? case analysis
+-- to get unstuck, apply em to one of the propositions to get a proof of a disjunction that that proposition is either true or false and can do case analysis on that disjunction
+axiom em: ∀ (p : Prop), p ∨ ¬ p
+
+-- 4
+-- its false that my dog is not blue (not the case in the logic we have developed thus far, so we need to use the axiom of the excluded middle)
+-- is this like false implies true?
+theorem neg_elim: ∀ (P : Prop), ¬¬ P → P :=
+begin
+  assume P,
+  assume h,
+  -- problem, we say that a proof of not not P is really a function
+  -- negation elimination rule: allows you to eliminate double negations
+  have pornp := classical.em P,
+  cases pornp with p pn,
+  assumption,
+  contradiction,
+end
