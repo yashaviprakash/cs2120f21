@@ -144,6 +144,74 @@ theorem distrib_and_or_foil :
   (P ∨ Q) ∧ (R ∨ S) ↔
   (P ∧ R) ∨ (P ∧ S) ∨ (Q ∧ R) ∨ (Q ∧ S) :=
 begin
+  assume P Q R S,
+  apply iff.intro _ _,
+  -- forward
+  assume h,
+  have porq : P ∨ Q := and.elim_left h,
+  have rors : R ∨ S := and.elim_right h,
+  apply or.elim porq,
+    -- left disjunct
+     assume p,
+     apply or.elim rors,
+      -- left disjunct using rors
+        assume r,
+        apply or.intro_left _ _,
+        apply and.intro p r,
+      -- right disjunct using rors
+        assume s,
+        apply or.intro_right _ _,
+        apply or.intro_left _ _,
+        apply and.intro p s,
+    -- right disjunct
+    assume q,
+    apply or.elim rors,
+      --left disjunct using rors
+        assume r,
+        apply or.intro_right _ _,
+        apply or.intro_right _ _,
+        apply or.intro_left _ _,
+        apply and.intro q r,
+      -- right disjunct using rors
+        assume s,
+        apply or.intro_right _ _,
+        apply or.intro_right _ _,
+        apply or.intro_right _ _,
+        apply and.intro q s,
+  -- backward
+  assume h,
+  apply or.elim h,
+    -- left disjunct
+    assume pandr,
+    have p : P := and.elim_left pandr,
+    have r: R := and.elim_right pandr,
+    apply and.intro _ _,
+    apply or.intro_left Q p,
+    apply or.intro_left S r,
+    -- right disjunct
+    assume h1,
+    apply or.elim h1,
+    assume pands,
+    have p : P := and.elim_left pands,
+    have s: S := and.elim_right pands,
+    apply and.intro _ _,
+    apply or.intro_left Q p,
+    apply or.intro_right R s,
+    assume h2,
+    apply or.elim h2,
+    assume qandr,
+    have q: Q := and.elim_left qandr,
+    have r: R := and.elim_right qandr,
+    apply and.intro _ _,
+    apply or.intro_right P q,
+    apply or.intro_left S r,
+    assume qands,
+    have q: Q := and.elim_left qands,
+    have s: S := and.elim_right qands,
+    apply and.intro _ _,
+    apply or.intro_right P q,
+    apply or.intro_right R s,
+
 end
 
 
