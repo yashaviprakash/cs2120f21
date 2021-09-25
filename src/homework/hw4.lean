@@ -72,6 +72,12 @@ begin
     assume h, 
     -- (P ∧ Q → false)
     -- to get not p and not q you need to get disjunct
+    have pornp := classical.em P,
+    cases pornp,
+    apply or.intro_left _ _,
+     
+
+    
     
 
 end
@@ -95,7 +101,22 @@ begin
   assume P Q,
   apply iff.intro _ _,
   -- forward
-
+  assume h1,
+  apply or.elim h1,
+  -- left disjunct
+  assume p,
+  apply or.intro_left Q p,
+  -- right disjunct
+  assume npandq,
+  have pornp := classical.em P,
+  cases pornp,
+  -- first case
+  apply or.intro_left _ _,
+  exact pornp,
+  -- second case
+  apply or.intro_left _ _,
+  --contradiction, (this didn't work)
+  
 end
 
 
