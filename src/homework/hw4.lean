@@ -73,12 +73,12 @@ begin
     -- (P ∧ Q → false)
     -- to get not p and not q you need to get disjunct
     have pornp := classical.em P,
-    cases pornp,
+    cases pornp with p pn,
     apply or.intro_left _ _,
+    
+    
+    
      
-
-    
-    
 
 end
 
@@ -88,6 +88,12 @@ theorem demorgan_2 : ∀ (P Q : Prop), ¬ (P ∨ Q) → ¬P ∧ ¬Q :=
 begin
   assume P Q,
   assume h,
+  have pornp := classical.em P,
+  have qornq := classical.em Q,
+  cases pornp with p pn,
+  cases qornq with q qn,
+  
+
 
 
 
@@ -116,6 +122,11 @@ begin
   -- second case
   apply or.intro_left _ _,
   --contradiction, (this didn't work)
+  -- ¬ P → P this means that (P → false) → P
+  -- left side is function, and you need to apply this proof of
+  -- false to P
+  
+  
   
 end
 
@@ -251,6 +262,11 @@ end
 -- 11. equivalence of P→Q and (¬P∨Q)
 example : ∀ (P Q : Prop), (P → Q) ↔ (¬P ∨ Q) :=
 begin
+  assume P Q,
+  apply iff.intro _ _,
+  -- forward
+  assume h,
+  
 end
 
 -- 12
