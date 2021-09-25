@@ -82,9 +82,9 @@ begin
   -- ¬ P is P → false
   -- ¬ (P → false)
   assume (p: P),
-  -- ¬ ¬ P means ¬ P → false
+  -- ¬ ¬ P means ¬ (P → false)
   -- this is the same as (P → false) → false
-  -- implicaiton, so assume P → false then apply
+  -- implication, so assume P → false (imply introduction rule) 
   assume h,
   -- contradiction because you have a proof of P and a proof of not P
   -- contradictions are good because you can just stop
@@ -106,7 +106,7 @@ axiom em: ∀ (p : Prop), p ∨ ¬ p
 -- 4
 -- its false that my dog is not blue (not the case in the logic we have developed thus far, so we need to use the axiom of the excluded middle)
 -- is this like false implies true?
-theorem neg_elim: ∀ (P : Prop), ¬¬ P → P :=
+theorem neg_elim: ∀ (P : Prop), ¬¬ P → P  :=
 begin
   assume P,
   assume h,
