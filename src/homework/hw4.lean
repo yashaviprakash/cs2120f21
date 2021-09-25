@@ -57,6 +57,8 @@ begin
   contradiction,
 end
 
+-- how to do case disjunct on a negation
+
 -- 5
 theorem demorgan_1 : ∀ (P Q : Prop), ¬ (P ∧ Q) ↔ ¬ P ∨ ¬ Q :=
 begin
@@ -67,12 +69,9 @@ begin
   assume P Q,
   apply iff.intro _ _,
   -- forward
-    assume h,
+    assume h, 
     -- (P ∧ Q → false)
-    
-
-    
-
+    -- to get not p and not q you need to get disjunct
     
 
 end
@@ -81,6 +80,11 @@ end
 -- 6
 theorem demorgan_2 : ∀ (P Q : Prop), ¬ (P ∨ Q) → ¬P ∧ ¬Q :=
 begin
+  assume P Q,
+  assume h,
+
+
+
 end
 
 
