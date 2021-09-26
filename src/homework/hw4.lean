@@ -312,6 +312,7 @@ not every natural number is equal to zero.
 lemma not_all_nats_are_zero : ¬ ∀ (n : ℕ), n = 0 :=
 begin
   assume n,
+  -- find contradiction in a case where n is not equal zero, then say contradiction
 
 
 end 
