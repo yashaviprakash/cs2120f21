@@ -73,8 +73,11 @@ begin
     -- (P ∧ Q → false)
     -- to get not p and not q you need to get disjunct
     have pornp := classical.em P,
+    have qornq := classical.em Q,
     cases pornp with p pn,
+    cases qornq with q qn,
     apply or.intro_left _ _,
+    
     
     
     
@@ -92,6 +95,7 @@ begin
   have qornq := classical.em Q,
   cases pornp with p pn,
   cases qornq with q qn,
+  
   
 
 
@@ -115,16 +119,23 @@ begin
   -- right disjunct
   assume npandq,
   have pornp := classical.em P,
-  cases pornp,
+  have qornq := classical.em Q,
+  cases pornp with p pn,
+  cases qornq with q qn,
   -- first case
   apply or.intro_left _ _,
-  exact pornp,
+  exact p,
   -- second case
   apply or.intro_left _ _,
+  exact p,
   --contradiction, (this didn't work)
   -- ¬ P → P this means that (P → false) → P
   -- left side is function, and you need to apply this proof of
   -- false to P
+  apply or.intro_left _ _,
+  
+
+  
   
   
   
@@ -266,12 +277,25 @@ begin
   apply iff.intro _ _,
   -- forward
   assume h,
+  apply or.intro_right _ _,
+  apply h,
+  have pornp := classical.em P,
+  cases pornp with p pn,
+  assumption,
+  contradiction,
+  
+  
+  
+  
   
 end
 
 -- 12
 example : ∀ (P Q : Prop), (P → Q) → (¬ Q → ¬ P) :=
 begin
+  assume P Q,
+  assume h,
+
 end
 
 -- 13
