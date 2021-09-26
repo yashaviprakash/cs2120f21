@@ -76,13 +76,37 @@ begin
     have qornq := classical.em Q,
     cases pornp with p pn,
     cases qornq with q qn,
+    have pandq : P ∧ Q := begin 
+      apply and.intro p q,
+    end,
+    have f:= h pandq,
+    apply false.elim f,
+    apply or.intro_right _ _,
+    exact qn,
     apply or.intro_left _ _,
-    
-    
-    
-    
-     
+    exact pn,
+  -- backward
+    assume h,
+    assume pandq,
+    have p := and.elim_left pandq,
+    have q := and.elim_right pandq,
+    cases h,
+    have f := h p,
+    exact f,
+    -- apply or.elim h,
+    -- assume np,
+    have f := h q,
+    exact f,
 
+    -- apply or.elim h,
+    -- -- not P is P → false
+    -- -- have to find proof for (P ∧ Q) → false
+    -- assume np,
+    -- have pornp := classical.em P,
+    -- have qornq := classical.em Q,
+    -- cases pornp with p pn,
+    -- cases qornq with q qn,
+    
 end
 
 
@@ -95,11 +119,19 @@ begin
   have qornq := classical.em Q,
   cases pornp with p pn,
   cases qornq with q qn,
-  
-  
-
-
-
+  -- P ∨ Q → false
+  have porq : P ∨ Q := or.inl p,
+  have f := h porq,
+  apply false.elim f,
+  --contradiction,
+  have porq : P ∨ Q := or.inl p,
+  have f := h porq,
+  apply false.elim f,
+  cases qornq,
+  have porq : P ∨ Q := or.inr qornq,
+  have f := h porq,
+  apply false.elim f,
+  apply and.intro pn qornq,
 
 end
 
@@ -132,13 +164,24 @@ begin
   -- ¬ P → P this means that (P → false) → P
   -- left side is function, and you need to apply this proof of
   -- false to P
+  cases qornq,
+  apply or.intro_right _ _,
+  exact qornq,
+  have q := and.elim_right npandq,
+  apply or.intro_right _ _,
+  exact q,
+  -- backward
+  assume h,
+  cases h,
   apply or.intro_left _ _,
-  
-
-  
-  
-  
-  
+  exact h,
+  have pornp := classical.em P,
+  cases pornp with p pn,
+  apply or.intro_left _ _,
+  exact p,
+  apply or.intro_right _ _,
+  apply and.intro pn h,
+ 
 end
 
 
@@ -266,8 +309,11 @@ end
 Formally state and prove the proposition that
 not every natural number is equal to zero.
 -/
-lemma not_all_nats_are_zero : ∀ (n : ℕ), n ≠ 0:=
+lemma not_all_nats_are_zero : ¬ ∀ (n : ℕ), n = 0 :=
 begin
+  assume n,
+
+
 end 
 
 -- 11. equivalence of P→Q and (¬P∨Q)
@@ -277,17 +323,23 @@ begin
   apply iff.intro _ _,
   -- forward
   assume h,
-  apply or.intro_right _ _,
-  apply h,
   have pornp := classical.em P,
   cases pornp with p pn,
-  assumption,
+  have q := h p,
+  apply or.intro_right _ _,
+  exact q,
+  apply or.intro_left _ _,
+  exact pn,
+  -- backward
+  assume h,
+  apply or.elim h,
+  assume np,
+  assume p,
   contradiction,
-  
-  
-  
-  
-  
+  assume q,
+  assume p,
+  exact q,
+
 end
 
 -- 12
@@ -295,11 +347,34 @@ example : ∀ (P Q : Prop), (P → Q) → (¬ Q → ¬ P) :=
 begin
   assume P Q,
   assume h,
+  have pornp := classical.em P,
+  cases pornp with p pn,
+  assume nq,
+  assume p,
+  have q := h p,
+  contradiction,
+  assume nq,
+  assume p,
+  contradiction,
 
 end
 
 -- 13
 example : ∀ (P Q : Prop), ( ¬P → ¬Q) → (Q → P) :=
 begin
+  assume P Q,
+  assume h,
+  have pornp := classical.em P,
+  have qornq := classical.em Q,
+  cases pornp with p pn,
+  cases qornq with q qn,
+  assume qimp,
+  exact p,
+  assume qimp,
+  exact p,
+  assume qimp,
+  have f := h pn,
+  contradiction,
+
 end
 
