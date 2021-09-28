@@ -313,7 +313,8 @@ lemma not_all_nats_are_zero : ¬ ∀ (n : ℕ), n = 0 :=
 begin
   assume n,
   -- find contradiction in a case where n is not equal zero, then say contradiction
-
+  have contradictory := n 1,
+  contradiction,
 
 end 
 
