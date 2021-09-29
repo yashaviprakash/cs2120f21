@@ -97,15 +97,6 @@ begin
     -- assume np,
     have f := h q,
     exact f,
-
-    -- apply or.elim h,
-    -- -- not P is P → false
-    -- -- have to find proof for (P ∧ Q) → false
-    -- assume np,
-    -- have pornp := classical.em P,
-    -- have qornq := classical.em Q,
-    -- cases pornp with p pn,
-    -- cases qornq with q qn,
     
 end
 
@@ -123,7 +114,6 @@ begin
   have porq : P ∨ Q := or.inl p,
   have f := h porq,
   apply false.elim f,
-  --contradiction,
   have porq : P ∨ Q := or.inl p,
   have f := h porq,
   apply false.elim f,
@@ -160,21 +150,20 @@ begin
   -- second case
   apply or.intro_left _ _,
   exact p,
-  --contradiction, (this didn't work)
-  -- ¬ P → P this means that (P → false) → P
-  -- left side is function, and you need to apply this proof of
-  -- false to P
   cases qornq,
   apply or.intro_right _ _,
   exact qornq,
+  -- third case
   have q := and.elim_right npandq,
   apply or.intro_right _ _,
   exact q,
   -- backward
   assume h,
   cases h,
+  -- first case
   apply or.intro_left _ _,
   exact h,
+  -- second case
   have pornp := classical.em P,
   cases pornp with p pn,
   apply or.intro_left _ _,
@@ -281,12 +270,14 @@ begin
     -- right disjunct
     assume h1,
     apply or.elim h1,
+    -- left disjunct using h1
     assume pands,
     have p : P := and.elim_left pands,
     have s: S := and.elim_right pands,
     apply and.intro _ _,
     apply or.intro_left Q p,
     apply or.intro_right R s,
+    -- right disjunct using h1
     assume h2,
     apply or.elim h2,
     assume qandr,
