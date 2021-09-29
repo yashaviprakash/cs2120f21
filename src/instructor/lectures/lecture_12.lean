@@ -15,7 +15,9 @@ def ev (n : ℕ) : Prop := n % 2=0
 /-
 The introduction rule for exists takes two
 arguments: a witness value, w, and a proof
-that that witness satisfies the predicate. 
+that that witness satisfies the predicate.
+
+what is a witness value again?
 -/
 example : ∃ (n : ℕ), ev n :=
 begin
@@ -30,7 +32,7 @@ begin
 
   -/
   apply exists.intro 4 _, -- proof of ev 2 tbd
-  --unfold ev,            -- remind me what ev 2 means
+  unfold ev,            -- remind me what ev 2 means
   exact rfl,
 end
 
@@ -84,7 +86,7 @@ Let's demand a proof of the proposition that
 -/
 example : pythagorean_triple 3 4 5 := 
 begin
-  --unfold pythagorean_triple, -- expand proposition to prove
+  unfold pythagorean_triple, -- expand proposition to prove
   apply rfl,
 end
 
