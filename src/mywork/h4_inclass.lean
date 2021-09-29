@@ -35,7 +35,7 @@ elimination rule: haven't talked about it yet
 
 ∃ (Exists)
 
-introduction rule: 
+introduction rule: exists.intro
 elimination rule: 
 
 true
