@@ -368,6 +368,6 @@ begin
   assume qimp,
   have f := h pn,
   contradiction,
-
+ 
 end
 
