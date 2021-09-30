@@ -238,6 +238,8 @@ proof that, from the preceding axioms, we can prove
 (P y).
 
 ``` lean
+
+
 example : P y := eq_subst T P x y e px -- Whoa
 ```
 
