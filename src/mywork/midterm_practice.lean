@@ -323,7 +323,7 @@ axiom eq_subst :
 
 end inferencerules_equality
 
-namespace lecture_4
+namespace symm_trans
 
 
 /-
@@ -412,7 +412,94 @@ begin
   rw e1,
   exact e2,
 end
-  
+
+/- Alternative proof for eq_symm-/
+example : eq_symm :=
+begin
+  unfold eq_symm,   -- replace name with definition
+  assume T x y e,   -- assume arbitrary values
+  apply eq.subst e, -- apply axiom 2, substitutability
+  exact eq.refl x,  -- apply axiom 1, reflexivity
+  -- QED.
+end
+
+/-
+There. That's a nice proof (script), as it closely
+models a typical English language proof. To wit:
+
+Theorem: Equality is symmetric.
+Proof: Assume we're given arbitrary values of T, 
+x, y, and a proof of x = y. What remains to be
+proved is y = x. Apply substitutability to write
+x as y or y as x. The result is trivially true 
+by the reflexive property of equality.
+-/
+
+end symm_trans
+
+namespace lecture_4
+
+/-
+We've seen that logics start with axioms that
+can then be combined (with other information)
+using *inference rules* to derive theorems. In
+this file we review what we've covered so far
+and then we introduce:
+
+(1) The concept of introduction and elimination
+rules for a given logical construct.
+(2) We distinguish the reflexivity axiom as an
+*introduction* rule (one that produces a proof
+of an equality), and the substitutability of
+equals as an *elimination* rule (one that uses,
+or consumes) a proof of an equality to produce
+some other kind of result.
+(3) We explicitly identity the introduction 
+rules for ∀ and for →. To produce a proof of
+∀ (x : T), P x (where T is a type and P is a
+predicate that asserts some property of x), we
+*assume* that we're given an arbitrary but
+specific (x : T) ["x of type T"], and then 
+we prove (P x) *for that x*. Because we made
+no assumptions whatsoever about x, if we can
+show that (P x) is true, then it must be true
+*for all* (x : T).
+-/
+
+/-
+Practice
+-/
+
+example : ∀ (T : Type) (x y z : T), x = y → y = z → z = x :=
+begin
+  assume T x y z h1 h2, -- introduction rule for ∀ 
+  apply eq.symm _,      -- application of symm *theorem*
+  apply eq.trans h1 h2, -- application of trans theorem
+end
+
+
+/-
+INTRODUCTION and ELIMINATION RULES
+-/
+
+/-
+For =
+  - introduction rule: eq.refl 
+  - elimination rule: eq.subst
+-/
+
+/-
+For ∀ x, P x
+  - introduction rule: assume arbitrary x, then show P x
+  - elimination rule: next time!
+-/
+
+/-
+For P → Q
+- introduction rule: assume arbitrary P, then show Q
+- elimination rule: next time.
+-/
+
 
 end lecture_4
 
