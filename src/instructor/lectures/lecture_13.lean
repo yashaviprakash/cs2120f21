@@ -118,13 +118,18 @@ begin
   cases h with b rg,
   apply exists.intro b,
   -- or is commutative
-  --apply or.elim rg,
-  cases rg,
-  
-
+  apply or.elim rg,
+  --cases rg,
+  assume rb,
+  apply or.intro_right _,
+  exact rb,
+  assume gb,
+  apply or.intro_left _,
+  exact gb,
 end 
 
 -- just because you know something red or green it doesn't mean that it's red
+-- if there exists a ball that is red or green then the ball is red
 example : 
   (∃ (b : Ball), Red b ∨ Green b) → 
   (∃ (b : Ball), Red b) :=
@@ -139,12 +144,16 @@ begin
   
 end 
 
+-- if there exists a ball that is red then there is a ball that is red or green
 example : 
     (∃ (b : Ball), Red b) → 
     (∃ (b : Ball), Red b ∨ Green b) := 
 begin
   assume h,
-
+  cases h with b rb,
+  apply exists.intro b,
+  apply or.intro_left _,
+  exact rb,
 end 
 
 /-
