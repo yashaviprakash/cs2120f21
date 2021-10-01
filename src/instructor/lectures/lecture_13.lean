@@ -65,6 +65,20 @@ end
 
 -- if there exists a boolean b that satisifes the constraint
 -- then there exists a bool b that satisfies the true predicate
+/-
+There is (exists) a Boolean value, b, that 
+satisfies the predicate, b && tt = f.
+-/
+example : ∃ (b : bool), b && tt = ff :=
+begin
+  apply exists.intro ff,  -- apply intro to witness
+  exact rfl,              -- leaving proof as a subgoal
+end
+
+/-
+If there's a Boolean value that satisfies
+that predicate, then there's a Boolean value.
+-/
 example : 
   (exists (b : bool), b && tt = ff) → 
   (∃ (b : bool), true) :=
@@ -73,6 +87,10 @@ begin
   cases h with w pf, -- what comes out of it is the names for the two components of that pair
   apply exists.intro w, -- show that w has the property that you care about
   trivial, -- tries a couple of simple things like applying eq.refl and some other things
+ assume h,              -- assume premise
+ cases h with w pf,     -- eliminate exists
+ apply exists.intro w,  -- introduce exists
+ trivial,               -- the rest is easy
 end
 
 
@@ -99,6 +117,13 @@ axioms
 
 -- if there exists a ball b that is red and green then there exists a ball that is red
 -- prof way of saying it : if there is a ball that is red and green then it is red
+/-
+Translate the propositions into English, then
+prove them formally.
+
+If there's a Ball that's Red and Green then 
+there is a ball that's Red.
+-/
 example : 
   (∃ (b : Ball), Red b ∧ Green b) → 
   (∃ (b : Ball), Red b) :=
@@ -110,6 +135,17 @@ begin
 end 
 
 -- if there is a ball that is red or green then there is a ball that is green or red
+  assume h,               -- assume there's a red and green ball
+  cases h with b rg,      -- get a name, b, for the ball and a proof about b
+  apply exists.intro b,   -- use b as a witness to the proposition to be proved
+  exact rg.left,          -- the proof it's red is part of that it's red and green
+end 
+
+/-
+If there's a ball, b, that's red or green
+then there's a ball, b, that greed or red.
+
+-/
 example : 
   (∃ (b : Ball), Red b ∨ Green b) → 
   (∃ (b : Ball), Green b ∨ Red b) :=
@@ -130,6 +166,18 @@ end
 
 -- just because you know something red or green it doesn't mean that it's red
 -- if there exists a ball that is red or green then the ball is red
+  assume h,             -- there's ball that's red or green
+  cases h with w pf,    -- name it w with pf a proof of Red w ∨ Green w
+  apply exists.intro w, -- use w as witness, need proof of Green w ∨ Red d
+  cases pf,             -- basically proof of X ∨ Y → Y ∨ X at this point
+  exact or.inr pf,
+  exact or.inl pf,
+end 
+
+/-
+How about this one? Translate it into Enlish. Do
+you believe it?
+-/
 example : 
   (∃ (b : Ball), Red b ∨ Green b) → 
   (∃ (b : Ball), Red b) :=
@@ -146,6 +194,17 @@ end
 
 -- if there exists a ball that is red then there is a ball that is red or green
 example : 
+  cases pf, 
+  apply exists.intro w,
+  assumption,
+  apply exists.intro w,
+  _
+end 
+
+/-
+If there's a red ball then there's a ball that's red or green.
+-/
+example : -- be sure you can do this one yourself!
     (∃ (b : Ball), Red b) → 
     (∃ (b : Ball), Red b ∨ Green b) := 
 begin
@@ -167,7 +226,11 @@ axioms
 
 -- if there is a person p1 such that every person p2 likes p1
 -- then everybody likes somebody
+/-
+What does this say, in English? It is true?
+-/
 example : 
+  -- If there's a person, p1, who everyone likes,
   (∃ (p1 : Person), ∀ (p2 : Person), Likes p2 p1) → 
   (∀ (e : Person), ∃ (s : Person), Likes e s) :=
 begin
@@ -175,6 +238,12 @@ begin
   assume e,
   cases h with p pf,
   -- have our person p1
+  -- then everyone likes someone
+  (∀ (e : Person), ∃ (s : Person), Likes e s) :=
+begin
+  assume h,
+  cases h with p pf,
+  assume e,
   apply exists.intro p,
   exact (pf e),
 end
@@ -200,5 +269,5 @@ English language sentences.
 /-
 If everyone who's nice likes someone, then
 there is someone whom everyone who is nice 
-likes.
+likes. (Is this true or not.)
 -/

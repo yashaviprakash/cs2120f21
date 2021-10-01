@@ -519,6 +519,10 @@ axioms of equality, but either of the theorems about properties
 of equality that we have proven. Hint: There's something about
 this question that makes it much easier to answer than it might
 at first appear.
+
+Answer: If we assume that w = z, we apply the symmetric property
+of equality to w = z to prove z = w.
+
 -/
 
 
@@ -532,18 +536,23 @@ all propositions in Lean).
 -/
 
 def prop_1 : Prop := 
-  _
+  ∀ (T: Type) (x y z w: T), x = y → y = z → w = z → z = w 
+  
 
 /- #3 (extra credit)
 Give a formal proof of the proposition from #2 by filling in
 the hole in this next definition. Hint: Use Lean's versions of
 the axioms and basic theorems concerning equality. They are,
 again, called eq.refl, eq.subst, eq.symm, eq.trans.
+
+*in class note: proofs are data*
 -/
 
 theorem prop_1_proof : prop_1 := 
 begin
-  _
+  assume T x y z w,
+  assume xy yz zw,
+  apply eq.symm zw,
 end
 
 /-
@@ -555,6 +564,9 @@ Give a very brief explanation in English of the introduction
 rule for ∀. For example, suppose you need to prove (∀ x, P x);
 what do you do? (I'm being a little informal in leaving out the
 type of X.) 
+
+Answer: Assume that you have an arbitrary x, and show predicate P 
+must apply for all X's.
 -/
 
 /- #5
@@ -563,7 +575,22 @@ Suppose you have a proof, let's call it pf, of the proposition,
 Write an expression then uses the elimination rule for ∀ to get
 such a proof. Complete the answer by replacing the underscores
 in the following expression: ( _ _ ). 
+
+Apply the theorem (∀ x, P x) to t, to get a proof of P t.
+
+This is called universal instantiation.
 -/
+
+axioms 
+(Ball: Type) 
+(blue : Ball → Prop) -- give me a ball i'll give you back a proposition about that ball
+(allBallsBlue : ∀ (b : Ball), blue b)
+(tomsBall : Ball) -- tom's ball is an object of type ball
+
+-- want to prove as a theorem that tom's ball is blue
+-- gives proposition that tom's ball is blue
+-- universal generalization : if you have an example of something that can be generalized to everything like it 
+theorem tomsBallIsBlue : blue tomsBall := allBallsBlue tomsBall
 
 /-
 IMPLIES: →
@@ -572,9 +599,11 @@ taking one natural number as an argument. We call them ev and
 odd. When applied to any value, n, ev yields the proposition 
 that n is even (n % 2 = 0), while odd yields the proposition
 that n is odd (n % 2 = 1).
+
+implies and for all are practically the same (for all practical purposes), you apply them the same
 -/
 
-def ev (n : ℕ) := n % 2 = 0
+def ev (n : ℕ) := n % 2 = 0 --evenness predicate that yields the proposition that n is even
 def odd (n : ℕ) := n % 2 = 1 
 
 /- #6
@@ -584,8 +613,9 @@ your answer by filling the hole in the following definition.
 Hint: put parenthesis around "n + 1" in your answer.
 -/
 
+-- for all n type nat, it is the case that IF THEN (form of proposition is implication)
 def successor_of_even_is_odd : Prop := 
-  _
+  ∀ (n : ℕ ), ev n → odd (n + 1)
 
 /- #7
 Suppose that "its_raining" and "the_streets_are_wet" are
@@ -597,7 +627,7 @@ by filling in the hole
 
 axioms (raining streets_wet : Prop)
 
-axiom if_raining_then_streets_wet : _
+axiom if_raining_then_streets_wet : raining → streets_wet -- have assumed this is true
   
 
 /- #9
@@ -608,10 +638,9 @@ the formal proof that the streets must be wet. Hint: here
 you are asked to use the elimination rule for →. 
 -/
 
-axiom pf_raining : raining
+axiom pf_raining : raining -- have a proof that its raining
 
-example : streets_wet :=
- _
+example : streets_wet := if_raining_then_streets_wet pf_raining
 
 /- 
 AND: ∧
@@ -650,14 +679,22 @@ To help you along, we give you the first part of the proof,
 including an example of a new Lean tactic called have, which
 allows you to give a name to a new value in the middle of a
 proof script.
+
+difference between example and theorem, theorem binds name to proof
+but example just asks for proof
 -/
 
 theorem and_associative : 
   ∀ (P Q R : Prop),
   (P ∧ (Q ∧ R)) → ((P ∧ Q) ∧ R) :=
 begin
-  intros P Q R h,
+  intros P Q R h, -- parenthesis goes away because and (and or) is right associative
   have p : P := and.elim_left h,
+  have q : Q := (and.elim_right h).left,
+  have r : R := (and.elim_right h).right,
+  apply and.intro _ _,
+  apply and.intro p q,
+  exact r,
 end
 
 /- #11
