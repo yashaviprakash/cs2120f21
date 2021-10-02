@@ -86,6 +86,7 @@ as a return value.
 -/
 
 #reduce silly 7   
+#check silly 
 
 /-
 The check command will tell you the type of any

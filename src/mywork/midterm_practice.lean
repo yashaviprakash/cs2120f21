@@ -727,3 +727,94 @@ the definitions we give in this file.
 
 end hw1_2
 
+namespace logical_connectives
+
+-- EQUALITY (=)
+
+/-
+INTRODUCTION RULE
+axiom or reflexivity of equality
+-/
+axiom eq_refl  : 
+  ∀ (T : Type)  -- if T is any type (of thing)
+    (t : T),    -- and t is thing of that type, T
+  t = t         -- the result type: proof of t = t
+
+/-
+ELIMINATION RULE
+axiom of substutability of equality
+-/
+axiom eq_subst :
+  ∀ (T :Type) -- if T is a type
+    (P : T → Prop) -- proposition P about T, basically saying that all objects of type T share a property P
+    (x y : T)  -- and x and y are T objects
+    (e : x = y) -- and you have a proof that x = y
+    (px : P x), -- and you have a proof that x has property P
+  P y -- then you can deduce (and get a proof) of P y
+
+-- THEOREMS OF EQUALITY
+
+theorem eq_symm: ∀ (T : Type) (x y: T), x = y → y = x :=
+begin 
+  assume T,
+  assume x y, 
+  assume xy, -- assume premise (left side of implication)
+  apply eq.subst xy, -- saying that y has the same property as x
+  apply eq.refl, -- everything equals to itself
+end
+
+theorem eq_trans : ∀ (T : Type) (x y z : T), x = y → y = z → x = z :=
+begin
+  assume T,
+  assume x y z,
+  assume xy yz,
+  -- apply eq.subst yz,
+  -- apply eq.subst xy,
+  -- apply eq.refl,
+  rw xy,
+  exact yz,
+end
+
+-- FOR ALL (∀)
+
+-- IMPLIES
+
+-- AND IS COMMUTATIVE
+-- question, why does and have P and Q as propositions but equality has types T
+-- premise : a proposition that isn't the conclusion
+-- google's definition : a previous statement or proposition from which another is inferred or follows as a conclusion.
+theorem and_comm : ∀ (P Q : Prop), (P ∧ Q) → (Q ∧ P) :=
+begin
+  assume P Q,
+  assume pandq,
+  -- cases pandq with p q,
+  -- apply and.intro q p,
+  apply and.intro _ _,
+  apply and.elim_right pandq,
+  apply and.elim_left pandq,
+
+end
+
+-- AND IS ASSOCIATIVE
+theorem and_asso1 : ∀ (P Q R: Prop), (P ∧ Q) ∧ R → P ∧ (Q ∧ R):=
+begin 
+  assume P Q R h,
+  cases h with pandq r,
+  cases pandq with p q,
+  apply and.intro p (and.intro q r),
+end 
+
+-- and is right associative...what does that mean?
+theorem and_asso2 : ∀ (P Q R: Prop), P ∧ (Q ∧ R) → (P ∧ Q) ∧ R:=
+begin 
+  assume P Q R h,
+  cases h with p qandr,
+  cases qandr with q r,
+  apply and.intro (and.intro p q) r,
+end 
+
+
+
+
+end logical_connectives
+
