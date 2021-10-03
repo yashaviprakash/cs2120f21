@@ -814,7 +814,241 @@ begin
 end 
 
 
-
-
 end logical_connectives
+
+namespace hw_4
+
+/-
+Prove the following simple logical conjectures.
+Give a formal and an English proof of each one.
+Your English language proofs should be complete
+in the sense that they identify all the axioms
+and/or theorems that you use.
+-/
+
+example : true := true.intro
+
+example : false := _    -- trick question? why?
+
+example : ∀ (P : Prop), P ∨ P ↔ P := 
+begin
+  assume P,
+  apply iff.intro _ _,
+  -- forward
+    assume porp,
+    cases porp with p p,
+    -- left disjunct
+    exact p,
+    -- right disjunct
+    exact p,
+  -- backward
+    assume p,
+    apply or.intro_left P p,
+end
+
+example : ∀ (P : Prop), P ∧ P ↔ P := 
+begin
+  assume P,
+  apply iff.intro _ _,
+  -- forward
+    assume pandp,
+    exact pandp.right,
+  -- backward
+    assume p,
+    apply and.intro p p,
+end
+
+example : ∀ (P Q : Prop), P ∨ Q ↔ Q ∨ P := 
+begin
+  assume P Q,
+  apply iff.intro _ _,
+  -- forward
+    assume porq,
+    cases porq with p q,
+    -- left disjunct
+    apply or.intro_right Q p,
+    -- right disjunct
+    apply or.intro_left P q,
+  -- backward
+    assume qorp,
+    cases qorp with q p,
+    -- left disjunct
+    apply or.intro_right P q,
+    -- right disjunct
+    apply or.intro_left Q p, 
+end
+
+example : ∀ (P Q : Prop), P ∧ Q ↔ Q ∧ P := 
+begin
+  assume P Q,
+  apply iff.intro _ _,
+  -- forward
+    assume pandq,
+    cases pandq with p q,
+    apply and.intro q p,
+  -- backward
+    assume qandp,
+    cases qandp with q p,
+    apply and.intro p q,
+end
+
+example : ∀ (P Q R : Prop), P ∧ (Q ∨ R) ↔ (P ∧ Q) ∨ (P ∧ R) := 
+begin
+  assume P Q R,
+  apply iff.intro _ _,
+  -- forward
+    assume pandqorr,
+    cases pandqorr with p qor,
+    cases qor with q r,
+    -- left disjunct
+    apply or.intro_left _ _,
+    apply and.intro p q,
+    -- right disjunct
+    apply or.intro_right _ _,
+    apply and.intro p r,
+  -- backward
+    assume h,
+    cases h with pandq pandr,
+    -- left disjunct
+    cases pandq with p q,
+    apply and.intro _ _,
+    exact p,
+    apply or.intro_left R q,
+    -- right disjunct
+    cases pandr with p r,
+    apply and.intro _ _,
+    exact p,
+    apply or.intro_right Q r,
+
+end
+
+example : ∀ (P Q R : Prop), P ∨ (Q ∧ R) ↔ (P ∨ Q) ∧ (P ∨ R) := 
+begin
+  assume P Q R,
+  apply iff.intro _ _,
+  -- forward
+    assume h,
+    cases h with p qandr,
+    -- left disjunct
+    apply and.intro _ _,
+    apply or.intro_left Q p,
+    apply or.intro_left R p,
+    -- right disjunct
+    cases qandr with q r,
+    apply and.intro _ _,
+    apply or.intro_right P q,
+    apply or.intro_right P r,
+  -- backward
+    assume h,
+    cases h with porq porr,
+    cases porq with p q,
+    -- left disjunct
+    apply or.intro_left _ _,
+    exact p,
+    -- right disjunct
+    cases porr with p r,
+    apply or.intro_left _ _,
+    exact p,
+    apply or.intro_right P (and.intro q r),
+end
+
+example : ∀ (P Q : Prop), P ∧ (P ∨ Q) ↔ P := 
+begin
+  assume P Q,
+  apply iff.intro _ _,
+  -- forward
+    assume h,
+    cases h with p porq,
+    exact p,
+  -- backward
+    assume p,
+    apply and.intro _ _,
+    exact p,
+    apply or.intro_left Q p,
+end
+
+example : ∀ (P Q : Prop), P ∨ (P ∧ Q) ↔ P := 
+begin
+  assume P Q,
+  apply iff.intro _ _,
+  -- forward
+    assume h,
+    cases h with p pandq,
+    -- left disjunct
+    exact p,
+    -- right disjunct
+    cases pandq with p q,
+    exact p,
+  -- backward
+    assume p,
+    apply or.intro_left _ _,
+    exact p,
+end
+
+example : ∀ (P : Prop), P ∨ true ↔ true := 
+begin
+  assume P,
+  apply iff.intro _ _,
+  -- forward
+    assume h,
+    apply or.elim h,
+    -- left disjunct
+    assume p,
+    apply true.intro,
+    -- right disjunct
+    assume t,
+    exact t,
+  -- backward
+    assume t,
+    apply or.intro_right P t,
+end
+
+example : ∀ (P : Prop), P ∨ false ↔ P := 
+begin
+  assume P,
+  apply iff.intro _ _,
+  -- forward
+    assume h,
+    cases h with p f,
+    -- left disjunct
+    exact p,
+    -- right disjunct
+    apply false.elim f, -- ex falso
+    --contradiction, is another way to solve this as you cannot prove something with a false proof
+  -- backward
+    assume p,
+    apply or.intro_left false p,
+end
+
+example : ∀ (P : Prop), P ∧ true ↔ P := 
+begin
+  assume P,
+  apply iff.intro _ _,
+  -- forward
+    assume h,
+    cases h with p t,
+    exact p,
+  -- backward
+    assume p,
+    apply and.intro _ _,
+    exact p,
+    apply true.intro,
+end
+
+example : ∀ (P : Prop), P ∧ false ↔ false := 
+begin
+  assume P,
+  apply iff.intro _ _,
+  -- forward
+    assume h,
+    cases h with p f,
+    apply false.elim f,
+  -- backward
+    assume f,
+    apply and.intro _ _,
+    apply false.elim f,
+    exact f,
+end
+
+end hw_4
 
