@@ -261,6 +261,6 @@ begin
   assume h,
   cases h with p pf,
   assume p2,
-  have f := p2 p,
+  have contradictory_pf := p2 p,
   contradiction,
 end
