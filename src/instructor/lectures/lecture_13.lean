@@ -12,17 +12,12 @@ the results indicate a possible problem.
 /-
 REVIEW: Last time we focused on the question, 
 how do we construct a proof of ∃ x, P x.  
-(a proposition that there exists some x that satisifes this predicate P or exists some x with property P)
-Pick value for x, and show that that value has particular property x
-witness is particular value for x
-
 To do so, you apply the introduction rule for
 exists. It's called exists.intro in Lean. You
 apply it to two arguments: a specific value, w,
 in place of x, and a proof that that particular
 w satisfies the predicate, P, i.e., that there 
 is a proof of the proposition, P w. 
-
 In other words, you can think of a proof of
 ∃ x, P x, as a pair, ⟨w, pf ⟩, where w is a
 witness and pf is a proof of P w.
@@ -32,7 +27,6 @@ witness and pf is a proof of P w.
 Today we'll delve deeper into the mysteries
 of exists elimination, or how you can *use*
 a proof of ∃ x, P x.
-
 Here's the idea: If you have a proof, ex, of
 of ∃ (x : X), P x, you can apply exists.elim
 to ex, and (after a few more simple maneuvers)
@@ -40,10 +34,6 @@ have yourself a specific value, (w : X), and
 a proof that w satisfies P, i.e., (pf : P w). 
 The idea is that you can then uses the values
 in your subsequent proof steps.
-
-exists elimination rule takes you to having
-two things a particular value w and a corresponding proof
-
 Why does this rule make sense? Consider a very
 simple example. If I tell you there exists some
 green ball, you can say, "well, call it b," and
@@ -53,18 +43,8 @@ also assume we have a proof of (isGreen b). In
 this example, b is a witness to the fact that
 some object satisfies the predicate. The proof
 then shows for sure that that is so.
-
 -/
 
--- exists some boolean where the proposition results in false
-example : ∃ (b : bool), b && tt = ff :=
-begin
-  apply exists.intro ff,
-  exact rfl, -- infers type of value you're looking at and specific value in lean
-end
-
--- if there exists a boolean b that satisifes the constraint
--- then there exists a bool b that satisfies the true predicate
 /-
 There is (exists) a Boolean value, b, that 
 satisfies the predicate, b && tt = f.
@@ -83,10 +63,6 @@ example :
   (exists (b : bool), b && tt = ff) → 
   (∃ (b : bool), true) :=
 begin
-  assume h,
-  cases h with w pf, -- what comes out of it is the names for the two components of that pair
-  apply exists.intro w, -- show that w has the property that you care about
-  trivial, -- tries a couple of simple things like applying eq.refl and some other things
  assume h,              -- assume premise
  cases h with w pf,     -- eliminate exists
  apply exists.intro w,  -- introduce exists
@@ -107,20 +83,17 @@ Beachballs! What could be more fun
 
 axioms 
   (Ball : Type)           -- There are balls
-  (Green : Ball → Prop)   -- a Ball can be Green (green as properties of balls)
-  (Red : Ball → Prop)     -- a Ball can be Red (red as properties of balls)
+  (Green : Ball → Prop)   -- a Ball can be Green
+  (Red : Ball → Prop)     -- a Ball can be Red 
   (b1 b2 : Ball)          -- b1 and b2 are balls
-  (b1r : Red b1)          -- b1 is red (I have a proof and therefore it must be true that b1 is red)
-  (b1g : Green b1)        -- b1 is green (same as above)
-  (b2r : Red b2)          -- b2 is red (same as above)
+  (b1r : Red b1)          -- b1 is red
+  (b1g : Green b1)        -- b1 is green
+  (b2r : Red b2)          -- b2 is red
 
 
--- if there exists a ball b that is red and green then there exists a ball that is red
--- prof way of saying it : if there is a ball that is red and green then it is red
 /-
 Translate the propositions into English, then
 prove them formally.
-
 If there's a Ball that's Red and Green then 
 there is a ball that's Red.
 -/
@@ -128,44 +101,23 @@ example :
   (∃ (b : Ball), Red b ∧ Green b) → 
   (∃ (b : Ball), Red b) :=
 begin
-  assume h,
-  cases h with b rg,
-  apply exists.intro b, -- applying elimination rule is what makes it possible to apply introduction rule
-  exact rg.left, 
-end 
-
--- if there is a ball that is red or green then there is a ball that is green or red
-  assume h,               -- assume there's a red and green ball
+  -- around minute 13:30 - 14:00 
+  assume h,               -- assume there's a red and green ball (assume premise)
   cases h with b rg,      -- get a name, b, for the ball and a proof about b
-  apply exists.intro b,   -- use b as a witness to the proposition to be proved
+  apply exists.intro b _,   -- use b as a witness to the proposition to be proved
   exact rg.left,          -- the proof it's red is part of that it's red and green
 end 
+
+/- exists elim looks at premise, and does the same thing as cases-/
 
 /-
 If there's a ball, b, that's red or green
 then there's a ball, b, that greed or red.
-
 -/
 example : 
   (∃ (b : Ball), Red b ∨ Green b) → 
   (∃ (b : Ball), Green b ∨ Red b) :=
 begin
-  assume h,
-  cases h with b rg,
-  apply exists.intro b,
-  -- or is commutative
-  apply or.elim rg,
-  --cases rg,
-  assume rb,
-  apply or.intro_right _,
-  exact rb,
-  assume gb,
-  apply or.intro_left _,
-  exact gb,
-end 
-
--- just because you know something red or green it doesn't mean that it's red
--- if there exists a ball that is red or green then the ball is red
   assume h,             -- there's ball that's red or green
   cases h with w pf,    -- name it w with pf a proof of Red w ∨ Green w
   apply exists.intro w, -- use w as witness, need proof of Green w ∨ Red d
@@ -184,16 +136,6 @@ example :
 begin
   assume h,
   cases h with w pf,
-  cases pf,
-  apply exists.intro w,
-  assumption,
-  apply exists.intro w,
-  -- stuck
-  
-end 
-
--- if there exists a ball that is red then there is a ball that is red or green
-example : 
   cases pf, 
   apply exists.intro w,
   assumption,
@@ -209,40 +151,34 @@ example : -- be sure you can do this one yourself!
     (∃ (b : Ball), Red b ∨ Green b) := 
 begin
   assume h,
-  cases h with b rb,
-  apply exists.intro b,
-  apply or.intro_left _,
-  exact rb,
+  cases h with b r,
+  apply exists.intro b _,
+  apply or.intro_left _ _,
+  exact r,
 end 
 
 /-
 Social Networks
 -/
 
-axioms 
+axioms
   (Person : Type)
-  (Nice : Person → Prop)
-  (Likes : Person → Person → Prop)
+  (Nice : Person → Prop) -- given a person, that person is nice
+  (Likes : Person → Person → Prop) -- function that takes in two people and returns a proposition that the first person likes the second person
 
--- if there is a person p1 such that every person p2 likes p1
--- then everybody likes somebody
 /-
 What does this say, in English? It is true?
 -/
 example : 
   -- If there's a person, p1, who everyone likes,
+  -- there exists a single person such that for all people, a person p2 (every person) likes p1
   (∃ (p1 : Person), ∀ (p2 : Person), Likes p2 p1) → 
-  (∀ (e : Person), ∃ (s : Person), Likes e s) :=
-begin
-  assume h,
-  assume e,
-  cases h with p pf,
-  -- have our person p1
   -- then everyone likes someone
+  -- for every person, there exists a person that they like
   (∀ (e : Person), ∃ (s : Person), Likes e s) :=
 begin
-  assume h,
-  cases h with p pf,
+  assume h, -- premise is a giant exists statement whereas right side of implication is a giant for all statement
+  cases h with p pf, -- pf : particular proposition applies to particular person p
   assume e,
   apply exists.intro p,
   exact (pf e),
@@ -254,20 +190,47 @@ English language sentences.
 -/
 
 -- Everyone likes him or herself
+example: ∀ (p : Person), Likes p p :=
+begin
+end
 
 -- Someone doesn't like him or herself
+example : ∃ (p: Person), ¬ (Likes p p) :=
+begin 
+end
 
--- There is someone likes someone else
+example : ¬ ∀ (p : Person), Likes p p :=
+begin 
+end
+
+-- There is someone who likes someone else
+example : ∃ (p1 p2: Person), Likes p1 p2 :=
+begin 
+end
 
 -- No one likes anyone who dislikes them
+example : ∃ (p : Person), ∀ (a : Person), ¬ (Likes a p):=
+begin 
+end
 
 -- Everyone likes anyone who is nice
+example : ∀ (a: Person), ∃ (p: Person), Likes a p :=
+begin
+end
 
 -- No one likes anyone who is not nice
-
+-- there exists a person such that all people, separate quantifieers
+example : ¬ ∃ (p : Person), ∀ (a : Person), ¬ (Nice a) → Likes p a :=
+begin 
+end
 
 /-
 If everyone who's nice likes someone, then
 there is someone whom everyone who is nice 
 likes. (Is this true or not.)
 -/
+example : 
+(∀ (e: Person), ∃ (p : Person), (Nice e) ∧ (Likes e p)) → 
+∃ (s: Person), ∀ (e: Person) (pf: Nice e), Likes e s :=
+begin
+end
