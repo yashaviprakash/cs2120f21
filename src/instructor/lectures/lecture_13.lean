@@ -238,3 +238,29 @@ end
 /- not true because the right side of the implication says that there is someone that everyone
 likes when the left side of the implication doesn't necessarily say that
 it just says that everyone likes someone-/
+
+/- hard exists question-/
+-- if not everyone likes themselves then there exists someone
+-- who doesn't like themself
+example: ¬ (∀ (p: Person), Likes p p) ↔ ∃ (p: Person), ¬ (Likes p p) :=
+begin 
+  apply iff.intro _ _,
+  -- forward
+    assume h,
+    sorry,
+  -- backwards (solved)
+    assume h,
+    cases h with p pf,
+    assume p2,
+    have f := p2 p,
+    contradiction,
+end
+
+example : (∃ (p : Person), ¬Likes p p) → (¬∀ (p : Person), Likes p p) :=
+begin
+  assume h,
+  cases h with p pf,
+  assume p2,
+  have f := p2 p,
+  contradiction,
+end
