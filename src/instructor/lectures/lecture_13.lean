@@ -230,7 +230,7 @@ there is someone whom everyone who is nice
 likes. (Is this true or not.)
 -/
 example : 
-(∀ (e: Person), ∃ (p : Person), (Nice e) ∧ (Likes e p)) → 
+(∀ (e: Person) (pf: Nice e), ∃ (p : Person), (Likes e p)) → 
 ∃ (s: Person), ∀ (e: Person) (pf: Nice e), Likes e s :=
 begin
 end
