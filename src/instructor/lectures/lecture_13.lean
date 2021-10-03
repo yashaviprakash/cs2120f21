@@ -230,7 +230,11 @@ there is someone whom everyone who is nice
 likes. (Is this true or not.)
 -/
 example : 
-(∀ (e: Person) (pf: Nice e), ∃ (p : Person), (Likes e p)) → 
-∃ (s: Person), ∀ (e: Person) (pf: Nice e), Likes e s :=
+(∀ (e: Person), ∃ (p : Person), (Nice e) → (Likes e p)) → 
+(∃ (s: Person), ∀ (e: Person), (Nice e) → (Likes e s)) :=
 begin
 end
+
+/- not true because the right side of the implication says that there is someone that everyone
+likes when the left side of the implication doesn't necessarily say that
+it just says that everyone likes someone-/
