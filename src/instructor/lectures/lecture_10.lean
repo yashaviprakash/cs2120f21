@@ -27,6 +27,8 @@ is true, then you show that in this context
 you can derive a contradiction. What you
 have then shown, of course, is P → false.
 
+CLARIFY
+
 So, to prove ¬P, assume P and show that in
 this context there is a contradiction. 
 This is proof by negation. It is not to be
