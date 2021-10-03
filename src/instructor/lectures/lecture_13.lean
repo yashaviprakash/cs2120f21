@@ -247,20 +247,25 @@ begin
   apply iff.intro _ _,
   -- forward
     assume h,
-    sorry,
+    -- lets assume right side of implication is false
+    have f := classical.em (∃ (p : Person), ¬Likes p p),
+    cases f,
+    assumption,
+    -- build construction with for all people they like themselves
+    have contra : ∀ (p: Person), Likes p p := _,
+    contradiction,
+    -- left with goal of how to get to this
+    assume p,
+    have likes_pp := classical.em (Likes p p),
+    cases likes_pp,
+    assumption,
+    have contra_2 : ∃ (p: Person), ¬ (Likes p p):= exists.intro p likes_pp,
+    contradiction,
   -- backwards (solved)
     assume h,
     cases h with p pf,
     assume p2,
-    have f := p2 p,
+    have contradictory_pf := p2 p,
     contradiction,
-end
 
-example : (∃ (p : Person), ¬Likes p p) → (¬∀ (p : Person), Likes p p) :=
-begin
-  assume h,
-  cases h with p pf,
-  assume p2,
-  have contradictory_pf := p2 p,
-  contradiction,
 end
