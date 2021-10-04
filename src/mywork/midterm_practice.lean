@@ -1183,7 +1183,7 @@ begin
   -- case 1
     have porq := or.intro_left Q p,
     have f := h porq,
-    contradiction,
+    apply false.elim f,
   -- case 2
     have porq := or.intro_left Q p,
     have f := h porq,
