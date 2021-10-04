@@ -199,7 +199,7 @@ begin
   have f:= np p, --*** core of today's lecture, when you have a contradiction, you end up with an object and a proof if you have that object you can obtain a proof of false
   exact f,
 -- NO CONTRADICTION
-
+end
 theorem no_contradiction : ∀ (P : Prop), ¬(P ∧ ¬P) :=
 begin
   assume P,
