@@ -1060,7 +1060,10 @@ begin
   -- ¬ (0 = 1)
   -- (0 = 1) → false
   assume h,
-  cases h,
+  cases h, -- how many different ways can h actually exist? 0
+  /-
+  can be solved using contradiction or trivial
+  -/
 end
 
 
@@ -1068,8 +1071,12 @@ end
 example : 0 ≠ 0 → 2 = 3 :=
 begin
   assume h,
+  have zeqz := eq.refl 0,
+  contradiction, -- what's really going on with contradiction is the false elim strategy
+  /-
   have f : false := h (eq.refl 0),
   exact false.elim (f),
+  -/
 end
 
 -- 3
@@ -1078,8 +1085,7 @@ begin
   assume P,
   assume p,
   assume h,
-  have f := h p,
-  exact f,
+  contradiction,
   -- ¬¬P
   -- ¬P → false
   -- (P → false) → false
@@ -1103,16 +1109,25 @@ having evidence *why* something is either true or
 not true, in that you no longer need a proof of 
 either P or of ¬P to have a proof of P ∨ ¬P.
 -/
+/-
+proof by negation : trying to prove np
+how do you prove np by negation? assume p, show false, shows that p implies false which is the negation of np
 
+proof of contradiction : trying to prove p
+how do you prove p by contradiction? ssume np, show that that leads to a contradiction which shows nnp
+
+classically proof by contradiction is valid through excluded middle of getting proof of disjunction and then perform case analysis
+-/
 -- 4
 theorem neg_elim : ∀ (P : Prop), ¬¬P → P :=
 begin
+  -- proof of negation on np to get nnp
   assume P,
   assume h,
   have pornp := classical.em P,
   cases pornp with p np,
   assumption,
-  contradiction,
+  contradiction, -- can use proof by contradiction when you already have a proof of false
   -- assume P,
   -- assume h,
   -- have pornp := classical.em P,
@@ -1135,7 +1150,7 @@ begin
     -- case 1
       have pandq := and.intro p q,
       have f := h pandq,
-      cases f,
+      apply false.elim f,
     -- case 2
       apply or.intro_right _ _,
       assumption,
