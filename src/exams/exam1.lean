@@ -41,7 +41,7 @@ rule for →.
 
 (P Q : Prop) (p2q : P → Q) (p : P)
 ----------------------------------
-     [q: Q]
+            [q: Q]
 -/
 
 -- Give a formal proof of the following
@@ -76,7 +76,7 @@ inference rule notation.
 Give a brief English language explanation of
 the introduction rule for true.
 
--- Anything true needs a proof of true.
+-- [Anything true needs a proof of true.]
 
 ELIMINATION
 
@@ -113,10 +113,10 @@ Given an English language description of
 this inference rule. What does it really
 say, in plain simple English. 
 
--- Given arbitrary but specific propositions P and Q, 
+-- [Given arbitrary but specific propositions P and Q, 
 and proofs that P is true and Q is true, a proof can 
 be derived such that both P and Q is true using the 
-individual proofs of P (p) and Q (q).
+individual proofs of P (p) and Q (q).]
 
 ELIMINATION
 
@@ -151,9 +151,9 @@ T is any type (such as nat) and Q is any proposition
 given type), how do you prove ∀ (t : T), Q? What is
 the introduction rule for ∀?
 
--- To prove Q, it must first be assumed that 
+-- [To prove Q, it must first be assumed that 
 we have an arbitrary t of type T, then show that it 
-applies for all objects of types T.
+applies for all objects of types T.]
 
 ELIMINATION
 
@@ -164,19 +164,19 @@ what it says.
 
 (T : Type) (Q : Prop), (pf : ∀ (t : T), Q) (t : T)
 -------------------------------------------------- elim
-                [pf t]
+                     [pf t]
 
--- If given a proof of a proposition that states that
+-- [If given a proof of a proposition that states that
 for all objects of type T, a proof of Q can be derived, 
 the proof of the for all proposition can be *applied* to 
 another object of type T named t, by the elimination rule 
-for for all (∀). 
+for for all (∀).] 
 
 Given a proof, (pf : ∀ (t : T), Q), and a value, (t : T),
 briefly explain in English how you *use* pf to derive a
 proof of Q.
 
--- I would apply the proof pf to t to derive a proof of Q.
+-- [I would apply the proof pf to t to derive a proof of Q.]
 -/
 
 /-
@@ -230,7 +230,7 @@ strategy to prove a proposition, ¬P.
 -/
 
 /-
-Answer: To prove by negation means to prove ¬P,
+--[To prove by negation means to prove ¬P,
 for some proposition P. To prove such a proposition, 
 it is necessary first to recognize the definition of
 ¬P is essentially P → false. Because we see it as an 
@@ -238,7 +238,7 @@ implication, we must first assume the premise (that
 P is true), and show that it leads to a contradiction.
 This can be done by performing case analysis on the assumed
 proof, which will prove the beginning proposition as there
-are no cases in which false is true. 
+are no cases in which false is true.] 
 -/ 
 
 /-
@@ -249,15 +249,15 @@ the lack of a ¬ in front of the P).
 
 Fill in the blanks the following partial answer:
 
-To prove P, assume __¬ P __ and show that ___the assumption yields a contradiction______.
-From this derivation you can conclude ___¬ ¬ P_______.
-Then you apply the rule of negation _____elimination_______
+To prove P, assume [¬ P] and show that [the assumption yields a contradiction].
+From this derivation you can conclude [¬ ¬ P].
+Then you apply the rule of negation [ elimination ]
 to that result to arrive a a proof of P. We have
 seen that the inference rule you apply in the 
 last step is not constructively valid but that it
-is ____classically_____ valid, and that accepting the axiom
-of the ____excluded middle_____ suffices to establish negation
-______elimination____ (better called double ___disjunct __ ____analysis_____)
+is [ classically ] valid, and that accepting the axiom
+of the [ excluded middle ] suffices to establish negation
+[ elimination ](better called double [disjunct analysis])
 as a theorem.
 -/
 
@@ -355,11 +355,11 @@ If every car is either heavy or light, and red or
 blue, and we want a prove by cases that every car 
 is rad, then: 
 
--- how many cases will need to be considered? 2 cases
+-- how many cases will need to be considered? [2 cases]
 -- list the cases (informaly)
-    -- The main cases are for heavy or light, and the subcases for each case
+    -- [The main cases are for heavy or light, and the subcases for each case
     is red or blue. This would mean that you would first have a case for heavy and red
-    and another one for light and red.
+    and another one for light and red.]
 
 -/
 
