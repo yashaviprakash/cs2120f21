@@ -334,7 +334,10 @@ def ELJL : Prop :=
     (JLNT : Nice JohnLennon ∧ Talented JohnLennon),
     (∀ (p : Person), Likes p JohnLennon) 
     
-
+/-
+English Rendition: [All people like John Lennon, who is a nice and talented Person 
+(this is true by the elantp proposition).]
+-/
 example : ELJL :=
 begin
   assume Person Nice Talented Likes elantp JohnLennon JLNT p,
