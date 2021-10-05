@@ -355,9 +355,11 @@ If every car is either heavy or light, and red or
 blue, and we want a prove by cases that every car 
 is rad, then: 
 
--- how many cases will need to be considered? __
+-- how many cases will need to be considered? 2 cases
 -- list the cases (informaly)
-    -- answer here
+    -- The main cases are for heavy or light, and the subcases for each case
+    is red or blue. This would mean that you would first have a case for heavy and red
+    and another one for light and red.
 
 -/
 
