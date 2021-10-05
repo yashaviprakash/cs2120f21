@@ -336,7 +336,7 @@ def ELJL : Prop :=
     
 /-
 English Rendition: [All people like John Lennon, who is a nice and talented Person 
-(this is true by the elantp proposition).]
+(this is true by the elantp proof).]
 -/
 example : ELJL :=
 begin
