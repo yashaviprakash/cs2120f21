@@ -346,12 +346,10 @@ begin
   assume p,
   apply elantp JohnLennon _ _,
   -- subgoals
-    -- subgoal 1
-    have nice := and.elim_left JLNT,
-    exact nice,
-    -- subogal 2
-    have talented := and.elim_right JLNT,
-    exact talented,
+    -- subgoal 1 
+    exact (and.elim_left JLNT), 
+    -- subogal 2 
+    exact (and.elim_right JLNT),
   
 end
 
@@ -432,5 +430,8 @@ axiom Loves : Person → Person → Prop
 
 example : ∃ (p: Person), ∀ (e: Person), Loves e p → Loves p e := 
 begin
+  apply exists.intro _ _,
+
   
+
 end
