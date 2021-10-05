@@ -206,6 +206,8 @@ end
 -- There is someone who likes someone else
 example : ∃ (p1 p2: Person), Likes p1 p2 :=
 begin 
+  apply exists.intro _ _,
+
 end
 
 -- No one likes anyone who dislikes them

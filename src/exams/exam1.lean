@@ -41,7 +41,7 @@ rule for →.
 
 (P Q : Prop) (p2q : P → Q) (p : P)
 ----------------------------------
-     [replace with answer]
+     [q: Q]
 -/
 
 -- Give a formal proof of the following
@@ -51,7 +51,7 @@ begin
   assume p2q,
   assume p,
   have q := p2q p,
-  exact p2q p,
+  exact q,
 end
 
 -- Extra credit [2 points]. Who invented this principle?
@@ -76,7 +76,7 @@ inference rule notation.
 Give a brief English language explanation of
 the introduction rule for true.
 
--- answer here
+-- Anything true needs a proof of true.
 
 ELIMINATION
 
@@ -113,7 +113,10 @@ Given an English language description of
 this inference rule. What does it really
 say, in plain simple English. 
 
--- answer here
+-- Given arbitrary but specific propositions P and Q, 
+and proofs that P is true and Q is true, a proof can 
+be derived such that both P and Q is true using the 
+individual proofs of P (p) and Q (q).
 
 ELIMINATION
 
@@ -148,7 +151,8 @@ T is any type (such as nat) and Q is any proposition
 given type), how do you prove ∀ (t : T), Q? What is
 the introduction rule for ∀?
 
--- answer here
+-- To prove Q, it must first be assumed that 
+we have an arbitrary t of type T. 
 
 ELIMINATION
 
@@ -167,7 +171,7 @@ Given a proof, (pf : ∀ (t : T), Q), and a value, (t : T),
 briefly explain in English how you *use* pf to derive a
 proof of Q.
 
--- answer here
+-- I would apply the proof pf to t to derive a proof of Q.
 -/
 
 /-
@@ -184,14 +188,18 @@ axioms
   -- formalizee the following assumptions here
   -- (1) Lynn is a person
   -- (2) Lynn knows logic
-  -- add answer here
-  -- add answer here
+  -- (3) Lynn is a better computer scientist
+  -- (4) If Lynn knows logic, then Lynn is a better computer scientist
 
 /-
 Now, formally state and prove the proposition that
 Lynn is a better computer scientist
 -/
-example : _ := _
+example : ∀ (Lynn : Person), KnowsLogic Lynn → BetterComputerScientist Lynn  := 
+begin
+  assume Lynn,
+  apply LogicMakesYouBetterAtCS Lynn,
+end
 
 
 
@@ -207,7 +215,7 @@ Lean's definition of not.
 -/
 
 namespace hidden
-def not (P : Prop) := _ -- fill in the placeholder
+def not (P : Prop) := P → P -- fill in the placeholder
 end hidden
 
 /-
@@ -264,9 +272,19 @@ that iff has both elim_left and elim_right
 rules, just like ∧.
 -/
 
-example : _ :=
+example : ∀ (P Q: Prop), (P ∧ Q) ↔ (Q ∧ P) :=
 begin
-_
+  assume P Q,
+  apply iff.intro _ _,
+  -- forward
+    assume pandq,
+    cases pandq with p q,
+    apply and.intro q p,
+  -- backward
+    assume qandp,
+    cases qandp with q p,
+    apply and.intro p q,
+    
 end
 
 
@@ -304,7 +322,7 @@ def ELJL : Prop :=
 
 example : ELJL :=
 begin
-  _
+  
 end
 
 
@@ -384,5 +402,5 @@ axiom Loves : Person → Person → Prop
 
 example : ∃ (p: Person), ∀ (e: Person), Loves e p → Loves p e := 
 begin
-  _
+  
 end
