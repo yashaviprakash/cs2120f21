@@ -337,20 +337,14 @@ def ELJL : Prop :=
 
 example : ELJL :=
 begin
-  assume Person,
-  assume Nice Talented,
-  assume Likes,
-  assume elantp,
-  assume JohnLennon,
-  assume JLNT,
-  assume p,
+  assume Person Nice Talented Likes elantp JohnLennon JLNT p,
   apply elantp JohnLennon _ _,
   -- subgoals
     -- subgoal 1 
-    exact (and.elim_left JLNT), 
+      exact (and.elim_left JLNT), 
     -- subogal 2 
-    exact (and.elim_right JLNT),
-  
+      exact (and.elim_right JLNT),
+
 end
 
 
