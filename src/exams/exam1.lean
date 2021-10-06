@@ -122,7 +122,17 @@ ELIMINATION
 
 Given the elimination rules for ∧ in both
 inference rule and English language forms.
+
+
+(P Q : Prop) (pq : P ∧ Q) 
+---------------------------- elim
+        (p: P) (q: Q)
+
+
+-- [Given a proof that P and Q is true]
 -/
+
+
 
 /-
 Formally state and prove the theorem that, 
