@@ -443,6 +443,7 @@ axiom Loves : Person → Person → Prop
 example : ∃ (p: Person), ∀ (e: Person), Loves e p → Loves p e := 
 begin
   apply exists.intro _ _,
+  
 
   
 
