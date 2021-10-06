@@ -125,14 +125,17 @@ inference rule and English language forms.
 
 
 (P Q : Prop) (pq : P ∧ Q) 
----------------------------- elim
-        (p: P) (q: Q)
+---------------------------- elim_left
+            (p: P) 
 
+(P Q : Prop) (pq : P ∧ Q) 
+---------------------------- elim_right
+            (q: Q) 
 
--- [Given a proof that P and Q is true]
+-- [Given a proof that P and Q is true by the introduction
+rule for and, we can derive a proof that P is true and that 
+Q is true by using the left and right elimination rules.]
 -/
-
-
 
 /-
 Formally state and prove the theorem that, 
