@@ -132,8 +132,8 @@ inference rule and English language forms.
 ---------------------------- elim_right
             (q: Q) 
 
--- [Given a proof that P and Q is true by the introduction
-rule for and, we can derive a proof that P is true and that 
+-- [Given a proof that P and Q is true by the and introduction
+rule, we can derive a proof that P is true and that 
 Q is true by using the left and right elimination rules.]
 -/
 
@@ -177,7 +177,7 @@ what it says.
 
 (T : Type) (Q : Prop), (pf : ∀ (t : T), Q) (t : T)
 -------------------------------------------------- elim
-                     [pf t]
+                     [pr: Q]
 
 -- [If given a proof of a proposition that states that
 for all objects of type T, a proof of Q can be derived, 
@@ -189,7 +189,10 @@ Given a proof, (pf : ∀ (t : T), Q), and a value, (t : T),
 briefly explain in English how you *use* pf to derive a
 proof of Q.
 
--- [I would apply the proof pf to t to derive a proof of Q.]
+-- [To derive a proof of Q, the the for all proposition pf
+would need to be *applied* to the value t to obtain a proof of
+Q.]
+
 -/
 
 /-
@@ -233,8 +236,9 @@ Lean's definition of not.
 -/
 
 namespace hidden
-def not (P : Prop) := P → P -- fill in the placeholder
+def not (P : Prop) := P → false -- fill in the placeholder
 end hidden
+
 
 /-
 Explain precisely in English the "proof strategy"
@@ -270,7 +274,7 @@ seen that the inference rule you apply in the
 last step is not constructively valid but that it
 is [ classically ] valid, and that accepting the axiom
 of the [ excluded middle ] suffices to establish negation
-[ elimination ](better called double [disjunct analysis])
+[ elimination ](better called double [exlcluded middle])
 as a theorem.
 -/
 
@@ -348,8 +352,9 @@ def ELJL : Prop :=
     (∀ (p : Person), Likes p JohnLennon) 
     
 /-
-English Rendition: [All people like John Lennon, who is a nice and talented Person 
-(this is true by the elantp proof).]
+English Rendition: [Everybody likes anyone who is nice and talented.
+John Lennon is a person who is liked by everyone because he is nice
+and talented.]
 -/
 example : ELJL :=
 begin
@@ -427,8 +432,19 @@ in one direction and five points for proving it
 both directions. 
 -/
 
-def negelim_equiv_exmid : Prop := 
-  _
+def negelim_equiv_exmid : ∀ (P : Prop), ¬¬P → P ∨ ¬P := 
+begin
+  assume P,
+  assume nnp,
+  have pornp := classical.em P,
+  cases pornp with p np,
+  -- forward
+  admit,
+  
+  -- backward
+  have f := nnp np,
+  contradiction,
+end
 
 
 /- 
