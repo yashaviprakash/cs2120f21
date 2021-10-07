@@ -376,7 +376,7 @@ If every car is either heavy or light, and red or
 blue, and we want a prove by cases that every car 
 is rad, then: 
 
--- how many cases will need to be considered? [2 cases (because this proposition can only be true in two cases)]
+-- how many cases will need to be considered? [4 cases (because this proposition can only be true in two cases)]
 -- list the cases (informaly)
     -- [To prove that every case is red, you will first have
     one case that concerns proving that every car is heavy and 
@@ -440,8 +440,8 @@ begin
   have pornp := classical.em P,
   cases pornp with p np,
   -- forward
-  admit,
-  
+  apply or.intro_left _ _,
+  exact p,
   -- backward
   have f := nnp np,
   contradiction,
@@ -457,9 +457,11 @@ thre is someone who loves everyone. [5 points]
 
 axiom Loves : Person → Person → Prop
 
-example : ∃ (p: Person), ∀ (e: Person), Loves e p → Loves p e := 
+example : ∀ (e: Person),  ∃ (p: Person), Loves e p → Loves p e := 
 begin
-  apply exists.intro _ _,
+  assume e,
+  
+
   
 
   
