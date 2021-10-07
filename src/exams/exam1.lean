@@ -376,12 +376,14 @@ If every car is either heavy or light, and red or
 blue, and we want a prove by cases that every car 
 is rad, then: 
 
--- how many cases will need to be considered? [4 cases (because this proposition can only be true in two cases)]
+-- how many cases will need to be considered? [4 cases]
 -- list the cases (informaly)
-    -- [To prove that every case is red, you will first have
+    -- [To prove this proposition, you will first have
     one case that concerns proving that every car is heavy and 
-    red, and another case that concerns proving that every car is
-    light and red.]
+    red, a second case that concerns proving that every car is
+    heavy and blue, a third case that concerns proving that every car is 
+    light and red, and a fourth case that concerns proving that every 
+    car is light and blue.]
 
 -/
 
