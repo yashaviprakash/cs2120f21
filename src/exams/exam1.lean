@@ -449,49 +449,28 @@ proposition that if there is someone everyone
 loves, and loves is a symmetric relation, then 
 thre is someone who loves everyone. [5 points]
 
-my undersatnding : that doesn't logically check out
-all the way because there is someone everyone loves, 
-it doesn't mean that there is someone who loves everyone
+my understanding : if loves is a symmetric relation,
+then that is an axiom that I want to start with
 
 -/
 
 axiom Loves : Person → Person → Prop
+axiom Loves_symm : ∀ (p e: Person), Loves e p → Loves p e
 
-example : (∃ (p: Person), ∀ (e: Person), Loves e p → Loves p e) →
+example : (∃ (p: Person), ∀ (e: Person), Loves e p) →
 (∃ (p : Person), ∀ (e: Person), Loves p e) := 
 begin
-  -- assume e,
-  -- have p : Person,
-  -- exact e,
-  -- apply exists.intro p _,
-  -- assume h,
   assume h,
   cases h with p pf,
   apply exists.intro p _,
   assume e,
-  -- there could or couldn't exist someone where this is true
-  have em := classical.em (Loves p e), 
-  cases em with em1 em2,
-  -- have contra := classical.em (Loves p e),
-  -- cases contra with a b,
-  -- exact a,
-  -- -- there could exist a person where this isn't true
-  -- have c : ∃ (p: Person), ¬ Loves p e := exists.intro p b,
- exact em1,
- have contra : ∃ (p: Person), ¬ Loves p e := exists.intro p em2,
- 
-
- 
- 
-
-  
-  
-  
- 
-  
-  
-  
-  
-
+  -- propose introduced fact that Loves p e
+  have loves_pe : Loves p e := _,
+  -- subgoal 1 : exact introduced fact
+    exact loves_pe,
+  -- subgoal 2: prove the introduced fact
+    have symm := Loves_symm p e,
+    have proof := pf e,
+    have final_proof := symm proof,
+    exact final_proof,
 end
- 
