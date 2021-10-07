@@ -461,6 +461,7 @@ example : (∃ (p: Person), ∀ (e: Person), Loves e p) →
 (∃ (p : Person), ∀ (e: Person), Loves p e) := 
 begin
   assume h,
+  -- exists elimination
   cases h with p pf,
   apply exists.intro p _,
   assume e,
@@ -469,8 +470,8 @@ begin
   -- subgoal 1 : exact introduced fact
     exact loves_pe,
   -- subgoal 2: prove the introduced fact
-    have symm := Loves_symm p e,
-    have proof := pf e,
-    have final_proof := symm proof,
-    exact final_proof,
+    have symm_rel := Loves_symm p e, -- use axiom that states symmetric relation
+    have proof := pf e, -- apply exists elim proof to a Person e
+    have final_proof := symm_rel proof, -- derive proof using implies elimination
+    exact final_proof, 
 end
