@@ -449,13 +449,13 @@ proposition that if there is someone everyone
 loves, and loves is a symmetric relation, then 
 thre is someone who loves everyone. [5 points]
 
-my understanding : if loves is a symmetric relation,
+my understanding : if Loves is a symmetric relation,
 then that is an axiom that I want to start with
 
 -/
 
 axiom Loves : Person → Person → Prop
-axiom Loves_symm : ∀ (p e: Person), Loves e p → Loves p e
+axiom Loves_symm : ∀ (p e: Person), Loves e p → Loves p e -- my introduced axiom that Loves is a symmetric relation
 
 example : (∃ (p: Person), ∀ (e: Person), Loves e p) →
 (∃ (p : Person), ∀ (e: Person), Loves p e) := 
