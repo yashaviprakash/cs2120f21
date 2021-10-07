@@ -439,7 +439,7 @@ both directions.
 def negelim_equiv_exmid : ∀ (P : Prop), (¬¬P → P) = P ∨ ¬P := 
 begin
   assume P,
-  sorry,
+  _
 end
 
 
