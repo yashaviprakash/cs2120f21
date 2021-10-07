@@ -207,6 +207,8 @@ end
 example : ∃ (p1 p2: Person), Likes p1 p2 :=
 begin 
   apply exists.intro _ _,
+  
+
 
 end
 
@@ -221,7 +223,7 @@ begin
 end
 
 -- No one likes anyone who is not nice
--- there exists a person such that all people, separate quantifieers
+-- there exists a person such that all people, separate quantifiers
 example : ¬ ∃ (p : Person), ∀ (a : Person), ¬ (Nice a) → Likes p a :=
 begin 
 end

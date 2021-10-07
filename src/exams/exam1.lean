@@ -274,7 +274,7 @@ seen that the inference rule you apply in the
 last step is not constructively valid but that it
 is [ classically ] valid, and that accepting the axiom
 of the [ excluded middle ] suffices to establish negation
-[ elimination ](better called double [exlcluded middle])
+[ elimination ](better called double [negation elimination])
 as a theorem.
 -/
 
@@ -358,6 +358,7 @@ and talented.]
 -/
 example : ELJL :=
 begin
+  intros,
   assume Person Nice Talented Likes elantp JohnLennon JLNT p,
   apply elantp JohnLennon _ _,
   -- subgoals
@@ -435,18 +436,10 @@ in one direction and five points for proving it
 both directions. 
 -/
 
-def negelim_equiv_exmid : ∀ (P : Prop), ¬¬P → P ∨ ¬P := 
+def negelim_equiv_exmid : ∀ (P : Prop), (¬¬P → P) = P ∨ ¬P := 
 begin
   assume P,
-  assume nnp,
-  have pornp := classical.em P,
-  cases pornp with p np,
-  -- forward
-  apply or.intro_left _ _,
-  exact p,
-  -- backward
-  have f := nnp np,
-  contradiction,
+  sorry,
 end
 
 
@@ -455,17 +448,50 @@ EXTRA CREDIT: Formally express and prove the
 proposition that if there is someone everyone
 loves, and loves is a symmetric relation, then 
 thre is someone who loves everyone. [5 points]
+
+my undersatnding : that doesn't logically check out
+all the way because there is someone everyone loves, 
+it doesn't mean that there is someone who loves everyone
+
 -/
 
 axiom Loves : Person → Person → Prop
 
-example : ∀ (e: Person),  ∃ (p: Person), Loves e p → Loves p e := 
+example : (∃ (p: Person), ∀ (e: Person), Loves e p → Loves p e) →
+(∃ (p : Person), ∀ (e: Person), Loves p e) := 
 begin
+  -- assume e,
+  -- have p : Person,
+  -- exact e,
+  -- apply exists.intro p _,
+  -- assume h,
+  assume h,
+  cases h with p pf,
+  apply exists.intro p _,
   assume e,
-  
+  -- there could or couldn't exist someone where this is true
+  have em := classical.em (Loves p e), 
+  cases em with em1 em2,
+  -- have contra := classical.em (Loves p e),
+  -- cases contra with a b,
+  -- exact a,
+  -- -- there could exist a person where this isn't true
+  -- have c : ∃ (p: Person), ¬ Loves p e := exists.intro p b,
+ exact em1,
+ have contra : ∃ (p: Person), ¬ Loves p e := exists.intro p em2,
+ 
+
+ 
+ 
 
   
-
+  
+  
+ 
+  
+  
+  
   
 
 end
+ 
