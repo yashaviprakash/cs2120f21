@@ -353,7 +353,7 @@ def ELJL : Prop :=
     
 /-
 English Rendition: [Everybody likes anyone who is nice and talented.
-John Lennon is a person who is liked by everyone because he is nice
+John Lennon is a person who is liked by everyone, and he is nice
 and talented.]
 -/
 example : ELJL :=
