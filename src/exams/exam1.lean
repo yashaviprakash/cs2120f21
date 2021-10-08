@@ -134,7 +134,7 @@ inference rule and English language forms.
 
 -- [Given a proof that P and Q is true by the and introduction
 rule, we can derive a proof that P is true and that 
-Q is true by using the left and right elimination rules.]
+Q is true by using the left and right elimination rules, respectively.]
 -/
 
 /-
@@ -146,7 +146,7 @@ example : ∀ (P Q: Prop), Q ∧ P → P :=
 begin
   assume P Q,
   assume qandp,
-  have p : P := and.elim_right qandp,
+  have p := and.elim_right qandp,
   exact p,
 end
 
@@ -179,17 +179,18 @@ what it says.
 -------------------------------------------------- elim
                      [pr: Q]
 
--- [If given a proof of a proposition that states that
-for all objects of type T, a proof of Q can be derived, 
-the proof of the for all proposition can be *applied* to 
-another object of type T named t, by the elimination rule 
-for for all (∀).] 
+-- [Given an arbitrary but specific Type T, an
+arbitrary but specific proposition Q, and a proof that 
+for all objects of type T, a proof of Q can be derived, the proof
+of Q can be derived by *applying* the proof of the for all 
+proposition to another object of type T named t. This describes the 
+elimination rule for for all (∀).] 
 
 Given a proof, (pf : ∀ (t : T), Q), and a value, (t : T),
 briefly explain in English how you *use* pf to derive a
 proof of Q.
 
--- [To derive a proof of Q, the the for all proposition pf
+-- [To derive a proof of Q, the for all proposition pf
 would need to be *applied* to the value t to obtain a proof of
 Q.]
 
@@ -236,7 +237,7 @@ Lean's definition of not.
 -/
 
 namespace hidden
-def not (P : Prop) := P → false -- fill in the placeholder
+def not (P : Prop) := (P → false) -- fill in the placeholder
 end hidden
 
 
@@ -244,18 +245,17 @@ end hidden
 Explain precisely in English the "proof strategy"
 of "proof by negation." Explain how one uses this
 strategy to prove a proposition, ¬P. 
--/
 
-/-
---[To prove by negation means to prove ¬P,
-for some proposition P. To prove such a proposition, 
+
+--[To prove by negation means to prove ¬P given some 
+proposition P and a proof that P → false. To prove such a proposition, 
 it is necessary first to recognize the definition of
 ¬P is essentially P → false. Because we see it as an 
 implication, we must first assume the premise (that 
-P is true), and show that it leads to a contradiction.
-This can be done by performing case analysis on the assumed
-proof, which will prove the beginning proposition as there
-are no cases in which false is true.] 
+P is true), and show that it leads to a contradiction with what we're given.
+This can be done by applying the given proof that P → false to the assumed
+proof of P to derive a proof of false, and apply false elimination given our proof of false 
+(ex falso).] 
 -/ 
 
 /-
@@ -277,8 +277,6 @@ of the [ excluded middle ] suffices to establish negation
 [ elimination ](better called double [negation elimination])
 as a theorem.
 -/
-
-
 
 -- -------------------------------------
 
@@ -352,13 +350,12 @@ def ELJL : Prop :=
     (∀ (p : Person), Likes p JohnLennon) 
     
 /-
-English Rendition: [Everybody likes anyone who is nice and talented.
-John Lennon is a person who is liked by everyone, and he is nice
-and talented.]
+English Rendition: [For all People, every person likes any person 
+who is nice and talented. John Lennon is a person who is liked by 
+everyone, and he is nice and talented.]
 -/
 example : ELJL :=
 begin
-  intros,
   assume Person Nice Talented Likes elantp JohnLennon JLNT p,
   apply elantp JohnLennon _ _,
   -- subgoals
@@ -465,13 +462,13 @@ begin
   cases h with p pf,
   apply exists.intro p _,
   assume e,
-  -- propose introduced fact that Loves p e
+  -- propose new fact that Loves p e is true
   have loves_pe : Loves p e := _,
   -- subgoal 1 : exact introduced fact
     exact loves_pe,
   -- subgoal 2: prove the introduced fact
     have symm_rel := Loves_symm p e, -- use axiom that states symmetric relation
     have proof := pf e, -- apply exists elim proof to a Person e
-    have final_proof := symm_rel proof, -- derive proof using implies elimination
+    have final_proof := symm_rel proof, -- derive proof of goal using implies elimination
     exact final_proof, 
 end
