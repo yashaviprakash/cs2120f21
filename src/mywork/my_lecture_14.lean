@@ -59,3 +59,29 @@ begin
     have contra := p2 p,
     contradiction,
 end
+
+/- practice on my own-/
+example : ¬ (∀ p: Person, Likes p p) ↔ (∃ p : Person, ¬ Likes p p) := 
+begin 
+  apply iff.intro _ _,
+  -- forward
+    assume p,
+    have classical := classical.em (∃ (p : Person), ¬Likes p p),
+    cases classical with a b,
+    exact a,
+    have intro : ∀ (p: Person), Likes p p := _,
+    contradiction,
+    assume p,
+    have classical_2 := classical.em (Likes p p),
+    cases classical_2 with a b,
+    exact a,
+    have e : ∃ (p: Person), ¬ Likes p p := exists.intro p b,
+    contradiction, 
+  -- backward
+    assume h,
+    cases h with p pf,
+    assume pr,
+    have contra := pr p,
+    contradiction,
+
+end

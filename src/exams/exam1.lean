@@ -54,7 +54,7 @@ begin
   exact q,
 end
 
--- Extra credit [2 points]. Who invented this principle?
+-- Extra credit [2 points]. Who invented this principle? [ Aristotle ]
 
 
 
