@@ -120,7 +120,7 @@ individual proofs of P (p) and Q (q).]
 
 ELIMINATION
 
-Given the elimination rules for ∧ in both
+Give the elimination rules for ∧ in both
 inference rule and English language forms.
 
 
