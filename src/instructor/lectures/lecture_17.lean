@@ -63,7 +63,7 @@ Sometimes people use ∅ to represent the empty set
 
 #check ( ∅ : set ℕ )
 
-/- set membership
+/- set membership (an example is ev n)
 
 A membership predicate applied to a value
 yields a proposition: one that is true for
@@ -71,7 +71,7 @@ values in the set. The ∈ notation is just
 a shorthand for application of a membership
 predicate to a value, but it gives a sense
 of "inclusion" of a value in a collection
-of values.
+of values. (ℕ → Prop)
 -/
 #check evens 0
 #check 0 ∈ evens
@@ -87,10 +87,10 @@ elements in s2 "taken away." Sometimes
 people use subtraction notation for
 set difference: s1 - s2.
 -/
-#check evens \ ods
-#check evens \ evens
-#check evens \ empte
-#check evens \ complete
+#check evens \ ods -- evens
+#check evens \ evens -- empty
+#check evens \ empte -- evens
+#check evens \ complete -- empty
 
 
 /- complement
@@ -155,7 +155,7 @@ proper subset of s2, written s1 ⊂ s2, if every value
 in s1 is in s2 and some value in s2 is not in s1. 
 -/
 
-#check evens ⊆ evens
+#check evens ⊆ evens -- even is a subset of even
 #check evens ⊂ evens
 #check evens ⊆ complete
 #check evens ⊂ complete
@@ -222,6 +222,8 @@ Two different notations when talking about sets:
 where you can enumerate all values in a set)
 * Comprehension Notation (we're defining the set of values
 n of type ℕ such that -- place predicate here -- )
+
+the product of two sets is a set of pairs
 -/
 
 -- Display notation
