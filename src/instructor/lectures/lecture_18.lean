@@ -1,6 +1,7 @@
 import data.set
 
 /-
+**memorize all the definitions in this file** 
 Up to now we have mostly used our 
 intuition to understand operations
 on, and special values (empty and
@@ -79,8 +80,8 @@ turn is just (s a). See preceding
 definition. 
 -/
 
-notation a ∈ s := mem a s
-notation a ∉ s := ¬ (mem a s)
+notation a ∈ s := mem a s -- a is a member of s
+notation a ∉ s := ¬ (mem a s) -- a is not a member of s
 
 /-
 We can now formally define what we
@@ -97,7 +98,9 @@ so for any value, if it's in s₁ it's
 also in s₂, so s₁ is a subset of s₂.
 -/
 def subset (s₁ s₂ : set α) :=
-∀ ⦃a : α⦄, a ∈ s₁ → a ∈ s₂
+∀ ⦃a : α⦄, a ∈ s₁ → a ∈ s₂ -- every value in s1 is also in s2
+-- for every value, if a satisfies the predicate
+-- of s1 then a satisfies teh predicate of s2
 
 /-
 You can read the curly braces in
@@ -108,7 +111,7 @@ subtle technical differences that
 is not important here.
 -/
 
-notation s₁ ⊆ s₂ := subset s₁ s₂
+notation s₁ ⊆ s₂ := subset s₁ s₂ -- a proposition
 
 /-
 It is common in predicate logic to 
@@ -120,8 +123,8 @@ types) returns the set (as a predicate,
 of coures) of elements in s that also
 satisfy p.
 -/
-def sep (p : α → Prop) (s : set α) : set α :=
-{a | a ∈ s ∧ p a}
+def sep (p : α → Prop) (s : set α) : set α := -- set of α that area also of property p
+{a : α | a ∈ s ∧ p a} -- the set of values that are in s and satisfy predicate p
 
 /-
 Exercise: Given the assumptions that 
@@ -160,11 +163,11 @@ the set with no values, the empty set
 for the type, α. 
 -/
 
-def empty_set {α : Type} (a : α) := false
+def empty_set {α : Type} (a : α) := false -- for any type, takes an alpha and returns a proposition false, type α → false (exactly what we want for a definition of a set, a predicate)
 
 #check @empty_set
 
-def empty_nat : set ℕ := empty_set
+def empty_nat : set ℕ := empty_set -- α is inferred, it is ℕ
 
 /-
 To understand the preceding definition
@@ -308,7 +311,7 @@ to every value in s.
 -/
 
 def image (f : α → β) (s : set α) : set β :=
-{b | ∃ a, a ∈ s ∧ f a = b}
+{b | ∃ a, a ∈ s ∧ f a = b} -- and means for which (for which f applied to a equals b)
 
 /-
 The formal definition sort of goes to a 
