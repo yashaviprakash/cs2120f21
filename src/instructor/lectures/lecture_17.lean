@@ -15,15 +15,23 @@ as a predicate, applicable to a value
 of the member type, and "reducing to"
 a proposition, possibly "about" that
 value.
+-/
 
-In the following example, among other
-things, we see that set ℕ and ℕ → Prop
-are (nearly) interchangeable as types. 
-A set is its defined by its membership
-predicate. The "nearly" is because you
-get to use set notations when you use
-set T rather than T → Prop to specify
-the type of a set value.
+/-
+SET NOTATIONS
+-/
+
+
+/-
+Display notation. We can represent
+a finite set of values by listing them,
+comma-separated, within curly braces.
+-/
+def one_to_four : set ℕ := { 1, 2, 3, 4 }
+def some_strings : set string := {"Hello", "World!"}
+
+/-
+Set comprehension notation
 -/
 
 def empte : set ℕ := { n : ℕ | false } -- no natural numbers for which this proposition is true
@@ -49,13 +57,21 @@ def evens_intersect_complete : set ℕ := {n : ℕ | ev n }
 def evens_union_empty : set ℕ := {n : ℕ | ev n ∨ n ∈ empte} -- this reduces to even
 
 def evens_union_complete : set ℕ := {n : ℕ | ev n ∨ n ∈ complete} -- this reduces to true
+-- If T is any type and P is any predicate on T
+axioms (T : Type) (P : T → Prop)
+
+-- The this is the set of T values that satisfy P
+#check { t : T | P t}
+
+
 
 -- fill in additional interesting combinations
 
 
 /-
-SET THEORY NOTATIONS
+MORE SET THEORY NOTATIONS
 -/
+
 /- empty set
 
 Sometimes people use ∅ to represent the empty set
@@ -65,17 +81,19 @@ Sometimes people use ∅ to represent the empty set
 
 /- set membership (an example is ev n)
 
-A membership predicate applied to a value
+A (membership) predicate applied to a value
 yields a proposition: one that is true for
 values in the set. The ∈ notation is just 
 a shorthand for application of a membership
 predicate to a value, but it gives a sense
 of "inclusion" of a value in a collection
 of values. (ℕ → Prop)
+of the "inclusion" of a value in a collection
+of values.
 -/
-#check evens 0
-#check 0 ∈ evens
-#check 1 ∈ evens
+#check evens 0    -- predicate applied to value
+#check 0 ∈ evens  -- equivalent proposition
+#check 1 ∈ evens  -- another proposition
 
 /- set difference
 
@@ -167,10 +185,10 @@ in s1 is in s2 and some value in s2 is not in s1.
 
 The powerset of a set, s, written 𝒫 s, is 
 the set of all subsets of s. This makes the 
-powerset a set of sets. 
+powerset a "set of sets". 
 -/
 
-#check 𝒫 { 1, 2, 3}
+#check (𝒫 { 1, 2, 3} : set (set ℕ))
 #check 𝒫 evens
 
 
