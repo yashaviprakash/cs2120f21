@@ -60,7 +60,7 @@ begin
   have pf : q b := _,
   exact exists.intro b pf,
   have pa_imp := f_all a,
-  have q_b := pa_imp ptoa,
+  have q_b : q (atob a):= pa_imp ptoa,
   
   admit,
 
