@@ -46,13 +46,23 @@ example :
 What does this propositon say? Explain it in
 plain English. Here's a start: "If there's a 
 function that maps/takes every α value that ... 
--- your completed English rendition here:
+-- 
 -/
 
 
 -- Give your formal proof here
-begin
-  _
-end
+begin 
+  assume h,
+  assume e,
+  cases h with atob f_all,
+  cases e with a ptoa,
+  have b : β := atob a,
+  have pf : q b := _,
+  exact exists.intro b pf,
+  have pa_imp := f_all a,
+  have q_b := pa_imp ptoa,
   
+  admit,
 
+  
+end
