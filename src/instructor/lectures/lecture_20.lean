@@ -290,9 +290,11 @@ any a, and the second rule says that if you
 know that a ≤ b, for any a and b, that you
 can then also prove a ≤ (b + 1). That's it.
 
+definition of the *type* less than or equal:
+
 inductive less_than_or_equal (a : ℕ) : ℕ → Prop
-| refl : less_than_or_equal a
-| step : Π {b}, 
+| refl : less_than_or_equal a (no matter what a is you can get a proof that a is less than or equal to a)
+| step : Π {b}, (for any b, if a is less than or equal to b, then a is less than the successor of b (1 + b))
     less_than_or_equal b → 
     less_than_or_equal (succ b)
 
