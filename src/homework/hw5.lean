@@ -46,23 +46,39 @@ example :
 What does this propositon say? Explain it in
 plain English. Here's a start: "If there's a 
 function that maps/takes every α value that ... 
--- 
+-- If there's a function that maps/takes every α value that provides
+a proof for a β value, then a proof of q can be derived using that function
+given that every α value satisfies predicate p. Additionally, if there exists 
+a value of type α that satisfies predicate p, then there exists a value of type 
+β that satisfies predicate q. 
 -/
 
-
+/- 
+to clarify: before I was determining the witness was something that was correct
+but not directly provided by earlier premises. This method will make sure that everything
+that was directly provided by teh earlier premise stands. 
+-/
 -- Give your formal proof here
 begin 
-  assume h,
-  assume e,
-  cases h with atob f_all,
-  cases e with a ptoa,
-  have b : β := atob a,
-  have pf : q b := _,
-  exact exists.intro b pf,
-  have pa_imp := f_all a,
-  have q_b : q (atob a):= pa_imp ptoa,
-  
-  admit,
-
+  assume h, -- first premise
+  assume e, -- second premise
+  cases h with atob f_all, -- split up h to receive witness and proof
+  cases e with a ptoa, -- split up e to receive witness and proof
+  apply exists.intro _ _, -- top down approach to solve implication
+  -- witness
+    exact atob a, 
+  -- proof
+    have pa_imp := f_all a,
+    have q_b := pa_imp ptoa,
+    exact q_b,  
   
 end
+
+-- informal proof of the proposition
+/-
+To prove this proposition, the first and second premise must be assumed
+due to the nature of the double implication. Given that both premises are
+existential propositions, exists elimination using case analysis must 
+be applied on both propositions. This yields the wtinesses and the proofs for 
+
+-/
