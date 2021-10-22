@@ -262,7 +262,7 @@ defined to express exactly the "less than or
 equal to  
 -/
 
-#check nat.le
+#check nat.le -- predicate that takes two natural numbers and yields a proposition
 
 /-
 At this point you might be wondering where do
