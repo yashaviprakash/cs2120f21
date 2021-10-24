@@ -76,18 +76,17 @@ end
 
 -- informal proof of the proposition
 /-
-To prove this proposition, the first and second premise must be assumed
-due to the nature of the double implication. Given that both premises are
-existential propositions, exists elimination using case analysis must 
-be applied on both propositions. This yields the wtinesses (the proof that
-the implication that α → β is true and the proof of a as a value of type α) 
+To prove this proposition, the first and second premise must be assumed. Given 
+that both premises are existential propositions, exists elimination using case 
+analysis must be applied on both propositions. This yields the wtinesses (the function 
+f of α → β and the value a of type α) 
 and the proofs (the proof of the for all proposition and the proof that a satisfies
 predicate p) for both propositions. This gives sufficient information to prove 
 the implication that there exists an object of type β that satisfies predicate q. 
 To prove the implication, the top-down approach can be employed on the application of
-the introduction rule for exists. To obtain the witness, a value of type β, the 
-proof the implication that a proof of α can acquire a proof of β can be applied to 
-the proof of a. To obtain the proof, a proof that the value b satisifes the predicate q, 
+the introduction rule for exists. 
+
+To obtain the witness, f can be applied to a. To obtain the proof, a proof that the value f(a) satisifes the predicate q, 
 the proof of the value a and the proof that a satisfies predicate p must be applied
 to the for all proposition. This satisfies the proof. QED. 
 
