@@ -38,7 +38,7 @@ of the proposition to be proved.
 
 -- here's the proposition
 example : 
-  (∃ (f : α → β), ∀ (a : α), p a → q (f a)) →
+  (∃ (f : α → β), ∀ (a  : α), p a → q (f a)) →
   (∃ (a : α), p a) → 
   (∃ (b : β), q b) := 
 
