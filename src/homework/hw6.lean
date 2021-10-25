@@ -158,10 +158,33 @@ Exercise: Formally state and prove both formally and
 informally that ∩ is left-distributive over ∩.
 -/
 
+example : ∀ (α : Type) (H L K : set α), H ∩ (L ∩ K) = (H ∩ L) ∩ (H ∩ K) :=
+begin
+  intros α H L K,
+  apply set.ext _,
+  assume x,
+  split,
+  -- forward
+  assume h,
+  apply and.intro _ _,
+  -- subgoal 1
+  apply and.intro _ _,
+  exact h.elim_left,
+  have right := h.elim_right,
+  have left := right.elim_left,
+  exact left,
+  -- subgoal 2
+  _
+end
 
 /-
 Exercise: Formally state and prove both formally 
 and informally that ∪ is left-distributive over ∩.
 -/
+
+example : ∀ (α : Type) (H L K : set α), H ∪ (L ∩ K) = (H ∪ L) ∩ (H ∪ K):=
+begin
+  _
+end
 
 

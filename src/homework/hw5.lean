@@ -65,8 +65,6 @@ begin
   cases h with atob f_all, -- split up h to receive witness and proof
   cases e with a ptoa, -- split up e to receive witness and proof
   apply exists.intro (atob a) _, -- top down approach to solve implication
-  -- witness
-    --exact atob a, 
   -- proof
     have pa_imp := f_all a,
     have q_b := pa_imp ptoa,
