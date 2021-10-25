@@ -174,7 +174,17 @@ begin
   have left := right.elim_left,
   exact left,
   -- subgoal 2
-  _
+  have left := h.elim_left,
+  have right := (h.elim_right).elim_right,
+  exact and.intro left right,
+  -- backward
+  assume h,
+  apply and.intro _ _,
+  exact (h.elim_left).elim_left,
+  have left := (h.elim_left).elim_right,
+  have right := (h.elim_right).elim_right,
+  apply and.intro left right,
+
 end
 
 /-
@@ -184,7 +194,39 @@ and informally that ∪ is left-distributive over ∩.
 
 example : ∀ (α : Type) (H L K : set α), H ∪ (L ∩ K) = (H ∪ L) ∩ (H ∪ K):=
 begin
-  _
+  intros α H L K,
+  apply set.ext _,
+  assume x,
+  split,
+  -- forward
+  assume h,
+  cases h with h lk,
+  apply and.intro _ _,
+  apply or.intro_left _,
+  exact h,
+  apply or.intro_left _,
+  exact h,
+  cases lk with l k,
+  apply and.intro _ _,
+  apply or.intro_right _,
+  exact l,
+  apply or.intro_right _,
+  exact k,
+  -- backward
+  assume h,
+  cases h with hl hk,
+  cases hl with h l,
+  cases hk with h k,
+  apply or.intro_left _,
+  exact h,
+  apply or.intro_left _,
+  exact h,
+  cases hk with h k,
+  apply or.intro_left _,
+  exact h,
+  apply or.intro_right _,
+  exact and.intro l k,
+  
 end
 
 
