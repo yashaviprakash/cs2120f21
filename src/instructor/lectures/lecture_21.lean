@@ -91,7 +91,7 @@ proposition that the equality relation for
 natural numbers is is reflexive.
 -/
 
-theorem eq_is_refl : reflexive (@eq nat) :=  
+theorem eq_is_refl : reflexive (@eq nat) :=  -- eq is the equality predicate
 -- proof below
 /-
 Let's unpack the notation, @eq α. When we 
@@ -109,6 +109,15 @@ to let us write the implicit argument(s)
 explicitly. 
 -/
 begin
+  -- turns into @eq nat 0 0
+  -- want to talk about the overall relation of equality on nats
+  -- binary equality relation on nats
+  -- the proposition that equality on natural numbers is reflexive
+  -- expand expression: @reflexive nat (@eq nat) :=
+  unfold reflexive, -- proposition you get when you apply reflexive predicate to equality
+  assume x,
+  exact rfl,
+
 end
 
 /-
