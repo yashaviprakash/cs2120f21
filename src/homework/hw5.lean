@@ -84,9 +84,8 @@ and the proofs (the proof of the for all proposition and the proof that a satisf
 predicate p) for both propositions. This gives sufficient information to prove 
 the implication that there exists an object of type β that satisfies predicate q. 
 To prove the implication, the top-down approach can be employed on the application of
-the introduction rule for exists. 
-
-To obtain the witness, f can be applied to a. To obtain the proof, a proof that the value f(a) satisifes the predicate q, 
+the introduction rule for exists. To obtain the witness, f can be applied to a. 
+To obtain the proof, a proof that the value f(a) satisifes the predicate q, 
 the proof of the value a and the proof that a satisfies predicate p must be applied
 to the for all proposition. This satisfies the proof. QED. 
 
