@@ -138,9 +138,9 @@ begin
   cases h with hl k,
   cases hl with h l,
   apply and.intro _ _,
-  -- left
+    -- left
       exact h,
-  -- right
+    -- right
       exact and.intro l k,
   -- backward
   assume h,
@@ -185,24 +185,30 @@ begin
   assume h,
   cases h with hl k,
   cases hl with h l,
+  -- first case
   apply or.intro_left _,
   exact h,
+  -- second case
   apply or.intro_right _,
   apply or.intro_left _ ,
   exact l,
+  -- third case
   apply or.intro_right _,
   apply or.intro_right _,
   exact k,
   -- backward
   assume h,
   cases h with h lk,
+  -- first case
   apply or.intro_left _,
   apply or.intro_left _,
   exact h,
   cases lk with l k,
+  -- first case
   apply or.intro_left _,
   apply or.intro_right _,
   exact l,
+  -- second case
   apply or.intro_right _,
   exact k,
 
