@@ -268,22 +268,26 @@ begin
   assume h,
   apply and.intro _ _,
   -- subgoal 1
-  apply and.intro _ _,
-  exact h.elim_left,
-  have right := h.elim_right,
-  have left := right.elim_left,
-  exact left,
+    apply and.intro _ _,
+    -- subgoal 1 of subgoal 1
+      exact h.elim_left,
+    -- subgoal 2 of subgoal 1
+      have lk := h.elim_right,
+      have l := lk.elim_left,
+      exact l,
   -- subgoal 2
-  have left := h.elim_left,
-  have right := (h.elim_right).elim_right,
-  exact and.intro left right,
+    have h_2 := h.elim_left,
+    have k := (h.elim_right).elim_right,
+    exact and.intro h_2 k,
   -- backward
   assume h,
   apply and.intro _ _,
-  exact (h.elim_left).elim_left,
-  have left := (h.elim_left).elim_right,
-  have right := (h.elim_right).elim_right,
-  apply and.intro left right,
+    -- subgoal 1
+      exact (h.elim_left).elim_left,
+    -- subgoal 2
+      have l := (h.elim_left).elim_right,
+      have k := (h.elim_right).elim_right,
+      apply and.intro l k,
 
 end
 
