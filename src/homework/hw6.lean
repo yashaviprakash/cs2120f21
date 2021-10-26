@@ -185,36 +185,61 @@ begin
   assume h,
   cases h with hl k,
   cases hl with h l,
-  -- first case
-  apply or.intro_left _,
-  exact h,
-  -- second case
-  apply or.intro_right _,
-  apply or.intro_left _ ,
-  exact l,
-  -- third case
-  apply or.intro_right _,
-  apply or.intro_right _,
-  exact k,
+    -- first case
+      apply or.intro_left _,
+      exact h,
+    -- second case
+      apply or.intro_right _,
+      apply or.intro_left _ ,
+      exact l,
+    -- third case
+      apply or.intro_right _,
+      apply or.intro_right _,
+      exact k,
   -- backward
   assume h,
   cases h with h lk,
-  -- first case
-  apply or.intro_left _,
-  apply or.intro_left _,
-  exact h,
-  cases lk with l k,
-  -- first case
-  apply or.intro_left _,
-  apply or.intro_right _,
-  exact l,
-  -- second case
-  apply or.intro_right _,
-  exact k,
-
-
+    -- first case
+      apply or.intro_left _,
+      apply or.intro_left _,
+      exact h,
+    cases lk with l k,
+    -- first case
+      apply or.intro_left _,
+      apply or.intro_right _,
+      exact l,
+    -- second case
+      apply or.intro_right _,
+      exact k,
 
 end
+
+/-
+Informal Proof: First, it must be assumed that H, L, and K are arbitrary but specific sets
+of type α, such that ∪ is associative in the context of these three sets. To begin to prove such proposition, the
+use of set equality must be recognized to apply the axiom of set extensionality must be applied to expand 
+this proposition and show such set equality as a biimplication. From here, the arbitrary but specific value
+x of type α can be assumed, and the biimplication can be split. To begin the forward proof, the premise that 
+x exists in (H ∪ L) ∪ K must first be assumed true. Seeing as this is a disjunct, two case analyses can be applied
+on the premise and the disjunct within the premise to create three total cases to be considered for the proof. The 
+first case can be proven by using the exact proof given in the case analysis that x exists in H using the left or
+introduction rule. The second proof can be proven using our proof that x exists in L. To be able to use said proof, 
+the right or introduction rule followed by the left or introduction rule can be applied to isolate that part of the 
+implication where the proof that x exists in L can be used to prove the implication true. The third proof can 
+be proven using our proof that x exists in K, and it can be used similar to the second proof. The double application 
+of the right or introduction rule to the proof that x exists in K will prove the forward proof. To begin the
+backward proof, the premise that x exists in H ∪ (L ∪ K) must be assumed true. Seeing that this is a disjunct, case 
+analysis can be applied on the premise to create two cases where x exists in H and where x exists in (L ∪ K). To prove 
+the first case, the double application of the left or introduction rule can be applied to the proof that x exists in H 
+to prove the implication that x exists in H ∪ (L ∪ K). To prove the next case, it must be recognized that the proof
+that x exists in (L ∪ K) must be further simplified to create more cases using case analysis as this disjunct is not 
+presented with each other in the implication. These cases will represent proofs where x exists in L and one where
+x exists in K. To prove the goal using the first case, the application of the left or introduction rule followed by
+the right or introduction rule must be applied to the goal to isolate the part of the goal we have a proof for: x exists
+in L. To rpove the goal using the second case, the right or introduction rule must be applied to the proof that x exists
+in K to conclude the backward proof. QED.
+
+-/
 
 
 /-
