@@ -335,32 +335,53 @@ begin
   -- forward
   assume h,
   cases h with h lk,
-  apply and.intro _ _,
-  apply or.intro_left _,
-  exact h,
-  apply or.intro_left _,
-  exact h,
-  cases lk with l k,
-  apply and.intro _ _,
-  apply or.intro_right _,
-  exact l,
-  apply or.intro_right _,
-  exact k,
+    -- case one
+    apply and.intro _ _,
+      -- subgoal one
+        apply or.intro_left _,
+        exact h,
+      -- subgoal two
+        apply or.intro_left _,
+        exact h,
+    -- case two
+    cases lk with l k,
+    apply and.intro _ _,
+      -- subgoal one
+        apply or.intro_right _,
+        exact l,
+      -- subgoal two
+        apply or.intro_right _,
+        exact k,
   -- backward
   assume h,
   cases h with hl hk,
   cases hl with h l,
   cases hk with h k,
-  apply or.intro_left _,
-  exact h,
-  apply or.intro_left _,
-  exact h,
-  cases hk with h k,
-  apply or.intro_left _,
-  exact h,
-  apply or.intro_right _,
-  exact and.intro l k,
+    -- case one
+      apply or.intro_left _,
+      exact h,
+    -- case two
+      apply or.intro_left _,
+      exact h,
+    -- case three
+      cases hk with h k,
+      -- sub case one
+        apply or.intro_left _,
+        exact h,
+      -- sub case two
+        apply or.intro_right _,
+        exact and.intro l k,
 
 end
+
+/-
+Informal Proof: First, it must be assumed that H L and K are arbitrary but specific sets
+of type α, such that H ∪ (L ∩ K) = (H ∪ L) ∩ (H ∪ K) and ∪ is left-distributive over
+∩. o begin to prove such proposition, the use of set equality must be recognized to apply the 
+axiom of set extensionality must be applied to expand this proposition and show such set equality 
+as a biimplication. From here, the arbitrary but specific value x of type α can be assumed, and the 
+biimplication can be split.
+
+-/
 
 
