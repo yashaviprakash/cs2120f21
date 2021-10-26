@@ -398,7 +398,11 @@ Seeing that the premise is a conjunction, the cases tactic can be used to break 
 we can see that each conjunct is actually a disjunct. From here, we can use case analysis twice to generate
 three cases to solve the backward proof. To begin the first case, we can prove that x exists in H ∪ (L ∩ K)
 using the left or introduction rule and the exact proof that x exists in H. The second case can be solved
-the same way. 
+the same way. For the third case, we can regcognize it as being capable of being broken down further as we 
+have recognized that x exists in H ∪ K is a disjunct that can produce two subcases via case analysis. 
+Using this approach, we can solve the first subcase using the left or introduction rule using the exact proof of H. 
+We can then solve the second subcase using the application of the right or introduction rule to the proof of the
+conjunction using the individual proofs of L and K. QED.
 
 -/
 
