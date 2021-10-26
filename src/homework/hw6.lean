@@ -265,7 +265,13 @@ of type α, such that H ∩ (L ∩ K) = (H ∩ L) ∩ (H ∩ K) and ∩ is left-
 axiom of set extensionality must be applied to expand this proposition and show such set equality 
 as a biimplication. From here, the arbitrary but specific value x of type α can be assumed, and the 
 biimplication can be split. To begin the forward proof, the premise that x exists in H ∩ (L ∩ K)
-must be assumed to be true. From here, we can recognize the premise as a conjunction 
+must be assumed to be true. Seeing as the proposition is a conjunction, the introduction rule for 
+and can be applied with placeholders to further break down the propositions to prove. To prove the 
+first subgoal that x exists in H ∩ L, the introduction rule for and can be applied once more with 
+placeholders to further break down the goal. From here, we can solve the first goal of the subgoal 
+that x exists in H using the left elimination rule applied to the premise. To solve the second goal 
+of the first subgoal, 
+
 -/
 example : ∀ (α : Type) (H L K : set α), H ∩ (L ∩ K) = (H ∩ L) ∩ (H ∩ K) :=
 begin
