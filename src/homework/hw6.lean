@@ -326,6 +326,7 @@ Exercise: Formally state and prove both formally
 and informally that ∪ is left-distributive over ∩.
 -/
 
+
 example : ∀ (α : Type) (H L K : set α), H ∪ (L ∩ K) = (H ∪ L) ∩ (H ∪ K):=
 begin
   intros α H L K,
@@ -380,8 +381,27 @@ of type α, such that H ∪ (L ∩ K) = (H ∪ L) ∩ (H ∪ K) and ∪ is left-
 ∩. o begin to prove such proposition, the use of set equality must be recognized to apply the 
 axiom of set extensionality must be applied to expand this proposition and show such set equality 
 as a biimplication. From here, the arbitrary but specific value x of type α can be assumed, and the 
-biimplication can be split.
+biimplication can be split. To prove the forward proof, it must first be assumed that the premise 
+that H ∪ (L ∩ K) is true. Seeing that the premise is a disjunct, case analysis can be applied on the 
+the premise to create two cases: 1) that x exists in H, and 2) that x exists in L ∩ K. To begin case 
+one, it must first be recognized that goal is a conjunction and can be broken down into smaller, simpler
+subgoals using the application of the introduction rule for and using placeholders. To solve the first 
+subgoal, the application of the left introduction rule for or can be applied using the exact proof that
+x exists in H. the second subgoal can be solved the saem way. To begin case two, it can be recognized that
+L ∩ K is a conjunction, and can be broken down to two individual proofs that x exists in L and that x exists
+in K using the cases tactic. From here, we can simplify the goal using the application of the introduction
+rule for and with placeholders to create smaller subgoals. To solve the first subgoal, the application of
+the right introduction rule for or can be applied using the exact proof that x exists in L. The second
+subgoal will also be proven using the application of the right introduction rule to the exact proof that 
+x exists in K. To begin the backward proof, the premise that (H ∪ L) ∩ (H ∪ K) must be assumed to be true. 
+Seeing that the premise is a conjunction, the cases tactic can be used to break down the conjunction. From here,
+we can see that each conjunct is actually a disjunct. From here, we can use case analysis twice to generate
+three cases to solve the backward proof. To begin the first case, we can prove that x exists in H ∪ (L ∩ K)
+using the left or introduction rule and the exact proof that x exists in H. The second case can be solved
+the same way. 
 
 -/
+
+
 
 
