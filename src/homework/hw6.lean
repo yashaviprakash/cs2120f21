@@ -32,8 +32,8 @@ begin
   assume x, 
   split, 
   -- forward
-    assume h,
-    cases h with l k,
+  assume h,
+  cases h with l k,
     -- left
       apply or.intro_right _,
       exact l,
@@ -41,8 +41,8 @@ begin
       apply or.intro_left _,
       exact k,
   -- backward
-    assume h,
-    cases h with k l,
+  assume h,
+  cases h with k l,
     -- left
       apply or.intro_right _ ,
       exact k,
@@ -53,7 +53,7 @@ begin
 end 
 
 /-
-informal proof: First, we can assume that L and K are arbitrary but specific 
+Informal Proof: First, we can assume that L and K are arbitrary but specific 
 sets of type α to prove that the set from the union of L and K is equal 
 to the set from the union of K and L. To, prove this proposition, the 
 axiom of set extensionality must be applied to expand this proposition and show
@@ -68,7 +68,7 @@ To solve the backward proof, the premise that x exists in K and L must be assume
 Similar to the forward proof, case analysis can be applied on the disjunction, let's call
 it h, to prove teh implication as true through two cases: 1) x exists in K or 2) x exists
 in L. The implication can be proven in the first case by applying the right or introduction
-rule, and it can be proven in teh second case by applying the left or introductino rule. 
+rule, and it can be proven in the second case by applying the left or introductino rule. 
 QED.
 -/
 
@@ -83,12 +83,12 @@ example :∀ (α : Type), (∀ (a : set α), (a ⊆ a)) ∧ (∀ (H K L : set α
 begin
   assume α,
   apply and.intro _ _,
-  -- left
+  -- left : prove that ⊆ is reflexive
   assume a,
   assume x,
   assume h,
   exact h,
-  -- right
+  -- right : prove that ⊆ is transitive
   assume H K L a b,
   assume x,
   assume h,
@@ -97,6 +97,28 @@ begin
   exact l,
   
 end  
+
+/-
+Informal Proof: First, we can assume that α is a specific type for the proposition. 
+Seeing as the proposition is a conjunction, the introduction rule for and can be applied
+with placeholders to further break down the propositions to prove. To prove the left
+proposition that ⊆ is reflexive, it must first be assumed that a is an arbitrary but 
+specific set of type α. Because we understand set equality as an implication that if 
+a value of the same type exists in one set then it must exist in another, we must first
+assume that we have a value, x, that is an arbitrary but specific value of type α. From here,
+we can assume the premise that x exists in a. Seeing that the proof is true and ⊆ is indeed
+reflexive, the exact proof of the implication is found in the premise. To prove the right
+proposition that ⊆ is transitive, it must first be assumed that H K and L are arbitrary but
+specific sets of type α, and that H ⊆ K and K ⊆ L are both true to prove that H ⊆ L. From here, 
+using our same understanding of set equality, it can be assumed that x is an arbitrary but specific 
+value x of type α. From here, the premise that x exists in H must be assumed true. To prove that
+x exists in L, our understanding of the transitive proprerty of equality can similiarly be applied
+to our understanding of the transitive property of ⊆ such that x exists in L if x exists in K first 
+given our proof that x exists in H. To derive the proof that x exists in K, the proof that H ⊂ K must
+be applied to our proof that x exists in H. From here, we can derive an exact proof that x exists in 
+L by applying the proof that K ⊆ L to our proof that x exists in K. This concludes the proof, and
+proves that ⊆ has the property of being both reflexive and transitive. QED. 
+-/
 
 
 /-
@@ -116,17 +138,42 @@ begin
   cases h with hl k,
   cases hl with h l,
   apply and.intro _ _,
-  exact h,
-  exact and.intro l k,
+  -- left
+      exact h,
+  -- right
+      exact and.intro l k,
   -- backward
   assume h,
   cases h with h lk,
   cases lk with l k,
   apply and.intro _ _,
-  exact and.intro h l,
-  exact k,
+    -- left
+      exact and.intro h l,
+    -- right
+      exact k,
 
 end
+
+/-
+Informal Proof: First, it must be assumed that H L and K are arbitrary but specific sets of type α, 
+such that ∩ is associative in the context of these three sets. To begin to prove such proposition, the
+use of set equality must be recognized to apply the axiom of set extensionality must be applied to expand 
+this proposition and show such set equality as a biimplication. From here, the arbitrary but specific value
+x of type α can be assumed, and the biimplication can be split. To prove the forward proof, it must first
+be assumed that the premise that x exists in (H ∩ L) ∩ K is true. Seeing as this is a conjunction, case analysis
+can be applied to obtain The proofs that x exists in H ∩ L and x exists in K. To further break down the conjunction
+of H ∩ L, case ansalysis can be applieda gain to obtain the proofs that x exists in H and x exists in L. From here, 
+we can recognize the goal that x exists in H ∩ (L ∩ K) in the form of a conjunction, the introduction rule for and 
+can be applied with placeholders to further break down the proofs. The exact proof of the left conjunct can be obtained 
+using the proof that x exists in H, and the exact proof of the right conjunct can be obtained using the introduction
+rule for and using the proof that x exists in L and that x exists in K. To prove the backward proof, the premise that 
+x exists in H ∩ (L ∩ K) must be assumed true. Seeing as this premise is in the form of a conjunction, the case analysis
+can be applied twice the same way as the forward proof to prove that x exists in h, x exists in l, and x exists in h. 
+Seeing that the goal is also in the form of a conjunction, it can be simplified by applying the introduction ruel for
+and using placeholders to further simplify the proofs. The exact proof of the left conjunct can be obtained using
+the introduction rule for and using the proofs that x exists in H and x exists in L, and the exact proof of the right 
+conjunct can be obtained using the proof that x exists in K. QED. 
+-/
 
 example : ∀ (α : Type) (H L K : set α), (H ∪ L) ∪ K = H ∪ (L ∪ K) :=
 begin
