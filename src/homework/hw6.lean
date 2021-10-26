@@ -258,21 +258,7 @@ Exercise: Formally state and prove both formally and
 informally that ∩ is left-distributive over ∩.
 -/
 
-/-
-Informal Proof: First, it must be assumed that H L and K are arbitrary but specific sets
-of type α, such that H ∩ (L ∩ K) = (H ∩ L) ∩ (H ∩ K) and ∩ is left-distributive over
-∩. o begin to prove such proposition, the use of set equality must be recognized to apply the 
-axiom of set extensionality must be applied to expand this proposition and show such set equality 
-as a biimplication. From here, the arbitrary but specific value x of type α can be assumed, and the 
-biimplication can be split. To begin the forward proof, the premise that x exists in H ∩ (L ∩ K)
-must be assumed to be true. Seeing as the proposition is a conjunction, the introduction rule for 
-and can be applied with placeholders to further break down the propositions to prove. To prove the 
-first subgoal that x exists in H ∩ L, the introduction rule for and can be applied once more with 
-placeholders to further break down the goal. From here, we can solve the first goal of the subgoal 
-that x exists in H using the left elimination rule applied to the premise. To solve the second goal 
-of the first subgoal, 
 
--/
 example : ∀ (α : Type) (H L K : set α), H ∩ (L ∩ K) = (H ∩ L) ∩ (H ∩ K) :=
 begin
   intros α H L K,
@@ -305,6 +291,35 @@ begin
       apply and.intro l k,
 
 end
+
+/-
+Informal Proof: First, it must be assumed that H L and K are arbitrary but specific sets
+of type α, such that H ∩ (L ∩ K) = (H ∩ L) ∩ (H ∩ K) and ∩ is left-distributive over
+∩. o begin to prove such proposition, the use of set equality must be recognized to apply the 
+axiom of set extensionality must be applied to expand this proposition and show such set equality 
+as a biimplication. From here, the arbitrary but specific value x of type α can be assumed, and the 
+biimplication can be split. To begin the forward proof, the premise that x exists in H ∩ (L ∩ K)
+must be assumed to be true. Seeing as the proposition is a conjunction, the introduction rule for 
+and can be applied with placeholders to further break down the propositions to prove. To prove the 
+first subgoal that x exists in H ∩ L, the introduction rule for and can be applied once more with 
+placeholders to further break down the goal. From here, we can solve the first goal of the subgoal 
+that x exists in H using the left elimination rule applied to the premise. To solve the second goal 
+of the first subgoal that x exists in L, the premise can be broken down using right elimination rule
+for and followed by the left elimination rule for and for the exact proof of the goal. To solve the 
+second subgoal that x exists in H ∩ K, we can use the left elimination rule for and to obtain the proof
+for h, and we can use the double application fo the right elimination rule for and to obtain teh proof
+for k. From here, we can receive the exact proof of the intersection using the introduction rule for and
+and the proofs of H and K. This concludes the forward proof. To begin the backward proof, the premise
+that x exists in (H ∩ L) ∩ (H ∩ K) must be assumed true. Seeing as the proposition is a conjunction, 
+the introduction rule for and can be applied with placeholders to further break down the propositions 
+to prove. To obtain the exact proof for the first subgoal, we can use the double application of the
+left elimination rule on the premise to obtain the proof that x exists in H. To obtain the proof for
+the second subgoal that x exists in L ∩ K, we can use the left and elimination rule followed by the
+right and elimination rule to obtain the proof for L, and we can use the double application of the
+right elimination rule to obtain the proof for K. With these proofs, we can use the introduction rule
+for and to create a conjunction to solve the goal. QED.
+
+-/
 
 /-
 Exercise: Formally state and prove both formally 
