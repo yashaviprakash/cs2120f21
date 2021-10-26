@@ -32,23 +32,45 @@ begin
   assume x, 
   split, 
   -- forward
-  assume h,
-  cases h with left right,
-  -- left
-  apply or.intro_right _,
-  exact left,
-  -- right
-  apply or.intro_left _,
-  exact right,
+    assume h,
+    cases h with l k,
+    -- left
+      apply or.intro_right _,
+      exact l,
+    -- right
+      apply or.intro_left _,
+      exact k,
   -- backward
-  assume h,
-  cases h with left right,
-  apply or.intro_right _ ,
-  exact left,
-  apply or.intro_left _ ,
-  exact right,
+    assume h,
+    cases h with k l,
+    -- left
+      apply or.intro_right _ ,
+      exact k,
+    -- right
+      apply or.intro_left _ ,
+      exact l,
   
 end 
+
+/-
+informal proof: First, we can assume that L and K are arbitrary but specific 
+sets of type α to prove that the set from the union of L and K is equal 
+to the set from the union of K and L. To, prove this proposition, the 
+axiom of set extensionality must be applied to expand this proposition and show
+such set equality as a biimplication. From here, the arbitrary but specific value
+x of type α can be assumed, and the biimplication can be split. To solve the forward
+proof, the premise that x exists in L and K must be assumed true. Seeing that this
+is a disjunction, case analysis can be applied on the premise, let's call it h, to
+prove the implication as true through two cases: 1) x exists in L or 2) x exists in K. 
+The implication can be proven in the first case by applying the right or introduction
+rule, and it can be proven in the second case by applying the left or introduction rule.
+To solve the backward proof, the premise that x exists in K and L must be assumed true.
+Similar to the forward proof, case analysis can be applied on the disjunction, let's call
+it h, to prove teh implication as true through two cases: 1) x exists in K or 2) x exists
+in L. The implication can be proven in the first case by applying the right or introduction
+rule, and it can be proven in teh second case by applying the left or introductino rule. 
+QED.
+-/
 
 
 /-
@@ -226,7 +248,7 @@ begin
   exact h,
   apply or.intro_right _,
   exact and.intro l k,
-  
+
 end
 
 
