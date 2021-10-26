@@ -258,6 +258,15 @@ Exercise: Formally state and prove both formally and
 informally that ∩ is left-distributive over ∩.
 -/
 
+/-
+Informal Proof: First, it must be assumed that H L and K are arbitrary but specific sets
+of type α, such that H ∩ (L ∩ K) = (H ∩ L) ∩ (H ∩ K) and ∩ is left-distributive over
+∩. o begin to prove such proposition, the use of set equality must be recognized to apply the 
+axiom of set extensionality must be applied to expand this proposition and show such set equality 
+as a biimplication. From here, the arbitrary but specific value x of type α can be assumed, and the 
+biimplication can be split. To begin the forward proof, the premise that x exists in H ∩ (L ∩ K)
+must be assumed to be true. From here, we can recognize the premise as a conjunction 
+-/
 example : ∀ (α : Type) (H L K : set α), H ∩ (L ∩ K) = (H ∩ L) ∩ (H ∩ K) :=
 begin
   intros α H L K,
