@@ -21,7 +21,7 @@ yielding a proposition for which there is
 a proof).
 -/
 
-variables {α β : Type}  (r : β → β → Prop)
+variables {α β : Type}  (r : β → β → Prop) -- r is a binary relation on the type β (a relation with two places both of type β)
 /-
 This variables declaration implicitly adds
 the following parameters to the front of 
@@ -41,6 +41,8 @@ by r, we can write (a ≺ b) read as "a
 is related to b." 
 -/
 local infix `≺`:50 := r   -- infix notation
+
+-- precedes symbol or is related to
 
 /-
 With these concepts and notations, we
@@ -90,8 +92,11 @@ As an example, let's state and prove the
 proposition that the equality relation for
 natural numbers is is reflexive.
 -/
-
-theorem eq_is_refl : reflexive (@eq nat) :=  -- eq is the equality predicate
+-- equality relation on natural numbers is reflexive
+-- @eq is shorthand for the equals sign
+-- @ turns off implicit arguments
+-- eq nat is a two place predicate on values of type nat
+theorem eq_is_refl : reflexive (@eq nat) := -- eq is the equality predicate
 -- proof below
 /-
 Let's unpack the notation, @eq α. When we 
@@ -114,7 +119,7 @@ begin
   -- binary equality relation on nats
   -- the proposition that equality on natural numbers is reflexive
   -- expand expression: @reflexive nat (@eq nat) :=
-  unfold reflexive, -- proposition you get when you apply reflexive predicate to equality
+  unfold reflexive, -- valuable to do bc it shows logical definition of set theory concept
   assume x,
   exact rfl,
 
@@ -174,7 +179,7 @@ predicate on binary relations in a set builder
 expression.
 -/
 
-def reflexive_relations := 
+def reflexive_relations := -- defined to be the sets of all objects r that are the two place predicates on β, such that r is reflexive
   { r : β → β → Prop | reflexive r }
 
 -- That's pretty cool. Says a lot, very precisely.
@@ -192,10 +197,13 @@ means when you see it. I will not give you any
 problems, except perhaps extra credit, where I
 expect you to know when exactly to use it. 
 -/
-example : @eq nat ∈ @reflexive_relations nat := 
-begin
+
+-- go back and look at definition of set membership
+example : @eq nat ∈ @reflexive_relations nat := -- this relation is in the set of all reflexive relations
+begin -- reflexive relations is a predicate is applied to equality on the nats
   show reflexive_relations (@eq nat),
   unfold reflexive_relations,
+  show reflexive (@eq nat),
   exact eq_is_refl,      -- Already proved, use theorem!
 end
 -- You can just feel your brains getting bigger here!
@@ -287,6 +295,9 @@ def transitive := ∀ ⦃x y z⦄, x ≺ y → y ≺ z → x ≺ z
 
 example : transitive (@eq α) :=
 begin
+  unfold transitive,
+  assume x y z h1 h2,
+  exact eq.trans h1 h2,
 end
 
 /-
@@ -296,6 +307,7 @@ and transitive.
 -/
 def equivalence := reflexive r ∧ symmetric r ∧ transitive r
 
+-- r is an equivalence relation if it is reflexive, symmetric, and transitive all at the same time
 lemma mk_equivalence (rfl : reflexive r) (symm : symmetric r) (trans : transitive r) :
   equivalence r :=
 ⟨rfl, symm, trans⟩
@@ -303,6 +315,8 @@ lemma mk_equivalence (rfl : reflexive r) (symm : symmetric r) (trans : transitiv
 -- Exercise
 theorem eq_is_equivalence : equivalence (@eq β) :=
 begin
+  unfold equivalence,
+
 end
 
 /-

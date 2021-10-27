@@ -243,8 +243,8 @@ in K to conclude the backward proof. QED.
 
 
 /-
-Assignment: read (at least skim) the Sections 1 and 2 of 
-the Wikipedia page on set identities: 
+Assignment: read (at least skim) the Sections 1 and 
+2 of the Wikipedia page on set identities: 
 https://en.wikipedia.org/wiki/List_of_set_identities_and_relations 
 There, , among *many* other facts, you will find definitions 
 of left and right distributivity. To complete the remainder
@@ -254,8 +254,8 @@ one operator to be left- (or right-) distributive over another.
 
 
 /-
-Exercise: Formally state and prove both formally and 
-informally that ∩ is left-distributive over ∩.
+Exercise: Formally state, and prove both formally and 
+informally, that ∩ is left-distributive over ∩.
 -/
 
 
