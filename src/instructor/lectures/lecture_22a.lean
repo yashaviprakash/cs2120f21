@@ -161,9 +161,9 @@ end
 Proof: To prove the equivalence relation for the congruence of natural
 numbers, it will suffice to prove that congruence is reflexive, symmetric,
 and transitive. The proof that congruence is reflexive can be achieved
-through the reflexivity of equality, the proof that congruence is 
+through the proof for reflexivity of equality, the proof that congruence is 
 symmetric can be achieved through the proof of symmetry of equality, and
 the proof that congruence is transitive can be achieved through the proof
-of symmetry of transitivity. 
+of symmetry of transitivity. QED.
 
 -/
