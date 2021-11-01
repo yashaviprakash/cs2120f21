@@ -141,15 +141,13 @@ begin
   unfold equivalence,
   split, -- to isolate reflexive
   -- reflexive
-  unfold reflexive,
+  unfold reflexive cong_mod_nat,
   assume x,
-  show x % n = x % n,
   exact rfl,
   -- split again for symmetric and transitive
   split,
     -- symmetric
-    unfold symmetric,
-    unfold cong_mod_nat,
+    unfold symmetric cong_mod_nat,
     assume x y h,
     rw h,
     -- transitive
