@@ -138,4 +138,23 @@ end
 
 example (n : ℕ): equivalence (cong_mod_nat n) :=
 begin
+  unfold equivalence,
+  split, -- to isolate reflexive
+  -- reflexive
+  unfold reflexive,
+  assume x,
+  show x % n = x % n,
+  exact rfl,
+  -- split again for symmetric and transitive
+  split,
+    -- symmetric
+    unfold symmetric,
+    unfold cong_mod_nat,
+    assume x y h,
+    rw h,
+    -- transitive
+    unfold transitive cong_mod_nat,
+    assume x y z h1 h2,
+    apply eq.trans h1 h2,
+  
 end
