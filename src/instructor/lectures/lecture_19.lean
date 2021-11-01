@@ -33,7 +33,7 @@ The rest of the proof is by case analysis.
 v ∈ {0, 2} means v = 0 ∨ v = 2. These are
 the cases. In each case, we need to show
 that the value, v, is in the second set. 
-This means that the value satisfies the
+This means that the value satisfies the 
 set membership predicate, so we will need
 to prove (evens 0) and (evens 2). Writing
 out the definition of evens, we'll need to
@@ -69,7 +69,7 @@ script.
 -/
 
 begin
-  -- --show ∀ n, n = 0 ∨ n = 2 → n ∈ evens,
+  show ∀ n, n = 0 ∨ n = 2 → n ∈ evens,
   -- assume n,
   -- assume h, -- assume these numbers are in the first set, n is in this set when n is 0 or n is 2
   -- cases h, -- two cases: 1) when n = 0 or the case when 2) n is in the rest of the set {2}
@@ -109,9 +109,10 @@ begin
   proof. (But before you do, try to work it
   out in your own head!)
   -/
-  -- unfold evens,
-  -- show {n : ℕ | n % 2 = 0} 0,
-  -- show 0 % 2 = 0,
+  unfold evens,
+  show {n : ℕ | n % 2 = 0} 0, --membership means that value satisfies predicate of evenness
+  show 0 % 2 = 0,
+  show 0 = 0,
   exact rfl,
 
   -- case: n = 2
@@ -133,13 +134,13 @@ begin
   -/
 
   --uncomment for unnecessary gory details!
-  /-
+  
   show 2 ∈ evens,
-  show evens 2,
   unfold evens,
+  show evens 2,
   show 2 % 2 = 0,
   show 0 = 0,
-  -/
+  
   exact rfl,    -- Ta Da!
 end
 

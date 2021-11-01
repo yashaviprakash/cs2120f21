@@ -139,7 +139,7 @@ predicate
 
 the power set of a product is all possible subsets of a product
 
-a relation is an element of a power set of a product set
+a relation is an element of a power set of a product set **clarify**
 
 Let R ⊂ ℕ x ℕ and R ∃ P(ℕ x ℕ) -- are these the same? yes! explanation is above!
 -/
@@ -148,7 +148,7 @@ Let R ⊂ ℕ x ℕ and R ∃ P(ℕ x ℕ) -- are these the same? yes! explanati
 
 practice subset problems: 
 
-Let R ⊂ ℕ × ℕ | (such that) ∀ (p: ℕ × ℕ ), (for all ordered pairs)
+Let R ⊆ ℕ × ℕ | (such that) ∀ (p: ℕ × ℕ ), (for all ordered pairs)
 p.2 = p.1 * p.1 
 
 mini theorem:
@@ -178,7 +178,7 @@ are in each of these sets, and express your
 answers in English.
 -/
 #check { p : ℕ × ℕ | p.1 <= p.2 } -- ℕ × ℕ makes p an ordered pair, such that the first one is less than or equal to the second
-#check { p : ℕ × ℕ | p.2 = p.1 * p.1 }
+#check { p : ℕ × ℕ | p.2 = p.1 * p.1 } -- p is an ordered pair (a value in the product set ℕ ⨯ ℕ) that **insert predicate here**
 #check { p : string × ℕ | p.2 = string.length p.1}
 
 
