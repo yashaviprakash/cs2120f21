@@ -208,7 +208,7 @@ begin -- reflexive relations is a predicate is applied to equality on the nats
 end
 -- You can just feel your brains getting bigger here!
 
-#check (λ x, x + 1)
+#check (λ x, x + 1) -- what does this mean
 
 
 /-
