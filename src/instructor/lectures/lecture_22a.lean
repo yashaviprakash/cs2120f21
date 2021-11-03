@@ -1,3 +1,4 @@
+import ring_theory.adjoin
 /-
 State formally and prove the proposition
 that congruence mod n is an equivalence
@@ -80,7 +81,7 @@ begin
   assume k,
   unfold cong_mod, -- trying to show that k is congruent to itself mod n
   apply exists.intro (0:ℤ), -- to finish it off, rfl won't do because it requires additional reason
-  sorry, -- accept without proof for now
+  ring, -- accept without proof for now
 
   -- symmetric
   split,
@@ -88,11 +89,13 @@ begin
   assume x y h,
   cases h with v pf,
   apply exists.intro (-v),
-  have lemma1 : -v * n = -(v * n) := sorry,
-  rw lemma1,
+  ring,
+  -- have lemma1 : -v * n = -(v * n) := sorry,
+  -- rw lemma1,
   rw <-pf, -- rewrites rw with an equality as an argument rewrites it on left side, this is how you do it to right side
-  have lemma2 : y - x = -(x - y) := sorry,
-  rw <-lemma2,
+  -- have lemma2 : y - x = -(x - y) := ring,
+  -- rw <-lemma2,
+  ring,
 
   -- transitive
      -- you prove it
@@ -105,7 +108,7 @@ begin
   rw int.distrib_right _ _ _,     -- LIBRARY LOOKUP!
   rw <-h2pf,
   rw <-h1pf,
-  sorry, 
+  ring,
 end
 
 /-
