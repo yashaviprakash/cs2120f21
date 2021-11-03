@@ -93,7 +93,7 @@ begin
   -- have lemma1 : -v * n = -(v * n) := sorry,
   -- rw lemma1,
   rw <-pf, -- rewrites rw with an equality as an argument rewrites it on left side, this is how you do it to right side
-  -- have lemma2 : y - x = -(x - y) := ring,
+  -- have lemma2 : y - x = -(x - y) := sorry,
   -- rw <-lemma2,
   ring,
 
