@@ -211,8 +211,6 @@ definitions of all of the preceding set
 theory concepts.
 -/
 
-axioms (P Q : ℕ → Prop)
-
 def pSet  : set nat := { n : ℕ | P n}
 def qSet  : set nat := { n : ℕ | Q n}
 
