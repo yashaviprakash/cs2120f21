@@ -9,7 +9,7 @@ UNIVERSAL QUANTIFICATION OVER AN EMPTY SET IS TRUE
 Let's review the most puzzling of the examples from
 last time: a relation r = {(0,1), (2,3)} we said is
 transitive because it satisfies the constraint that
-defines transitivity: for every x, y, and x, if (x,y)
+defines transitivity: for every x, y, and z, if (x,y)
 is in r, and (y,z) is in r, then (x,z) is in r. This
 relation is transitive because in *every* case where
 we have (x, y) and (y, z) in r, (x, z) is in r. In
@@ -99,6 +99,9 @@ relation will be an equivalence relation.
 A pair (a, b) is in the reflexive closure of r if
 (a, b) is in r or if (a = b).
 -/
+
+-- r a b refers to the pair already in the relation
+-- and a=b is the additional pair for the reflexive closure
 def reflexive_closure := λ (a b : β), (r a b) ∨ (a = b)
 
 /-
