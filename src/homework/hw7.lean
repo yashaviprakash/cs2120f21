@@ -21,6 +21,10 @@ def asymmetric := ∀ ⦃x y⦄, x ≺ y → ¬ y ≺ x
 -- for every x y in the relation y x is not in the relation (asymm)
 -- not refelxive means that there is at least one case in the relation where
 -- x is not related to itself
+
+-- it's the existence of a b that allowed this proof 
+-- would give beta value to refl and would give that result to asymm
+-- ask about empty set again
 example : (∃ (b : β), true) → asymmetric r → ¬reflexive r :=
 begin
   unfold asymmetric reflexive,
