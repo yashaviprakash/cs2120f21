@@ -28,39 +28,12 @@ lemma  allBallsInEmptyBucketAreRed :
   ∀ (b : Ball), b ∈ empty_bucket → red b := 
 begin
   assume b h,
-<<<<<<< HEAD
-  cases h,
-
-=======
   cases h,             -- finish off this proof
->>>>>>> b1e15aeac74a2134ecff2e1e76a1947e23aa4536
 end
 
 /- 
 Whoa, ok. That's a little bit counterintuitive, but
 it's correct. A universal quantification over an empty
-<<<<<<< HEAD
-set is always trivially true. Here's another way to 
-think about it. Suppose we had a set with two balls
-in it: { b1, b2 }. To show that every ball is red,
-we'd show that b1 is red, AND (∧) that all balls in 
-the remaining set, { b2 }, are red. To prove the 
-latter, we'd show that b2 is red, and that all balls
-in the remaining set, {}, are red. So we have that
-all balls are red if (red b1) ∧ (red b2) ∧ "all balls
-in {} are red". If b1 and b2 really are red, then
-that last predicate better be true if the whole chain
-of ∧ operations are to be true. When you think about
-∀ as a version of ∧ that can take any number of
-arguments, not just 2, it becomes clear that when
-applied to zero arguments, the answer better be true,
-otherwise this operation would *always* return false.  
-
-existential quantification over an empty set always gives
-a false result, why is that?
-
-universl generalization over an empty set always equals true
-=======
 set is always trivially true. 
 
 
@@ -83,7 +56,6 @@ can take any number of arguments, not just 2, it becomes
 clear that when applied to zero arguments, the answer 
 really has to be true, otherwise this operation would
 *always* produce propositions that are ultimately false.  
->>>>>>> b1e15aeac74a2134ecff2e1e76a1947e23aa4536
 -/
 
 /-
@@ -99,11 +71,7 @@ How about this: {(0,1), (1,0), (2,3)}?
 
 Now suppose that we have a relation, r, over a set
 of values, {0, 1, 2, 3, 4, 5}. Is this relation
-<<<<<<< HEAD
-reflexive? {} what about this: {(0, 1), (2, 3)}
-=======
 reflexive? {} What about this: {(0, 1), (2, 3)}
->>>>>>> b1e15aeac74a2134ecff2e1e76a1947e23aa4536
 
 Question: If a relation is transitive and symmetric
 is it necessarily reflexive? If so, give an informal
@@ -125,11 +93,6 @@ has all three properties. Note that the resulting
 relation will be an equivalence relation. 
 -/
 
-<<<<<<< HEAD
-def reflexive_closures := λ (a b : β), (r a b) ∨ (a = b)
-
-def symmetric_closure := λ (a b : β), (r a b) → (r b a)
-=======
 -- REFLEXIVE CLOSURE
 
 /-
@@ -151,7 +114,8 @@ r = {}
 A pair (a, b) is in the symmetric closure of r if 
 (a, b) is in r or if (b, a) is i r.
 -/
-def symmetric_closure := λ (a b : β), (r a b) ∧ (r b a)
+-- predicate on two arguments
+def symmetric_closure := λ (a b : β), (r a b) ∨ (r b a)
 
 /-
 Consider a set, s = {0, 1, 2, 3} and a binary relation
@@ -166,7 +130,6 @@ but (b=0,a=1) is in r, so (a=1,b=0) is (defined to be)
 in (sc r). In a nutshell, the symmetric closure includes
 an edge/pair if either it is in r, or its reverse is r.
 -/
->>>>>>> b1e15aeac74a2134ecff2e1e76a1947e23aa4536
 
 /-
 Let's look examples. What's in the reflexive closure
@@ -229,19 +192,11 @@ be related in r. For any length-2 "path" from a to c
 
 namespace hidden 
 
-<<<<<<< HEAD
-inductive tc {α : Type} (r : α → α → Prop) : α → α → Prop -- define a type of binary relations, that returns another binary relation or proposition that this relation is the transitive closure of r
-=======
 inductive tc {α : Type} (r : α → α → Prop) : α → α → Prop
->>>>>>> b1e15aeac74a2134ecff2e1e76a1947e23aa4536
 | base  : ∀ a b, r a b → tc a b
 | trans : ∀ a b c, tc a b → tc b c → tc a c
 
 end hidden
-<<<<<<< HEAD
-=======
-
->>>>>>> b1e15aeac74a2134ecff2e1e76a1947e23aa4536
 /-
 Here's a possibly surprising fact: the transitive 
 closure concept *cannot be expressed, defined, nor the
