@@ -50,8 +50,31 @@ reflexive that it cannot be anti-symmetric. Is it actually true?
 If not, what condition needs to be added to make it true? See
 https://sites.oxy.edu/traiger/logic/exercises/chapter13/properties_of_relations_exercise.html
 -/
-example : transitive r → reflexive r → ¬ asymmetric r :=
+-- if a relation is transitive, and it's reflexive, then it cannot be
+-- antisymmetric at the same time
+-- empty set will not give a way to prove contradiction
+example : (∃ (b: β), true) → transitive r → reflexive r → ¬ asymmetric r :=
 begin
+  unfold transitive reflexive asymmetric,
+  assume ex trans refl asymm,
+  -- prove contradiction by showing a case where (a, b) relates to 
+  -- r and (b, a) relates to r
+  -- need to show that all three are inconsistent and that they lead to
+  -- a contradiction
+  /-
+  if you don't have a beta, and you quanitfy over an empty set, you get true
+  -/
+  -- there's no way to derive a contradiction because there is no contradiction
+  -- must add exists to make this statement true
+  /-
+  proof by contradiction is a form of proof that establishes the truth or the validity 
+  of a proposition, by showing that assuming the proposition to be false leads to a contradiction.
+  -/
+  cases ex with b pf,
+  have rbb := refl b,
+  have contra := asymm rbb,
+  contradiction,
+
 end
 
 
@@ -63,14 +86,30 @@ an informal proof, of this proposition. You may use the following
 formal definition of the powerset of a given set, s. 
 -/
 
-def powerset (s : set β) := { s' | s' ⊆ s}
+def powerset (s : set β) := { s' | s' ⊆ s} -- the set of s prime which is the subset of s
 
+-- want to show that the subset relation is antisymmetric
 example : ∀ (s : set β) 
-            (s1 s2 ∈ powerset s), 
+            (s1 s2 ∈ powerset s), -- s1 and s2 are in poweret of s
             s1 ⊆ s2 → 
-            s2 ⊆ s1 → 
-            s1 = s2 :=
+            s2 ⊆ s1 →  -- if subsets of each other
+            s1 = s2 := -- sets must be equal
 begin
+  assume s s1 s2,
+  assume ex_s1 ex_s2 s1setof s2setof,
+  apply set.ext _,
+  assume b,
+  split,
+  -- forward
+    -- to prove b exists in s1 i have to prove that 
+    assume bs1,
+    have bs2 := s1setof bs1,
+    exact bs2,
+
+
+  -- backward
+
+
 end
 
 /-
