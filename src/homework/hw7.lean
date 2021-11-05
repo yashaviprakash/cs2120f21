@@ -26,10 +26,10 @@ begin
   unfold asymmetric reflexive,
   assume ex,
   assume asym,
-  assume h2, -- proof by negation
+  assume refl, -- proof by negation
   -- what if there is no x of type beta, what if x is an empty set
   cases ex with b pf,
-  have rbb := h2 b, -- apply universal generalization to refl
+  have rbb := refl b, -- apply universal generalization to refl
   have contra := asym rbb,
   contradiction,
 end
