@@ -226,8 +226,11 @@ begin
   contradiction,
 end
 
-example : transitive r → ¬ symmetric r → ¬ irreflexive r :=
-_
+example : (∃ (b: β), true) → transitive r → ¬ symmetric r → ¬ irreflexive r :=
+begin
+
+end
+
 
 
 end relation
