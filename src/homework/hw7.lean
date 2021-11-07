@@ -182,48 +182,33 @@ it's not.
 anti_symmetric predicate to state the proposition
 formally.
 -/
-example : relations.anti_symmetric divides := 
+example : anti_symmetric divides := 
 begin
-  unfold relations.anti_symmetric divides,
-  assume x y kx ky,
-  cases kx with kxv kxpf,
-  cases ky with kyv kypf,
-  rw kxpf at kypf,
-  /-
-  From kypf we can deduce by basic algebra
-  that kyv = kxv = 1, and the rewriting kxv
-  as 1 in kxpf, we get that y = x. The proof
-  of the conclusion then follows by symmetry
-  of equality. We don't yet quite have the
-  tools to reason formally to the conlusion
-  that kxv and kyv are both one, so we'll 
-  just admit it as an axiom for now, using
-  sorry to remind us to come back and visit
-  this point again when we're equipped to 
-  polish off the formal proof.
-  -/
-  sorry,  
+  unfold anti_symmetric divides,
+  assume x y h1 h2,
+  cases h1 with w pf,
+  cases h2 with w1 pf1,
+  rw pf1,
+  rw pf,
+  ring,
+  
 end
 
 
 example : asymmetric r → irreflexive r :=
 begin
   unfold asymmetric irreflexive,
-  assume h x k,
-  have nk := h k,
+  assume h x rxx,
+  have b := h rxx,
   contradiction,
 end
 
 example : irreflexive r → transitive r → asymmetric r :=
 begin
-  unfold irreflexive transitive,
-  assume h k,
-  assume x y,
-  assume rxy,
-  assume nryx,
-  have f := k rxy nryx,
-  have nrxx := h x,
-  contradiction,
+  unfold irreflexive transitive asymmetric,
+  assume irr trans x y,
+  assume rxy ryx,
+
 end
 
 example : (∃ (b: β), true) → transitive r → ¬ symmetric r → ¬ irreflexive r :=
