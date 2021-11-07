@@ -103,11 +103,10 @@ begin
   -- forward
     -- to prove b exists in s1 i have to prove that 
     assume bs1,
-    have bs2 := s1setof bs1,
-    exact bs2,
-
-
+    exact (s1setof bs1),
   -- backward
+    assume bs2,
+    exact (s2setof bs2),
 
 
 end
@@ -132,6 +131,11 @@ English.
 
 example : ∀ n, divides 1 n :=
 begin
+  assume n,
+  unfold divides,
+  apply exists.intro 1,
+  ring,
+  
 end
 
 -- 3b. For any n, n divides n
