@@ -188,9 +188,9 @@ begin
   assume x y h1 h2,
   cases h1 with w pf,
   cases h2 with w1 pf1,
-  rw pf1,
   rw pf,
-  ring,
+  rw pf1,
+  sorry,
   
 end
 
@@ -211,8 +211,12 @@ begin
 
 end
 
-example : (∃ (b: β), true) → transitive r → ¬ symmetric r → ¬ irreflexive r :=
+example : transitive r → ¬ symmetric r → ¬ irreflexive r :=
 begin
+  unfold transitive symmetric irreflexive,
+  assume trans symm irr,
+  
+
 
 end
 
