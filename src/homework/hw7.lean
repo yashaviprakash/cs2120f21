@@ -190,6 +190,7 @@ begin
   cases h2 with w1 pf1,
   rw pf,
   rw pf1,
+  -- assume that something is equal 1
   sorry,
   
 end
