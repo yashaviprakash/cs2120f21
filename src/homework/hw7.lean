@@ -170,8 +170,8 @@ begin
   assume x y z,
   assume h1 h2,
   cases h1 with w1 pf1,
-  cases h2 with w1 pf2,
-  apply exists.intro w1,
+  cases h2 with w2 pf2,
+  apply exists.intro (w1 * w2), -- think about concrete example
   rw pf2,
   sorry,
   
@@ -227,21 +227,15 @@ begin
   assume irr trans x y,
   assume rxy ryx,
   have irrefl := irr x, -- rxx → false 
-  
-  
+  have a := trans rxy ryx, -- note of this
+
 
 end
 
-example : (∃ (b : β), true) → transitive r → ¬ symmetric r → ¬ irreflexive r :=
+example : ¬ (transitive r → ¬ symmetric r → ¬ irreflexive r) :=
 begin
   unfold transitive symmetric irreflexive,
-  assume ex trans symm irr,
-  cases ex with b pf,
-  have irrefl := irr b,
-  apply symm _,
-  assume x y,
-  assume rxy,
-  
+  assume h,
   
 
 end
