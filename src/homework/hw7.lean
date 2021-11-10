@@ -173,9 +173,11 @@ begin
   cases h2 with w2 pf2,
   apply exists.intro (w1 * w2), -- think about concrete example
   rw pf2,
-  sorry,
+  rw pf1,
+  have w2 : w2 = 1 := sorry,
+  rw w2,
+  ring,
   
-
 end 
 
 /- 
@@ -201,10 +203,9 @@ begin
   cases h2 with w1 pf1,
   rw pf,
   rw pf1,
+  have w : w = 1 := sorry,
+  rw w,
   ring,
-  -- assume that something is equal 1
-  sorry,
-  
 end
 
 -- 4a -- 
@@ -226,16 +227,18 @@ begin
   -/
   assume irr trans x y,
   assume rxy ryx,
-  have irrefl := irr x, -- rxx → false 
-  have a := trans rxy ryx, -- note of this
-
+  have notrxx := irr x, -- rxx → false 
+  have rxx := trans rxy ryx, -- note of this
+  contradiction,
 
 end
 
+-- extra credit -- 
 example : ¬ (transitive r → ¬ symmetric r → ¬ irreflexive r) :=
 begin
   unfold transitive symmetric irreflexive,
   assume h,
+  
   
 
 end
