@@ -212,12 +212,13 @@ begin
 
 end
 
-example : transitive r → ¬ symmetric r → ¬ irreflexive r :=
+example : (∃ (b : β), true) → transitive r → ¬ symmetric r → ¬ irreflexive r :=
 begin
   unfold transitive symmetric irreflexive,
-  assume trans symm irr,
+  assume ex trans symm irr,
+  cases ex with b pf,
+  have irrefl := irr b,
   
-
 
 end
 

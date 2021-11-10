@@ -4,6 +4,7 @@ variables {α β : Type}  (r : β → β → Prop)
 local infix `≺`:50 := r  
 
 /-
+<<<<<<< HEAD
 UNIVERSAL QUANTIFICATION OVER AN EMPTY SET IS TRUE
 
 Let's review the most puzzling of the examples from
@@ -79,6 +80,8 @@ argument/proof. If not, give a counter-example.
 -/
 
 /-
+=======
+>>>>>>> 98948409a0b4120e3456baf3592723b7ad7d80ff
 CLOSURE OPERATIONS ON RELATIONS
 
 Given a relation, r, the reflexive, symmetric, or
