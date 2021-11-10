@@ -48,7 +48,9 @@ def well_order := total_order r ∧ (∀ (s : set β),       -- for every
                                         b ∈ s ∧         -- in s
                                           ∀ b' : β,     -- smaller than every other element in s 
                                             b' ∈ s →     
-                                            b ≺ b')     
+                                            b ≺ b')  
+
+   
 
 /-
 EXAMPLE:

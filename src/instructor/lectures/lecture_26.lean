@@ -69,10 +69,11 @@ def domain_of_definition (r : α → β → Prop) : set α :=
 
 #check @domain_of_definition
 
+-- there's a pair for which the object in set β connects to object in set α 
 
-def domain (r : α → β → Prop) := { a : α | ∃ b, r a b }
-def co_domain (r : α → β → Prop) := { b : β | true }
-def range (r : α → β → Prop) := { b : β | ∃ (a : α), r a b  }
+def domain (r : α → β → Prop) := { a : α | ∃ b, r a b } -- set of alpha values such that there's some b that's related to a
+def co_domain (r : α → β → Prop) := { b : β | true } -- set of all beta values
+def range (r : α → β → Prop) := { b : β | ∃ (a : α), r a b  } -- that set of beta values, such that there's some alpha value that the relation maps to that particular beta value
 
 -- EXAMPLE
 def R : ℕ → string → Prop := λ n m, n = m.length
@@ -106,7 +107,7 @@ an operation on relations.
 Note that these operations takes relations (and
 sets) as arguments and return new relations!
 -/
-def dom_res (r : α → β → Prop) (s : set α) : α → β → Prop := 
+def dom_res (r : α → β → Prop) (s : set α) : α → β → Prop := -- trying to get relation for salaries for managers only, not all employees
   λ a b, a ∈ s ∧ r a b
 
 def ran_res (r : α → β → Prop) (s : set β) : α → β → Prop := 
@@ -152,10 +153,16 @@ Note that the folloowing operations take a relation
 and a value and return a set of values.
 -/
 
+-- circle relation gives back -1 and 1 if a = 0
+-- domain restriction gives me the pairs (0, 1) and (0, -1)
+-- if i apply relation r to a i get back set β 
+-- set of beta values for which a is related to b
 def image_val (a : α) : set β :=
 { b : β | a ≺ b } 
 
 -- image of a set, s, under r
+-- get back a set of beta values for which there is some 
+-- alpha value in s such that r is related to a and b
 def image_set (s : set α) : set β :=
 { b : β | ∃ a : α, a ∈ s ∧ r a b}
 
@@ -175,7 +182,8 @@ original but with all the pair arrows reversed.
 
 -- inverse of r
 def inverse : β → α → Prop :=
-λ (b : β) (a : α), r a b
+λ (b : β) (a : α), r a b -- α → β → Prop
+-- a pair is in the inverse if a < b is in the original relation
 
 
 /-
