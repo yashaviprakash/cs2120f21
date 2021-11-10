@@ -157,15 +157,18 @@ begin
 end 
 
 -- #3d. divides is transitive
-
-example : ∀ h n k, divides h n → divides n k → divides h k :=
+-- #D. prove that divides is transitive
+example : transitive divides :=
 begin
-  assume h n k,
-  unfold divides,
-  assume ex1 ex2,
-  cases ex1 with k n,
-  cases ex2 with k_1 n_1,
-  apply exists.intro, 
+  unfold transitive divides,
+  assume x y z,
+  assume h1 h2,
+  cases h1 with w1 pf1,
+  cases h2 with w1 pf2,
+  apply exists.intro w1,
+  rw pf2,
+  sorry,
+  
 
 end 
 
@@ -175,7 +178,9 @@ give a counterexample and a brief explanation to show that
 it's not.
 -/
 
--- Answer here
+/- Divides is not symmetric. If we assume that m = 2 and n = 4,
+then we understand that 4 = k * 2 does not equal 2 = k * 4. 
+-/
 
 /- 
 #3e. Prove that divides is antisymmetric. Use the
@@ -190,12 +195,13 @@ begin
   cases h2 with w1 pf1,
   rw pf,
   rw pf1,
+  ring,
   -- assume that something is equal 1
   sorry,
   
 end
 
-
+-- 4a -- 
 example : asymmetric r → irreflexive r :=
 begin
   unfold asymmetric irreflexive,
