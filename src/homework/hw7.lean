@@ -3,6 +3,12 @@ import ..instructor.lectures.lecture_23
 namespace relation
 
 /-
+Questions : 4b, 3d, 3e
+
+5c, 5b, 4f, 4d
+-/
+
+/-
 Define relation, r, as two-place predicate on 
 a type, β, with notation, x ≺ y, for (r x y). 
 -/
@@ -205,16 +211,24 @@ end
 example : asymmetric r → irreflexive r :=
 begin
   unfold asymmetric irreflexive,
-  assume h x rxx,
-  have b := h rxx,
-  contradiction,
+  assume h x rxx, -- giving a case of a reflexive proof
+  have contra := h rxx, -- if symmetric, would relate back to itself, but it doesn't
+  contradiction, -- proof by contradiction
 end
 
+-- 4b -- 
 example : irreflexive r → transitive r → asymmetric r :=
 begin
-  unfold irreflexive transitive asymmetric,
+  unfold irreflexive transitive asymmetric, 
+  /-
+  If no object is related to itself, and the relation is transitive, 
+  then the relation is asymmetric.
+  -/
   assume irr trans x y,
   assume rxy ryx,
+  have irrefl := irr x, -- rxx → false 
+  
+  
 
 end
 
@@ -224,6 +238,10 @@ begin
   assume ex trans symm irr,
   cases ex with b pf,
   have irrefl := irr b,
+  apply symm _,
+  assume x y,
+  assume rxy,
+  
   
 
 end
