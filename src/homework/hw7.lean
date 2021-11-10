@@ -31,6 +31,14 @@ def asymmetric := ∀ ⦃x y⦄, x ≺ y → ¬ y ≺ x
 -- it's the existence of a b that allowed this proof 
 -- would give beta value to refl and would give that result to asymm
 -- ask about empty set again
+
+
+/- 
+#1: Give both a formal and an English-language proof. Then
+answer the question, is the proposition true if you remove
+the first condition, that β is inhabited? Briefly explain
+your answer (in English).
+-/
 example : (∃ (b : β), true) → asymmetric r → ¬reflexive r :=
 begin
   unfold asymmetric reflexive,
@@ -125,14 +133,15 @@ definition of this relation.
 def divides (m n : ℕ) := ∃ k, n = k * m
 
 /- 
-#3: Formally state and prove each of the following propositions.
-Remember that the ring tactic is useful for producing proofs of
-algebraic equalities involving + and *. You can use the phrase,
-"by basic algebra" when translating the use of this tactic into
-English.
+#4: Formally and informally state and prove each of the following
+propositions. Remember that the ring tactic is useful for producing
+proofs of simple algebraic equalities involving + and *. You can use
+the phrase, "by basic algebra" when translating the use of this tactic
+into English. (Or if you wanted to be truly Hobbit-like you could say 
+"by the ring axioms!")
 -/
 
--- 3a: For any n, 1 divides n.
+-- A: For any n, 1 divides n.
 
 example : ∀ n, divides 1 n :=
 begin
@@ -142,7 +151,7 @@ begin
   ring,
 end
 
--- 3b. For any n, n divides n
+-- B. For any n, n divides n
 
 example : ∀ n, divides n n :=
 begin
@@ -152,7 +161,7 @@ begin
   ring,
 end
 
--- #3c. divides is reflexive (use our reflexive predicate)
+-- C. divides is reflexive (use our reflexive predicate)
 
 example : reflexive divides :=
 begin
@@ -162,7 +171,6 @@ begin
   ring,
 end 
 
--- #3d. divides is transitive
 -- #D. prove that divides is transitive
 example : transitive divides :=
 begin
@@ -181,7 +189,7 @@ begin
 end 
 
 /- 
-#3d. is divides symmetric? if yes, give a proof, otherwise 
+E. Is divides symmetric? if yes, give a proof, otherwise 
 give a counterexample and a brief explanation to show that 
 it's not.
 -/
@@ -191,9 +199,7 @@ then we understand that 4 = k * 2 does not equal 2 = k * 4.
 -/
 
 /- 
-#3e. Prove that divides is antisymmetric. Use the
-anti_symmetric predicate to state the proposition
-formally.
+#F. Prove that divides is antisymmetric. 
 -/
 example : anti_symmetric divides := 
 begin
@@ -208,7 +214,16 @@ begin
   ring,
 end
 
--- 4a -- 
+/- #4
+Prove the following propositions. Remember that
+throughout this file, each definition implicitly
+includes β as a type and r as an arbitrary binary 
+relation on β. In addition to formal proofs, give
+an English language proof of the last of the three
+problems.
+-/
+
+-- A
 example : asymmetric r → irreflexive r :=
 begin
   unfold asymmetric irreflexive,
@@ -217,7 +232,7 @@ begin
   contradiction, -- proof by contradiction
 end
 
--- 4b -- 
+-- B
 example : irreflexive r → transitive r → asymmetric r :=
 begin
   unfold irreflexive transitive asymmetric, 
@@ -233,7 +248,7 @@ begin
 
 end
 
--- extra credit -- 
+-- C
 example : ¬ (transitive r → ¬ symmetric r → ¬ irreflexive r) :=
 begin
   unfold transitive symmetric irreflexive,
