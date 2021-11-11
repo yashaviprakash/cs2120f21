@@ -51,6 +51,12 @@ begin
   have contra := asym rbb,
   contradiction,
 end
+/-
+Proof: Given that there exists some object of beta, we can show that the 
+properties of reflexivity and asymmetry cannot be applied to the same relation, 
+as there exists a contradiction in this conjecture. We show that if a relation
+relates to itself ()
+-/
 
 
 
@@ -249,11 +255,10 @@ begin
 end
 
 -- C
-example : ¬ (transitive r → ¬ symmetric r → ¬ irreflexive r) :=
+example : (transitive r → ¬ symmetric r → ¬ irreflexive r) :=
 begin
   unfold transitive symmetric irreflexive,
   assume h,
-  
   
 end
 
