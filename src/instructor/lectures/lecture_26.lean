@@ -50,8 +50,9 @@ set is specificed by the β type.
 def dom (r : α → β → Prop) : set α := { a : α | true } 
 def codom (r : α → β → Prop) : set β := { b : β | true }
 
-def dom_of_def (r : α → β → Prop) : set α := { a : α | ∃ b, r a b }
-def range (r : α → β → Prop) : set β := { b : β | ∃ (a : α), r a b  }
+-- subset of doman and codomain respectively
+def dom_of_def (r : α → β → Prop) : set α := { a : α | ∃ b, r a b } -- set of alpha values for which there's some b so that the given alpha value is related to that b in the codomain
+def range (r : α → β → Prop) : set β := { b : β | ∃ (a : α), r a b  } 
 
 
 -- EXAMPLE
@@ -167,6 +168,7 @@ def image_val (a : α) : set β :=
 -- get back a set of beta values for which there is some 
 -- alpha value in s such that r is related to a and b
 -- is this a restriction?
+-- REVIEW THIS
 def image_set (s : set α) : set β :=
 { b : β | ∃ a : α, a ∈ s ∧ a ≺ b }
 
@@ -204,6 +206,30 @@ review??
 def composition (s : β → γ → Prop) (r : α → β → Prop):=
   λ a c, (∃ b, s b c ∧ r a b)
 
+/- YouTube Video -/
+/-(s after r) to a = s(r(a))-/
+/-
+Function that gives you cows and gives you milk, and another
+function that gives you milk and gives you cheese, then you
+can put it into a dairy farm function that will give you
+cows and cheese
+
+-/
+
+/-
+i : id → salary
+s : id → salary
+
+x : name → salary
+
+you want to do:
+
+i inverse : name → id
+s : id → salary
+
+(s after i inverse) fred, gives you salary for fred given those relations
+
+-/
 #check @composition
 
 /-
