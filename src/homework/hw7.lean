@@ -251,9 +251,19 @@ begin
   rw pf,
   rw pf1,
   have w : w = 1 := sorry,
+  have w1 : w1 = 1 := sorry,
   rw w,
+  rw w1,
   ring,
 end
+/-
+Proof: To prove that divides is anti symmetric, we can understand that, for any
+x and y, if y is divisible by x and x is divisible by y, then x = y. To prove x = y, 
+then we must show that x divides y one time and y divides x one time. From here,
+we must show that if y = k1 * x and x = k2 * y, then, by extension, x = (k1 * k2) * x. 
+When we divide by x, then (k1 * k2) = 1. Because k1 and k2 are both natural numbers, then
+k1 = k2 = 1. QED. 
+-/
 
 /- #4
 Prove the following propositions. Remember that
