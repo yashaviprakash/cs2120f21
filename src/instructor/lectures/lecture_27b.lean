@@ -95,8 +95,8 @@ a total function, r, domain_of_definition r = domain r.
 -/
 
 def total_function := function r ∧ ∀ (a : α), defined r a
-def strictly_partial_fun := function r ∧ ¬total_fun r
-def partial_function := function r -- includes total funs
+def strictly_partial_fun := function r ∧ ¬total_function r
+def partial_function := function r -- includes total funs as a subset
 
 /-
 Mathematicians generally consider the set of partial
