@@ -33,7 +33,7 @@ Exercises: Which of the following are single-valued?
 - x = sin y
 -/
 
-/- FUNCTION
+/- FUNCTION : a function or relation is defined at a if there's some pair in the relation that starts at a
 
 A single-valued binary relation is also called a 
 function (sometimes a functional binary relation).
