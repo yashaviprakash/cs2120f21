@@ -1,11 +1,13 @@
-import ..instructor.lectures.lecture_23
+import ring_theory.adjoin
+import data.set
 
 namespace relation
-
 /-
-Questions : 4b, 3d, 3e
+Yashavi Prakash, yp3ez
+Thuy-vi Bui, tdb7dgr
+Jacqueline Chao, jc7rw
 
-5c, 5b, 4f, 4d
+Team Name: Team Sorry
 -/
 
 /-
