@@ -204,7 +204,9 @@ thus call the resulting relation "s after r."
 review??
 -/
 def composition (s : β → γ → Prop) (r : α → β → Prop):=
-  λ a c, (∃ b, s b c ∧ r a b)
+  λ a c, (∃ b, s b c ∧ r a b) -- names a new binary relation
+  -- have a pair alpha or a,c whenever there's some b in the middle
+  -- r on the left takes a to b and relation in middle takes it to c on the right
 
 /- YouTube Video -/
 /-(s after r) to a = s(r(a))-/
