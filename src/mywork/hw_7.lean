@@ -17,6 +17,22 @@ local infix `≺`:50 := r
 -- Strangely Lean's library does define asymmetric, so here it is.
 def asymmetric := ∀ ⦃x y⦄, x ≺ y → ¬ y ≺ x
 
+-- less than or equal is not asymmetric, because they could be reflexive
+-- less than or equal is antisymmetric, if a is related to b and b is
+-- related to a then they must be equal
+-- for a relation to b reflexive, you have to have a pair for every value in that set
+
+-- Prove both formally and in English.
+-- if r is asymmetric than r is not reflexive
+-- for every x y in the relation y x is not in the relation (asymm)
+-- not refelxive means that there is at least one case in the relation where
+-- x is not related to itself
+
+-- it's the existence of a b that allowed this proof 
+-- would give beta value to refl and would give that result to asymm
+-- ask about empty set again
+
+
 /- 
 #1: Give both a formal and an English-language proof. Then
 answer the question, is the proposition true if you remove
@@ -28,9 +44,10 @@ begin
   unfold asymmetric reflexive,
   assume ex,
   assume asym,
-  assume refl, 
+  assume refl, -- proof by negation
+  -- what if there is no x of type beta, what if x is an empty set
   cases ex with b pf,
-  have rbb := refl b,
+  have rbb := refl b, -- apply universal generalization to refl
   have contra := asym rbb,
   contradiction,
 end
@@ -61,12 +78,30 @@ example : (∃ (b: β), true) → transitive r → reflexive r → ¬ asymmetric
 begin
   unfold transitive reflexive asymmetric,
   assume ex trans refl asymm,
+  -- prove contradiction by showing a case where (a, b) relates to 
+  -- r and (b, a) relates to r
+  -- need to show that all three are inconsistent and that they lead to
+  -- a contradiction
+  /-
+  if you don't have a beta, and you quanitfy over an empty set, you get true
+  -/
+  -- there's no way to derive a contradiction because there is no contradiction
+  -- must add exists to make this statement true
+  /-
+  proof by contradiction is a form of proof that establishes the truth or the validity 
+  of a proposition, by showing that assuming the proposition to be false leads to a contradiction.
+  -/
   cases ex with b pf,
   have rbb := refl b,
   have contra := asymm rbb,
   contradiction,
 
 end
+/-
+Proof: 
+-/
+
+
 
 /-
 State and prove that the subset relation on the powerset of any
@@ -90,6 +125,7 @@ begin
   assume b,
   split,
   -- forward
+    -- to prove b exists in s1 i have to prove that 
     assume bs1,
     exact (s1setof bs1),
   -- backward
@@ -179,7 +215,7 @@ begin
   assume h1 h2,
   cases h1 with w1 pf1,
   cases h2 with w2 pf2,
-  apply exists.intro (w1 * w2), 
+  apply exists.intro (w1 * w2), -- think about concrete example
   rw pf2,
   rw pf1,
   ring,
@@ -242,9 +278,9 @@ problems.
 example : asymmetric r → irreflexive r :=
 begin
   unfold asymmetric irreflexive,
-  assume h x rxx, 
-  have contra := h rxx, 
-  contradiction,
+  assume h x rxx, -- giving a case of a reflexive proof
+  have contra := h rxx, -- if symmetric, would relate back to itself, but it doesn't
+  contradiction, -- proof by contradiction
 end
 /-
 Proof: To prove that a relation is irreflexive if it is asymmetric, we must show 
@@ -261,8 +297,8 @@ begin
   unfold irreflexive transitive asymmetric, 
   assume irr trans x y,
   assume rxy ryx,
-  have notrxx := irr x,
-  have rxx := trans rxy ryx, 
+  have notrxx := irr x, -- rxx → false 
+  have rxx := trans rxy ryx, -- note of this
   contradiction,
 
 end
