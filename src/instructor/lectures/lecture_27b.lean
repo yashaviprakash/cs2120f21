@@ -17,16 +17,18 @@ def single_valued :=
 #check @single_valued   -- property of a relation
 
 
-/-
+/- YOUTUBE VIDEO
+https://www.youtube.com/watch?v=OixshZzH8t0
+
 Exercises: Which of the following are single-valued?
-- r = {(0,1), (0,2)}
-- r = {(1,0), (2,0)}
-- the unit circle on ℝ 
-- r = {(-1,0), (0,-1), (1,0), (0,1)}
-- y = x^2
-- x = y^2
-- y = + / - square root x
-- f(x) = 3x+1
+- r = {(0,1), (0,2)} -- not single valued
+- r = {(1,0), (2,0)} -- yes
+- the unit circle on ℝ -- fails vertical line test, no
+- r = {(-1,0), (0,-1), (1,0), (0,1)} -- no
+- y = x^2 -- yes, passes vertical line test
+- x = y^2 -- no
+- y = + / - square root x -- not a function, not single valued
+- f(x) = 3x+1 -- yes
 - y = sin x
 - x = sin y
 -/

@@ -207,6 +207,7 @@ def composition (s : β → γ → Prop) (r : α → β → Prop):=
   λ a c, (∃ b, s b c ∧ r a b) -- names a new binary relation
   -- have a pair alpha or a,c whenever there's some b in the middle
   -- r on the left takes a to b and relation in middle takes it to c on the right
+  -- compared to transitivity?
 
 /- YouTube Video -/
 /-(s after r) to a = s(r(a))-/
@@ -243,7 +244,7 @@ Let square be the binary relation that
 associates natural numbers with their 
 squares.
 -/
-def square := (λ a b : ℕ, b = a * a)
+def square := (λ a b : ℕ, b = a * a) -- pair (4, 16) is in this relation
 
 /- 
 Let incr be the binary relation that 
@@ -272,7 +273,7 @@ natural number with the square of its successor.
 
 #check square             -- binary relation on ℕ 
 #check incr               -- binary relation on ℕ
-#check square_after_incr  -- binary relation on ℕ
+#check square_after_incr  -- binary relation on ℕ, relation you get when you compose those relations into an even bigger one
 #reduce square_after_incr -- λ (a c : ℕ), ∃ (b : ℕ), 
                           --  c = b.mul b ∧ b = a.succ
                           -- another relation on ℕ 
