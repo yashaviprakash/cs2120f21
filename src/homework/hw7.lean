@@ -52,10 +52,11 @@ begin
   contradiction,
 end
 /-
-Proof: Given that there exists some object of beta, we can show that the 
+Proof: Given that there exists some object of type beta, we can show that the 
 properties of reflexivity and asymmetry cannot be applied to the same relation, 
-as there exists a contradiction in this conjecture. We show that if a relation
-relates to itself ()
+as there exists a contradiction in this conjecture. Formally, we showed that if a relation
+were to relate to itself, then it could not be simultaneously be symmetric. This
+concludes our proof by contradiction. QED.
 -/
 
 
@@ -96,6 +97,9 @@ begin
   contradiction,
 
 end
+/-
+Proof: 
+-/
 
 
 
@@ -129,6 +133,16 @@ begin
     exact (s2setof bs2),
 
 end
+/-
+Proof: For any two sets that exist in a power set, if the first
+set is a subset of the second, and the second set is the subset of
+the first, then we can conclude that both sets are equal. This proof
+can be proven true using the set extensionality axiom, which restates
+the proposition to be that any value that exists in the first subset, 
+exists in the second and vice versa. Thus if every value that exists
+in both sets are the same, then the subset relation is antisymmetric.
+QED.
+-/
 
 /-
 Given two natural numbers, n and m, we will say that m divides n
@@ -156,6 +170,11 @@ begin
   apply exists.intro (n),
   ring,
 end
+/-
+Proof: To prove that 1 divides n, for any n, we must show there
+exists some k for which n = k * 1. The only case that such proposition
+can be true is if k = n. QED.
+-/
 
 -- B. For any n, n divides n
 
@@ -166,6 +185,11 @@ begin
   apply exists.intro 1,
   ring,
 end
+/-
+Proof: To prove that n divides n, for any n, we must show there
+exists some k for which n = k * n. The only case that such proposition
+can be true is if k = 1. QED.
+-/
 
 -- C. divides is reflexive (use our reflexive predicate)
 
@@ -176,6 +200,12 @@ begin
   apply exists.intro 1,
   ring,
 end 
+/-
+Proof: To prove that divides is reflexive, we can understand that
+every number is divisible by itself. To prove such proposition,
+we must show that, for any x, there exists some k for which x = k * x. 
+The only case that such proposition can be true is if k = 1. QED.
+-/
 
 -- #D. prove that divides is transitive
 example : transitive divides :=
@@ -188,11 +218,16 @@ begin
   apply exists.intro (w1 * w2), -- think about concrete example
   rw pf2,
   rw pf1,
-  have w2 : w2 = 1 := sorry,
-  rw w2,
   ring,
   
 end 
+/-
+Proof: To prove that divides is transitive, we can understand that, for
+any numbers x, y, and z, if y divides x, and z divides y, then z divides x.
+To prove such proposition, we must show that for z divides y, there exists
+some k such that z = k * x, such that y = k1 * x and z = k2 * y. The only case 
+that such proposition can be true is if k = k1 * k2. QED.
+-/
 
 /- 
 E. Is divides symmetric? if yes, give a proof, otherwise 
@@ -257,11 +292,17 @@ end
 -- C
 example : (transitive r → ¬ symmetric r → ¬ irreflexive r) :=
 begin
-  unfold transitive symmetric irreflexive,
-  assume h,
-  
+  _
 end
 
+/-
+Explanation: This proposition is not provable because if a relation
+was transitive and not symmetric, then the relation COULD be irreflexive.
+When a relation is not symmetric, it could be the case that some sets
+were symmetric and that some sets are not symmetric. It could also be 
+the case that there are no symmetric case. In this instance, where
+sets are transitive and not symmetric, sets are irreflexive. QED.
 
+-/
 
 end relation
