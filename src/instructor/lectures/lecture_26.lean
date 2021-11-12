@@ -132,11 +132,10 @@ of the relational specification of programs.
 -/
 def dom_res (r : α → β → Prop) (s : set α) : α → β → Prop := -- trying to get relation for salaries for managers only, not all employees
   λ a b, a ∈ s ∧ r a b
-def dom_res (r : α → β → Prop) (s : set α) : α → β → Prop := 
-  λ a b, r a b ∧ a ∈ s  -- (a,b) pairs in r for which a ∈ s   
+-- (a,b) pairs in r for which a ∈ s   
 
 def ran_res (r : α → β → Prop) (s : set β) : α → β → Prop := 
-_                       -- homework
+ λ a b, b ∈ s ∧ r a b                   -- homework
 
 
 /-
@@ -188,6 +187,7 @@ def image_val (a : α) : set β :=
 -- image of a set, s, under r
 -- get back a set of beta values for which there is some 
 -- alpha value in s such that r is related to a and b
+-- is this a restriction?
 def image_set (s : set α) : set β :=
 { b : β | ∃ a : α, a ∈ s ∧ a ≺ b }
 
@@ -195,6 +195,8 @@ def image_set (s : set α) : set β :=
 /- HOMEWORK
 Define the concepts of the *pre-image* of a
 value of type β or of a set of such values.
+
+???
 -/
 
 /-
@@ -217,6 +219,8 @@ this relation to an (a : α) is the (c : γ) that
 is obtained by applying the relation s to the 
 result of applying the relation r to a. We can
 thus call the resulting relation "s after r."
+
+review??
 -/
 def composition (s : β → γ → Prop) (r : α → β → Prop):=
   λ a c, (∃ b, s b c ∧ r a b)

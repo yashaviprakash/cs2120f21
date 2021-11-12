@@ -43,7 +43,6 @@ ordering.
 def partial_order :=    ordering r ∧ ¬strongly_connected r
 def total_order :=      ordering r ∧ strongly_connected r
 def strict_ordering :=  asymmetric r ∧ transitive r
-<<<<<<< HEAD
 def well_order := total_order r ∧ (∀ (s : set β),       -- for every
                                     ∃ (b : β), b ∈ s →  -- non-empty set s
                                       ∃ (b : β),        -- there is an element
@@ -53,8 +52,6 @@ def well_order := total_order r ∧ (∀ (s : set β),       -- for every
                                             b ≺ b')  
 
    
-=======
->>>>>>> f9af1cbe665c6f106a3886cb3ef4c2fe2e2355df
 
 /-
 EXAMPLE:
