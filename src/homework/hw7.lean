@@ -282,15 +282,19 @@ begin
   have contra := h rxx, -- if symmetric, would relate back to itself, but it doesn't
   contradiction, -- proof by contradiction
 end
+/-
+Proof: To prove that a relation is irreflexive if it is asymmetric, we must show 
+a relation cannot be simultaneously reflexive and asymmetric. We can prove this
+by contradiction, by using of our proof for reflexivity, and applying to our
+proof for asymmetry. This will yield a proof that the relation is not reflexive.
+The existence of both proofs allows to prove the original proposition by contradiction.
+QED. 
+-/
 
 -- B
 example : irreflexive r → transitive r → asymmetric r :=
 begin
   unfold irreflexive transitive asymmetric, 
-  /-
-  If no object is related to itself, and the relation is transitive, 
-  then the relation is asymmetric.
-  -/
   assume irr trans x y,
   assume rxy ryx,
   have notrxx := irr x, -- rxx → false 
@@ -298,6 +302,15 @@ begin
   contradiction,
 
 end
+/-
+Proof: To prove that a relation is asymmetric, it will suffice us to prove
+that the relation is irreflexive and transitive. We can prove this by contradiction,
+by showing a case where the relation is symmetric, and showing the relation cannot be
+simultaneously irreflexive and transitive. By using our proof that the relation is
+symmetric, we can derive a proof that the relation is reflexive through the proof
+of transitivity. The simultaneous existence of an irreflexive and reflexive proof
+allows us to prove the original proposition by contradiction. QED.
+-/
 
 -- C
 example : (transitive r → ¬ symmetric r → ¬ irreflexive r) :=
