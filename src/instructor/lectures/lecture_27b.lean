@@ -155,6 +155,10 @@ with a single y value. There can be no fan-out from
 x/domain values to y/codomain values, but there can
 be fan-in from x to y values.
 
+one to one correspondence between an element of two sets
+
+for every element in the first set there is exactly one element in the other set
+
 Which is the following functions exhibits "fan-in",
 with different x values associated with the same y
 values?
