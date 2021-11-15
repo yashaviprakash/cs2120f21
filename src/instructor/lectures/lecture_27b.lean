@@ -119,23 +119,26 @@ or "surjective."
 
 def surjective := 
   total_function r ∧  
-  ∀ (b : β), ∃ a : α, r a b
+  ∀ (b : β), ∃ a : α, r a b -- review
 
 /-
 Should this be true?
 -/
 
 example : 
-  surjective r → 
-  image_set r (dom r) = { b : β | true } :=
+  surjective r → -- if it's surjective
+  image_set r (dom r) = { b : β | true } := -- then image of domain of r under r is the entire set of beta values
 begin
 -- homework
+unfold total_function function single_valued surjective image_set dom,
+assume h,
+
 end
 
 /-
 Which of the following functions are surjective?
 
-- y = log x, viewed as a function from ℝ → ℝ⁺
+- y = log x, viewed as a function from ℝ → ℝ⁺ (not defined for negative numbers, so this is a partial function. but if i restrict domain to domain of definition (R+) then it is surjective because it's both total)
 - y = x^2, viewed as a function from ℝ → ℝ 
 - y = x, viewed as a function from ℝ → ℝ
 - y = sin x, viewed as a function from ℝ → ℝ
