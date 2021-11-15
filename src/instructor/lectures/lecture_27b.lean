@@ -95,7 +95,7 @@ a total function, r, domain_of_definition r = domain r.
 -/
 
 def total_function := function r ∧ ∀ (a : α), defined r a
-def strictly_partial_fun := function r ∧ ¬total_function r
+def strictly_partial_fun := function r ∧ ¬total_function r -- to return to a function that is not total or not defined for all values a
 def partial_function := function r -- includes total funs as a subset
 
 /-
@@ -274,4 +274,37 @@ problem providing these as properties of any partial function.
 
 end functions
 end relations
+
+/-
+What does it mean to say r is single valued?
+
+It means that if you every element connects to one other element.
+
+It cannot be one to many.
+
+single valued r := ∀ ( a : α ), ∀ ( b1 b2 :β ), r a b1 → r a b2 → b1 = b2 (vertical line test)
+
+function := single-valued r
+
+function is horizontal line test
+
+r is defined at ( a : α ) means that ∃ b, r a b
+
+what does it mean for a function to be total?
+
+function r is total if for every a, r is defined at a (which means that there exists a b)
+
+to be an injenctive function you cannot have many to one, but it's fine for a function
+
+injenctive function,
+
+∀ (a1 a2: α), ∀ (b : β), r a1 b → r a2 b → a1 = a2 (cannot be many to one)
+
+injenctive functions are invertible (capable of being inverted)
+
+a function is surjective if its image of the domain definition is the entire codomain
+
+∀ (b : β ), ∃ (a : α), r a b, why isn't it for all a or is it because you're saying that every b is defined to some a
+
+-/
 
