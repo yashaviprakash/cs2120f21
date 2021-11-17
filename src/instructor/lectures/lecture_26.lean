@@ -1,3 +1,4 @@
+import .lecture_25
 import data.set
 
 /-
@@ -52,7 +53,7 @@ def codom (r : α → β → Prop) : set β := { b : β | true }
 
 -- subset of doman and codomain respectively
 def dom_of_def (r : α → β → Prop) : set α := { a : α | ∃ b, r a b } -- set of alpha values for which there's some b so that the given alpha value is related to that b in the codomain
-def range (r : α → β → Prop) : set β := { b : β | ∃ (a : α), r a b  } 
+def range (r : α → β → Prop) : set β := { b : β | ∃ a , r a b  } 
 
 
 -- EXAMPLE
@@ -115,7 +116,7 @@ def ran_res
   (r : α → β → Prop) 
   (s : set β) : 
   α → β → Prop := 
-_                       -- homework
+λ a b, b ∈ s ∧ r a b     -- homework
 
 
 /-
@@ -220,7 +221,7 @@ cows and cheese
 -/
 
 /-
-i : id → salary
+i : id → name
 s : id → salary
 
 x : name → salary
