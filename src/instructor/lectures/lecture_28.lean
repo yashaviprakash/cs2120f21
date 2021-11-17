@@ -414,7 +414,7 @@ apply nat.rec_on n,
 exact 0,
 -- show if we have answer for n' we can derive answer one for n'+1
 assume n',              -- suppose n' is arbitrary
-assume result_for_n',   -- assume result for n' (ind. hypothesis)
+assume result_for_n',   -- assume result for n' (ind. hypothesis) assume given answer for n' and show you can construct answer for (n' + 1)
 exact result_for_n' + (n' + 1),   -- answer for n' + 1
 end
 
