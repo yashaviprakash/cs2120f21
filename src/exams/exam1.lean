@@ -302,19 +302,16 @@ that iff has both elim_left and elim_right
 rules, just like ∧.
 -/
 
-example : ∀ (P Q: Prop), (P ∧ Q) ↔ (Q ∧ P) :=
+example : ∀ (P Q: Prop), (P ↔ Q) → (Q ↔ P) :=
 begin
   assume P Q,
-  apply iff.intro _ _,
+  assume h1,
+  split,
   -- forward
-    assume pandq,
-    cases pandq with p q,
-    apply and.intro q p,
+    apply iff.elim_right h1,
   -- backward
-    assume qandp,
-    cases qandp with q p,
-    apply and.intro p q,
-    
+    apply iff.elim_left h1,
+
 end
 
 
