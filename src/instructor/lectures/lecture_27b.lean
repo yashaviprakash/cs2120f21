@@ -134,7 +134,7 @@ begin
 
   -- forwards
   assume h,
-  unfold defined at defall,
+  unfold defined at defall, -- what does this mean?
   unfold defined at defall,
   -- goal completed
   
@@ -188,6 +188,17 @@ example :
   image_set r (dom r) = { b : β | true } := -- then image of domain of r under r is the entire set of beta values
 begin
 -- homework (on your own ungraded but please do it!)
+  unfold surjective,
+  assume h1,
+  unfold image_set,
+  apply set.ext _,
+  assume x,
+  split,
+  -- forward
+    assume h2,
+
+
+
 end
 
 /-
@@ -251,12 +262,12 @@ Which is the following functions exhibits "fan-in",
 with different x values associated with the same y
 values?
 
-y = x
-y = sin x
-x = 1 (trick question)
-y = 1
-y = x^2 on ℝ 
-y = x^2 on ℝ⁺ (the positive reals)
+y = x, no
+y = sin x, yes
+x = 1 (trick question), no
+y = 1, yes
+y = x^2 on ℝ , no
+y = x^2 on ℝ⁺ (the positive reals), no
 -/
 
 def injective := 
@@ -305,7 +316,7 @@ That we've assumed that a function is total is important
 here. Here's a counterexample: consider the relation from
 dom = {1,2,3} to codom = {A, B} with r = {(1,A), (2,B)}.
 This function is injective and surjective but it clearly
-does not establish a 1-1 correspondence. 
+does not establish a 1-1 correspondence. **doesn't it, where's 3?**
 
 We can define what it means for a strictly partial function
 to be surjective or injective (we don't do it formally here).
