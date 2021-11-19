@@ -519,6 +519,9 @@ function is that function.
 -/
 example : bijective r → (r = inverse (inverse r)) :=
 begin
+  assume bij,
+  apply rfl,
+  
 end
 
 /-
@@ -526,7 +529,19 @@ EXERCISE  #4: Formally state and prove that every injective function
 has a *function* as an inverse.
 -/
 example : injective r → function (inverse r) :=
-  _ -- hint: remember recent work
+begin
+ -- hint: remember recent work
+ assume inj,
+ 
+ cases inj with tot injr,
+
+ unfold function single_valued defined inverse,
+
+ assume x y z ryx rzx,
+
+ apply injr ryx rzx,
+
+end
 
 
 /-
