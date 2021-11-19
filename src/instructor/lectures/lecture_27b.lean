@@ -478,11 +478,11 @@ begin
       /- solve that the inverse of r is a single-valued function-/
       assume x y z invrxy invryx,
       unfold inverse at invrxy invryx,
-      apply r_one_to_one invrxy invryx,
+      apply r_one_to_one invrxy invryx, --using second conjunction in definition of surjective functions
       /- solve that the inverse of r is defined-/
       unfold defined inverse,
       assume a,
-      have ex_pf := r_onto a,
+      have ex_pf := r_onto a, 
       exact ex_pf,
     /- solve that for every alpha value, there exists a b such that its the inverse of r a b-/
     unfold inverse,
@@ -499,9 +499,16 @@ split,
     /- solve that the inverse of r is a single_valued function -/
     assume x y z invrxy invrxz,
     unfold inverse at invrxy invrxz,
-
-
-  
+    apply r_one_to_one invrxy invrxz, -- using second conjunction in definition of injective functions
+    /- solve that hte inverse of r is defined -/
+    unfold defined inverse,
+    assume a,
+    have ex_pf := r_onto a,
+    exact ex_pf,
+  /- solve that the inverse of the function is injective-/
+  unfold inverse,
+  assume x y z rzx rzy,
+  apply r_fun rzx rzy,
 
 end
 
