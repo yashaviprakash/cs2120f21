@@ -559,7 +559,68 @@ False? Present a counterexample.
 -/
 def bij_trans (s : β → γ → Prop)  (r : α → β → Prop) :
   bijective r → bijective s → bijective (composition s r) := 
-  _
+begin 
+  assume bijr bijs,
+
+  /- unfold every definition in bijective r-/
+  unfold bijective at bijr,
+  cases bijr with surrr injrr,
+  unfold surjective total_function at surrr,
+  unfold injective total_function at injrr,
+  cases injrr with fanddr injr,
+  cases surrr with fanddr surr,
+  cases fanddr with funcr defir,
+  unfold defined at defir,
+  unfold function single_valued at funcr,
+  unfold function single_valued defined at fanddr,
+
+  /- unfold every definition in bijective s-/
+  unfold bijective at bijs,
+  cases bijs with surrs injrs,
+  unfold surjective total_function at surrs,
+  unfold injective total_function at injrs,
+  cases injrs with fandds injs,
+  cases surrs with fandds surs,
+  cases fandds with funcs defis,
+  unfold defined at defis,
+  unfold function single_valued at funcs,
+  unfold function single_valued defined at fandds,
+  
+  /- start solving -/
+  unfold bijective surjective injective composition,
+  split,
+  split,
+
+  unfold total_function function single_valued defined,
+  split,
+
+  -- first case
+  assume x y z ex1 ex2,
+  cases ex1 with w1 pf1,
+  cases ex2 with w2 pf2,
+  cases pf1 with one two,
+  cases pf2 with three four,
+  have w_same : w1 = w2 := begin
+    apply funcr two four,
+  end,
+  rw w_same at one,
+  apply funcs one three,
+
+  assume a,
+  have h1 := defir a,
+  cases h1 with w pf,
+  have h2 := defis w,
+  cases h2 with w2 pf2,
+  apply exists.intro w2,
+  apply exists.intro w (and.intro pf2 pf),
+  
+
+
+
+
+
+
+end 
 
 /-
 In general, an operation (such as inverse, here) that, 
