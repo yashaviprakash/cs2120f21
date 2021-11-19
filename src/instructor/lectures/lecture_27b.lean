@@ -2,6 +2,7 @@ import .lecture_26
 import data.set
 
 namespace relations
+
 section functions
 
 variables {α β γ : Type} (r : α → β → Prop)
@@ -368,14 +369,14 @@ begin
   deduce all the basic facts we'll have to
   work with.
   -/
-  cases r_bij with r_sur r_inj,
-  cases r_inj with r_tot r_one_to_one,
-  cases r_sur with r_tot r_onto,
-  unfold total_function at r_tot, 
-  cases r_tot with r_fun alldef,
-  unfold function at r_fun,
-  unfold single_valued at r_fun,
-  unfold defined at alldef,
+  cases r_bij with r_sur r_inj, -- injective and surjective
+  cases r_inj with r_tot r_one_to_one, -- dividing injective definition
+  cases r_sur with r_tot r_onto, -- dividing surjective definition
+  unfold total_function at r_tot, -- unfolding the definition of total
+  cases r_tot with r_fun alldef, -- divides the definition of total
+  unfold function at r_fun, -- says that a function is single valued
+  unfold single_valued at r_fun, -- unfolds single valued
+  unfold defined at alldef, -- unfolds the definition of defined
 
   /-
   What remains to be shown is that the
@@ -438,14 +439,75 @@ def bijectivep := function r ∧ bijective (dom_res r (dom_of_def r))
 
 
 
--- #2: Prove that the inverse of a bijective function is bijective.
+-- EXERCISE #2: Prove that the inverse of a bijective function is bijective.
 example : bijective r → bijective (inverse r) :=
 begin
+  assume bij,
+  
+  /- a bijective function must be surjective and injective-/
+  cases bij with r_sur r_inj, -- injective and surjective
+  cases r_inj with r_tot r_one_to_one, -- dividing injective definition
+  cases r_sur with r_tot r_onto, -- dividing surjective definition
+
+  /- both surjective and injective must be strongly connected, reduce that next-/
+  unfold total_function at r_tot, -- unfolding the definition of total
+  cases r_tot with r_fun alldef, -- divides the definition of total
+
+  /- unfold what it means to be a function and single valued-/
+  unfold function at r_fun, -- says that a function is single valued
+  unfold single_valued at r_fun, -- unfolds single valued
+
+  /- unfold defined -/
+  unfold defined at alldef, -- unfolds the definition of defined
+
+  /-
+  What remains to be shown is that the
+  inverse of r is bijective. Expanding 
+  the definition of bijective, that means
+  r inverse is surjective and injective. 
+  -/
+  unfold bijective,
+  split,
+
+  /-  solve that the inverse of r is surjective -/
+  unfold surjective,
+  split,
+    /- solve that the inverse of r is a total function -/
+    unfold total_function function single_valued,
+    split,
+      /- solve that the inverse of r is a single-valued function-/
+      assume x y z invrxy invryx,
+      unfold inverse at invrxy invryx,
+      apply r_one_to_one invrxy invryx,
+      /- solve that the inverse of r is defined-/
+      unfold defined inverse,
+      assume a,
+      have ex_pf := r_onto a,
+      exact ex_pf,
+    /- solve that for every alpha value, there exists a b such that its the inverse of r a b-/
+    unfold inverse,
+    assume b,
+    have ex_pf := alldef b,
+    exact ex_pf, 
+
+/- solve that the inverse of r is injective-/
+unfold injective,
+split,
+  /- solve that the inverse of r is a total function -/
+  unfold total_function function single_valued,
+  split,
+    /- solve that the inverse of r is a single_valued function -/
+    assume x y z invrxy invrxz,
+    unfold inverse at invrxy invrxz,
+
+
+  
+
 end
 
 
 /-
-#3: Prove that the inverse of the inverse of a bijective
+EXERCISE #3: Prove that the inverse of the inverse of a bijective
 function is that function.
 -/
 example : bijective r → (r = inverse (inverse r)) :=
@@ -453,7 +515,7 @@ begin
 end
 
 /-
-#4: Formally state and prove that every injective function 
+EXERCISE  #4: Formally state and prove that every injective function 
 has a *function* as an inverse.
 -/
 example : injective r → function (inverse r) :=
@@ -461,7 +523,7 @@ example : injective r → function (inverse r) :=
 
 
 /-
-#5. Is bijectivity transitive? In other words, if the
+EXERCISE #5. Is bijectivity transitive? In other words, if the
 relations, s and r, are both bijective, then is the
 composition, s after r, also always bijective? Now
 we'll see.
