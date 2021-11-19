@@ -718,6 +718,7 @@ exact n_ih + (n_n + 1),   -- answer for n' + 1 (sum of all the numbers for 9 and
 -- need an answer given n' and an answer for n' + 1
 end
 
+#eval sum_to 100
 
 #reduce sum_to 0
 #reduce sum_to 1
@@ -732,7 +733,23 @@ EXERCISE: Define the factorial function by recursion
 
 def factorial : nat → nat :=
 begin
+  assume n,
+
+  induction n with n' n'_fac,
+
+  -- 0! = 1
+  -- exact 1,
+  exact nat.zero.succ,
+
+  -- (n+1)! = (n!) * (n+1)
+  exact n'_fac * (n'.succ),
 end
+
+#eval factorial 10
+
+def fac : ℕ → ℕ 
+| (nat.zero) := 1
+| (nat.succ n') := fac n' * (nat.succ n') -- can assume you have the answer for one smaller n
 
 /-
 Lean provides a nice notation for writing proofs
