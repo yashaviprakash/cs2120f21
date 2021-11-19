@@ -751,6 +751,8 @@ def fac : ℕ → ℕ
 | (nat.zero) := 1
 | (nat.succ n') := fac n' * (nat.succ n') -- can assume you have the answer for one smaller n
 
+#eval fac 10
+
 /-
 Lean provides a nice notation for writing proofs
 or functions by induction/recursion. Let's rewrite
