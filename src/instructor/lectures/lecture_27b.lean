@@ -594,31 +594,71 @@ begin
   unfold total_function function single_valued defined,
   split,
 
-  -- first case
+    -- first case
+    assume x y z ex1 ex2,
+    cases ex1 with w1 pf1,
+    cases ex2 with w2 pf2,
+    cases pf1 with one two,
+    cases pf2 with three four,
+    have w_same : w1 = w2 := begin
+      apply funcr two four,
+    end,
+    rw w_same at one,
+    apply funcs one three,
+
+    -- second case
+    assume a,
+    have h1 := defir a,
+    cases h1 with w pf,
+    have h2 := defis w,
+    cases h2 with w2 pf2,
+    apply exists.intro w2,
+    apply exists.intro w (and.intro pf2 pf),
+
+
+  assume g,
+  have h1 := surs g,
+  cases h1 with w pf,
+  have h2 := surr w,
+  cases h2 with w2 pf2,
+  apply exists.intro w2,
+  apply exists.intro w (and.intro pf pf2),
+
+  split,
+
+    -- first case
+    unfold total_function function single_valued defined,
+    split,
+      -- subcase one
+      assume x y z ex1 ex2,
+      cases ex1 with w1 pf1,
+      cases ex2 with w2 pf2,
+      cases pf1 with one two,
+      cases pf2 with three four,
+      have w_same : w1 = w2 := begin
+        apply funcr two four,
+      end,
+      rw w_same at one,
+      apply funcs one three,
+      -- subcase two
+      assume a,
+      have h1 := defir a,
+      cases h1 with w1 pf1,
+      have h2 := defis w1,
+      cases h2 with w2 pf2,
+      apply exists.intro w2,
+      apply exists.intro w1 (and.intro pf2 pf1),
+
   assume x y z ex1 ex2,
   cases ex1 with w1 pf1,
   cases ex2 with w2 pf2,
   cases pf1 with one two,
   cases pf2 with three four,
-  have w_same : w1 = w2 := begin
-    apply funcr two four,
+  have w_same : w1 = w2 := begin 
+    apply injs one three,
   end,
-  rw w_same at one,
-  apply funcs one three,
-
-  assume a,
-  have h1 := defir a,
-  cases h1 with w pf,
-  have h2 := defis w,
-  cases h2 with w2 pf2,
-  apply exists.intro w2,
-  apply exists.intro w (and.intro pf2 pf),
-  
-
-
-
-
-
+  rw w_same at two,
+  apply injr two four,
 
 end 
 
