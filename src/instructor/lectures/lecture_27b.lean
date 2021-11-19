@@ -532,13 +532,9 @@ example : injective r → function (inverse r) :=
 begin
  -- hint: remember recent work
  assume inj,
- 
  cases inj with tot injr,
-
  unfold function single_valued defined inverse,
-
  assume x y z ryx rzx,
-
  apply injr ryx rzx,
 
 end
