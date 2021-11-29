@@ -317,7 +317,7 @@ begin
   in the order they're listed in the data type
   definition.
   -/
-  -- case #1: b = bool.ff **why does it have to be one or the other??**
+  -- case #1: b = bool.ff **why does it have to be one or the other?? go back to definitions while asking**
   exact bool.tt,
   -- case #2: b = bool.tt
   exact bool.ff,
@@ -422,7 +422,7 @@ end
 But now we'll see where these strategies differ.
 The difference shows up when larger values of a
 given type can beconstructed from smaller values
-of the same type.
+of the same type. **meaning??**
 -/
 
 
@@ -448,7 +448,7 @@ tt and ff), there is a big difference between
 proof by cases and by applying an induction
 axiom. With induction, you have additional
 assumptions ("induction hypotheses") to work 
-with, as we'll now explain. 
+with, as we'll now explain.**here is the difference between induction and case analysis** 
 -/
 
 /-
@@ -557,7 +557,7 @@ claims that some property holds for every
 natural number requires that you provide 
 two analogous machines, but instead of 
 imaginary buildings they generate proofs,
-that for any n, n has the stated property.
+that for any n, n has the stated property.**important!! here!!**
 
 As we've said, this principle can also be 
 used to construction total functions from
@@ -603,7 +603,7 @@ of (P (succ n')), that is, of P (n' + 1).
 If you have both such machines, then you can
 build a proof for any given natural number, 
 n, whatsoever, and from this fact deduce that
-every natural number has that property. QED.
+every natural number has that property. QED. **important two paragraphs!! here!!**
 
 In general, therefore, to give a proof by
 mathematical induction requires that you
@@ -617,7 +617,7 @@ thus says that in order to prove ∀ n, P n,
 it suffices to have two "machines": a proof
 of P 0, and a *function* that when given 
 an arbitrary n' and proof/result (P n') 
-then returns a proof/result(P (n'+1)).
+then returns a proof/result(P (n'+1)). **important!! here!!**
 -/
 
 /-
@@ -668,7 +668,7 @@ nat.rec_on :
 Π {motive : nat → Sort u_1},                      (1)
     motive nat.zero →                             (2)
     (Π (n' : nat), motive n' → motive n'.succ) →  (3) for any n' you give me the answer for n' i will give you the answer for n' + 1
-    Π (n : nat), motive n                         (4) if you have all of those things you will have a machien that gives you an answer for everything
+    Π (n : nat), motive n                         (4) if you have all of those things you will have a machine that gives you an answer for everything
 
 Sort u_1 could be Prop (Sort 0), or Type (Sort 1), or other.
 
@@ -686,7 +686,7 @@ or answer for the successor of n' (nat.succ n' or n'.succ
 or simply n' + 1)
 
 (4) then the property holds, or we have an answer, for
-*all* values of type nat.
+*all* values of type nat. **important deconstruction of recursor**
 
 Suppose you need a proof for n = 3, for example. If
 you have an answer for 0, start with that, then you
@@ -715,7 +715,7 @@ induction n,
 -- apply nat.rec_on n, -- apply induction principle to that n (reuqires one machien that gives an answer for zero, and another that gives any answer for n' and returns one for n' + 1)
 -- answer for base case, n = 0
 exact 0, -- the answer for n = 0 is zero!
--- show if we have answer for n' we can derive answer one for n'+1
+-- show if we have answer for n' and n', we can derive answer one for n'+1
 
 /- assume n' and the result for n'-/
 -- assume n',              -- suppose n' is arbitrary
@@ -763,7 +763,7 @@ end
 #eval factorial 10
 
 
-/-
+/- **important!! valuable and alternate way to define the same factorial function**
 Now that you understand how the inducion 
 principle for a type enables you to define
 total functions on values of that type, we
@@ -822,7 +822,7 @@ case, the second *assumes* you have an answer for
 n' and constructs an answer for n' + 1. Another way
 to think about it is that it gives you a way to 
 turn an answer or result for any n' into an answer
-or result for n'+1. 
+or result for n'+1. **important last line**
 
 Now with an answer for the base case and a 
 rule for induction, you have the components
