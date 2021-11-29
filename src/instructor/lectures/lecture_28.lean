@@ -58,7 +58,7 @@ correct value.
 When we construct a proof using an induction 
 principle we call it "proof by induction." When
 we define a function using an induction principle
-we (generally) call it a "recursive" function.
+we (generally) call it a "recursive" function. **important distinction between proof by induction and recursive functions**
 -/
 
 /-
@@ -127,7 +127,7 @@ that return data values as results.
 
 /-
 empty.rec : 
-  Π (motive : empty → Sort u_1)     (1) property
+  Π (motive : empty → Sort u_1)     (1) property 
     (n : empty),                    (2) arbitrary value
   motive n                          (3) proof value has property
 
@@ -143,7 +143,7 @@ Let's consider two variants. First, suppose
 u_1 is 0. Sort 0 is the same as Prop, so we're
 talking about proving that, given any property 
 of values of this type (Lean calls it "motive"),
-that any value, n, of this type has this property.
+that any value, n, of this type has this property. **recursor in english**
 -/
 
 -- Show every value of this type is Blue
@@ -153,6 +153,9 @@ axiom Blue : empty → Prop
 theorem all_empty_Blue : ∀ (n : empty), Blue n :=
 begin
   assume n,
+  -- given a property of values of type empty
+  -- given arbitrary value n
+  -- can use recursor
   apply empty.rec_on, -- no cases to consider, no way to build a value of type empty
 end
 
@@ -164,7 +167,7 @@ value of this type, returns a natural number.
 
 def empty_to_nat : empty → nat :=
 begin
-  apply empty.rec_on,    -- no cases to consider! 
+  apply empty.rec_on,    -- no cases to consider! **how is recursor like case analysis**
 end
 
 /-
@@ -207,7 +210,7 @@ For any property of unit values (u_1 = 0)
 or any function from unit to another type
 (u_1 = 1), if we have a proof or value for 
 unit.star, then we have a proof or value 
-for every value, n, of this type.
+for every value, n, of this type. **if we have a proof for star we have a proof for every value of this type**
 
 unit.rec_on : 
   Π {motive : unit → Sort u_1} 
@@ -222,7 +225,7 @@ A "proof by induction"
 theorem all_unit_self_eq : ∀ (u : unit), u = u :=
 begin
   assume u,
-  apply unit.rec_on u,    -- one case to consider
+  apply unit.rec_on u,    -- one case to consider **given a proof that unit has what property??**
   apply rfl,              -- proof for that one case
 end
 
@@ -235,7 +238,7 @@ as good names for the cases it considers.
 example : ∀ (u : unit), u = u :=
 begin
   assume u,
-  induction u,    -- one case to consider
+  induction u,            -- one case to consider
   apply rfl,              -- proof for that one case
 end
 
@@ -245,7 +248,7 @@ any values of type unit returns 0, defined "by
 recursion."
 -/
 
-def unit_to_nat : unit → nat :=
+def unit_to_nat : unit → nat := --**i'm not sure i understand this one, walk through**
 begin
   assume u,
   apply unit.rec_on u,    -- one case to consider
@@ -292,7 +295,7 @@ bool.rec :
 To prove that *all* values of type bool
 have some property or a corresponding value,
 it suffices to prove proofs/values for tt and
-for ff.
+for ff. **definition**
 -/
 
 /-
@@ -302,7 +305,7 @@ A function, Boolean not (!), defined by recursion
 def bnot : bool → bool :=
 begin
   assume b,
-  apply bool.rec_on b,
+  induction b,
   /-
   Reduce problem of giving an answer for all
   Boolean arguments to the two subproblems of
@@ -314,7 +317,7 @@ begin
   in the order they're listed in the data type
   definition.
   -/
-  -- case #1: b = bool.ff
+  -- case #1: b = bool.ff **why does it have to be one or the other??**
   exact bool.tt,
   -- case #2: b = bool.tt
   exact bool.ff,
