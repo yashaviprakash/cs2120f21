@@ -171,11 +171,11 @@ end
 Lean provide induction tactic to apply the right
 induction axiom and clean up automatically. 
 -/
-def empty_to_nat : empty → nat :=
-begin
-  assume e,
-  induction e,    -- no cases to consider!
-end
+-- def empty_to_nat : empty → nat :=
+-- begin
+--   assume e,
+--   induction e,    -- no cases to consider!
+-- end
 
 
 /- 
@@ -320,16 +320,16 @@ begin
   exact bool.ff,
 end
 
--- it's better to use the induction tactic
-def bnot : bool → bool :=
-begin
-  assume b,
-  induction b,  -- the cases are now well marked
-  -- case #1: return value when b = bool.ff
-  exact bool.tt,
-  -- case #2: return value when b = bool.tt
-  exact bool.ff,
-end
+-- -- it's better to use the induction tactic
+-- def bnot : bool → bool :=
+-- begin
+--   assume b,
+--   induction b,  -- the cases are now well marked
+--   -- case #1: return value when b = bool.ff
+--   exact bool.tt,
+--   -- case #2: return value when b = bool.tt
+--   exact bool.ff,
+-- end
 
 #reduce bnot bool.tt
 #reduce bnot bool.ff
@@ -487,14 +487,10 @@ that we can consider to represent natural
 numbers. (There's a one-to-one corresondence).
 -/
 
-<<<<<<< HEAD
-def two : nat := nat.succ (nat.succ nat.zero) -- how to build two
-=======
 def two : nat := 
   nat.succ (
   nat.succ 
   nat.zero)
->>>>>>> ec8f7763971fb581a8cdf99d2610d19e2e097a85
 
 /-
 Now let's talk about proving universal generalizations
