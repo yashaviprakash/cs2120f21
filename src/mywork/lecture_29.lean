@@ -79,3 +79,6 @@ def sum_to : nat → nat
 #reduce sum_to f
 
 end hidden
+
+def P : nat → Prop 
+| n := 2 * hidden.sum_to n = n * (n +1)
