@@ -27,7 +27,7 @@ begin
   proof that it satisfies the predicate to a
   separate sub-goal/sub-task. Notice how the
   value of the parameter is incorporated into
-  the final proposition to be proved: that 
+  the final proposition to be proved: that  
   that value has the required property.
 
   -/
