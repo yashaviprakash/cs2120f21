@@ -70,7 +70,7 @@ script.
 
 begin
   show ∀ n, n = 0 ∨ n = 2 → n ∈ evens,
-  -- assume n,
+  -- \assume n,
   -- assume h, -- assume these numbers are in the first set, n is in this set when n is 0 or n is 2
   -- cases h, -- two cases: 1) when n = 0 or the case when 2) n is in the rest of the set {2}
   -- -- case: n = 0

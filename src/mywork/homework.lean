@@ -237,10 +237,27 @@ to the for all proposition. This satisfies the proof. QED.
 
 -/
 
- 
 end hw_5
 
 
 namespace hw_6
+
+/- Set Extensionality 
+
+We define the concept of a set
+of values of type α as nothing
+other than a predicate on values
+of this type. (α → Prop)
+
+
+And given any one-place predicate
+on α, we can view it as defining
+a set.
+
+
+**def set_of {α : Type} (p : α → Prop) : set α := p**
+
+-/
+
 
 end hw_6
