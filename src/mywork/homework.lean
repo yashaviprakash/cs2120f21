@@ -279,5 +279,239 @@ To prove L = X, it will suffice to prove that
 ∀ x, x ∈ L ↔ x ∈ X
 -/
 
+/-
+Exercise: Prove that for any set, L, L ∩ L = L.
+-/
+
+example : ∀ (α : Type) (L: set α), L ∩ L = L :=
+begin
+  intros a L,
+  apply set.ext _,
+  assume x,
+  split,
+  -- forward
+  assume h,
+  exact h.left,
+  -- backward
+  assume l,
+  exact and.intro l l,
+end
+
+/-
+Exercise: Give a formal statement and proof, then an 
+English language proof, that the union operator on 
+sets is commutative.
+-/
+
+-- how to express commutativity
+-- for sets (s1 ∪ s2 = s2 ∪ s1)
+-- we use set extensionality because the only case
+-- where this would be true is if it was written like:
+/-
+∀ x, (x ∈ (s1 ∪ s2)) ↔ (x ∈ (s2 ∪ s1))
+-/
+example : ∀ (α : Type) (L K : set α), L ∪ K = K ∪ L :=
+begin
+  intros a L K,
+  apply set.ext _,
+  assume x,
+  split,
+  -- forward
+  assume h,
+  cases h with l k,
+    -- subgoal one
+    apply or.inr l,
+    -- subgoal two
+    apply or.inl k,
+  -- backward
+  assume h,
+  cases h with k l,
+    -- subgoal one
+    apply or.inr k,
+    -- subgoal two 
+    apply or.inl l,
+end
+
+/-
+Exercise: Prove that ⊆ is reflexive and transitive.
+Give a formal statement, a formal proof, and an English
+language (informal) proof of this fact.
+-/
+
+example : ∀ (α : Type), (∀ (a: set α), (a ⊆ a)) ∧ (∀ (H K L: set α) (a: H ⊆ K) (b: K ⊆ L), H ⊆ L):=
+begin
+  assume a,
+  split,
+  -- reflexive
+  assume X, -- x ⊆ x is same as ∀ x, x ∈ X → x ∈ X
+  assume x,
+  assume h,
+  exact h,
+  -- transitive
+  assume H L K hl kl, -- ∀ x, x ∈ H → x ∈ K
+  assume x,
+  assume h,
+  have l := hl h,
+  have k := kl l,
+  exact k,
+
+end
+
+/-
+Exercise: Prove that ∪ and ∩ are associative.
+Give a formal statement, a formal proof, and an 
+English language (informal) proof of this fact.
+-/
+
+example : ∀ (α : Type) (H L K: set α), (H ∩ L) ∩ K = H ∩ (L ∩ K):=
+begin
+  intros a H L K,
+  apply set.ext,
+  assume x,
+  split,
+  -- forward 
+  assume h,
+  cases h with hl k,
+  cases hl with h l,
+  apply and.intro h (and.intro l k),
+  -- backward
+  assume h,
+  cases h with h lk,
+  cases lk with l k,
+  apply and.intro (and.intro h l) k,
+end
+
+example : ∀ (α : Type) (H L K : set α), (H ∪ L) ∪ K = H ∪ (L ∪ K) :=
+begin
+  assume α H L K,
+  apply set.ext _,
+  assume x,
+  split,
+  -- forward
+  assume h,
+  cases h with hl k,
+  cases hl with h l,
+    -- first case
+      apply or.intro_left _,
+      exact h,
+    -- second case
+      apply or.intro_right _,
+      apply or.intro_left _ ,
+      exact l,
+    -- third case
+      apply or.intro_right _,
+      apply or.intro_right _,
+      exact k,
+  -- backward
+  assume h,
+  cases h with h lk,
+    -- first case
+      apply or.intro_left _,
+      apply or.intro_left _,
+      exact h,
+    cases lk with l k,
+    -- first case
+      apply or.intro_left _,
+      apply or.intro_right _,
+      exact l,
+    -- second case
+      apply or.intro_right _,
+      exact k,
+
+end
+
+example : ∀ (α : Type) (H L K : set α), (H ∪ L) ∪ K = H ∪ (L ∪ K) :=
+begin
+  assume α H L K,
+  apply set.ext _,
+  assume x,
+  split,
+  -- forward
+  assume h,
+  cases h with hl k,
+  cases hl with h l,
+    -- first case
+      apply or.intro_left _,
+      exact h,
+    -- second case
+      apply or.intro_right _,
+      apply or.intro_left _ ,
+      exact l,
+    -- third case
+      apply or.intro_right _,
+      apply or.intro_right _,
+      exact k,
+  -- backward
+  assume h,
+  cases h with h lk,
+    -- first case
+      apply or.intro_left _,
+      apply or.intro_left _,
+      exact h,
+    cases lk with l k,
+    -- first case
+      apply or.intro_left _,
+      apply or.intro_right _,
+      exact l,
+    -- second case
+      apply or.intro_right _,
+      exact k,
+
+end
+
+
+/-
+Exercise: Formally state and prove both formally 
+and informally that ∪ is left-distributive over ∩.
+-/
+
+
+example : ∀ (α : Type) (H L K : set α), H ∪ (L ∩ K) = (H ∪ L) ∩ (H ∪ K):=
+begin
+  intros α H L K,
+  apply set.ext _,
+  assume x,
+  split,
+  -- forward
+  assume h,
+  cases h with h lk,
+    -- case one
+    apply and.intro _ _,
+      -- subgoal one
+        apply or.intro_left _,
+        exact h,
+      -- subgoal two
+        apply or.intro_left _,
+        exact h,
+    -- case two
+    cases lk with l k,
+    apply and.intro _ _,
+      -- subgoal one
+        apply or.intro_right _,
+        exact l,
+      -- subgoal two
+        apply or.intro_right _,
+        exact k,
+  -- backward
+  assume h,
+  cases h with hl hk,
+  cases hl with h l,
+  cases hk with h k,
+    -- case one
+      apply or.intro_left _,
+      exact h,
+    -- case two
+      apply or.intro_left _,
+      exact h,
+    -- case three
+      cases hk with h k,
+      -- sub case one
+        apply or.intro_left _,
+        exact h,
+      -- sub case two
+        apply or.intro_right _,
+        exact and.intro l k,
+
+end
 
 end hw_6
