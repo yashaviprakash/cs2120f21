@@ -257,6 +257,26 @@ a set.
 
 **def set_of {α : Type} (p : α → Prop) : set α := p**
 
+  set.ext : 
+    ∀ {α : Type u_1} {a b : set α}, 
+    (∀ (x : α), x ∈ a ↔ x ∈ b) → a = b
+
+  
+Here's the most important point: If we 
+apply ext to a "hole" where the proof 
+of the bi-implication should be, we will 
+have our proof of L = X, with only the
+proof of ∀ x, x ∈ L ↔ x ∈ X remaining 
+to be produced. In this sense, applying
+the axiom of set extensionality without
+giving a proof of the bi-implication,
+*reduces* the problem of proving L = X
+to the problem of proving ∀ x, x ∈ L ↔ 
+x ∈ X. And that is what we see next. 
+
+
+To prove L = X, it will suffice to prove that
+∀ x, x ∈ L ↔ x ∈ X
 -/
 
 

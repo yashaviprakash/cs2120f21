@@ -170,7 +170,7 @@ which we can also write as
 Remember that you can think about an
 implication, P → Q, in two ways: first,
 if P then Q; second, to prove Q it will
-suffice to prove P. So to prove L = X, 
+suffice to prove P. So to prove L = X, **To prove Q it will suffice to prove P**
 it suffices to prove ∀ x, x ∈ L ↔ x ∈ X,
 because one can then apply ext to that
 proof to derive a proof of L = X. In 
@@ -293,7 +293,7 @@ begin
   -- backward
   assume k,
   have r := h k,
-  exact and.intro k (h k),
+  apply and.intro k r,
   /-
   So this last "proof move" will take a little
   time to think about. Look at the goal and think
