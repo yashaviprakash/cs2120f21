@@ -280,7 +280,29 @@ give a brief defense of your answer.
 
 theorem eq_is_symm : symmetric (@eq α) :=
 begin
+  unfold symmetric,
+  assume x y,
+  assume h,
+  rw h,
 end
+
+/-
+Theorem: Equality is reflexive.
+Proof. Unfolding the definition of reflexive,
+what we are to show is ∀ x, x = x. To prove it,
+assume x is an arbitrary value and show x = x.
+That's true by (application of) the introduction
+rule for equality (to x). QED.
+
+Theorem: Equality is symmetric. Proof. Unfolding
+the definnition of symmetric, what we are to show
+is ∀ (x y: α), x = y → y = x. To prove it, we must
+assume x and y are arbitrary values of type α and 
+show that  x = y → y = x. To do so, assume the premise
+and apply the substitutability of equality axiom by
+rewriting the proosition. QED.
+
+-/
 
 /-
 Exercise prove that = is transitive as per
@@ -313,7 +335,18 @@ lemma mk_equivalence (rfl : reflexive r) (symm : symmetric r) (trans : transitiv
 -- Exercise
 theorem eq_is_equivalence : equivalence (@eq β) :=
 begin
-  unfold equivalence,
+  unfold equivalence reflexive symmetric transitive,
+  split,
+  assume x,
+  apply rfl,
+  split,
+  assume x y,
+  assume h,
+  rw h,
+  assume x y z,
+  assume h1 h2,
+  apply eq.trans h1 h2,
+  
 
 end
 

@@ -1,4 +1,5 @@
 import data.set
+import ..instructor.lectures.lecture_21
 
 namespace hw_5
 
@@ -515,3 +516,132 @@ begin
 end
 
 end hw_6
+
+namespace hw_7
+
+-- the pair (1,1) is in the <= relation
+-- right side is a predicate (takes a pair) takes an argument and yields a proposition
+example : (1, 1) ∈ { p : ℕ × ℕ | p.1 <= p.2 } :=
+begin
+  show { p : ℕ × ℕ | p.1 <= p.2 } (1, 1), -- apply predicate
+  show 1 <= 1,                            -- proposition
+  exact nat.less_than_or_equal.refl,      -- proof
+  -- less than or equal relation has two proof rules/ introduction rules
+  -- it's like eq.refl but its for the less than or equal relation
+
+end
+
+-- Proof by reflexivity of =.
+
+example : (3, 10) ∈ { p : ℕ × ℕ | p.2 = p.1 * p.1 } :=
+begin
+  show 10 = 3 * 3,
+  exact rfl, -- stuck
+end
+
+-- stuck (in fact it's provably false)
+
+example : (3, 10) ∈ compl { p : ℕ × ℕ | p.2 = p.1 * p.1 } :=
+begin -- little c is the standard notation for the complement of a set
+  show ¬10=9,
+  assume h,
+  cases h,
+end
+
+-- Proof by negation and the reflexive property of =.
+/-
+In English, the proposition is true by the reflexive
+property of =.
+-/
+
+example : ("Hello", 5) ∈ { p : string × ℕ | p.2 = string.length p.1} :=
+begin
+  exact rfl,
+end
+
+example : 0 ≤ 0 :=    -- nat.le 0 0
+begin
+  exact nat.less_than_or_equal.refl, -- anything is less than or equal to itself
+end
+
+example : nat.le 0 1 := 
+begin
+  apply nat.less_than_or_equal.step _, -- it will suffice to apply step intro rule to prove that 0 <= 0 to prove that 0 <= 1
+  exact nat.less_than_or_equal.refl,
+end
+
+example : nat.le 0 2 := 
+begin
+  apply nat.less_than_or_equal.step _,
+  apply nat.less_than_or_equal.step _,
+  exact nat.less_than_or_equal.refl, -- the proof in itself is like this recursive data structure
+end
+
+-- equality relation on natural numbers is reflexive
+-- @eq is shorthand for the equals sign
+-- @ turns off implicit arguments
+-- eq nat is a two place predicate on values of type nat
+theorem eq_is_refl : reflexive (@eq nat) := -- eq is the equality predicate
+-- proof below
+/-
+Let's unpack the notation, @eq α. When we 
+write, 0 = 0, that's infix notation for
+the term, eq 0 0 (the application of the
+two-place predicate, eq, to 0 and 0. It
+is the meaning of the notation 0 = 0.). 
+
+But what (eq 0 0) means is (@eq nat 0 0). 
+The first argument of eq is implicit, so 
+is usually omitted from code and inferred
+from the following values. But here we 
+don't give such values. The @tells Lean
+to let us write the implicit argument(s)
+explicitly. 
+-/
+begin
+  -- turns into @eq nat 0 0
+  -- want to talk about the overall relation of equality on nats
+  -- binary equality relation on nats
+  -- the proposition that equality on natural numbers is reflexive
+  -- expand expression: @reflexive nat (@eq nat) :=
+  unfold reflexive, -- valuable to do bc it shows logical definition of set theory concept
+  assume x,
+  exact rfl,
+
+end
+
+/-
+Here's an English version.
+
+Theorem: Equality is reflexive.
+Proof. Unfolding the definition of reflexive,
+what we are to show is ∀ x, x = x. To prove it,
+assume x is an arbitrary value and show x = x.
+That's true by (application of) the introduction
+rule for equality (to x). QED.
+-/
+
+/-This predicate picks out (logically) those that do. 
+Building on our discussion of sets, it appears to
+be the case, and it is, that it defines the set of
+binary relations on β that are reflexive. We can
+define this set explicitly by using reflexive as a
+predicate on binary relations in a set builder
+expression.
+-/
+
+def reflexive_relations := -- defined to be the sets of all objects r that are the two place predicates on β, such that r is reflexive
+  { r : β → β → Prop | reflexive r }
+
+  -- go back and look at definition of set membership
+example : @eq nat ∈ @reflexive_relations nat := -- this relation is in the set of all reflexive relations
+begin -- reflexive relations is a predicate is applied to equality on the nats
+  show reflexive_relations (@eq nat),
+  unfold reflexive_relations,
+  show reflexive (@eq nat),
+  exact eq_is_refl,      -- Already proved, use theorem!
+end
+-- You can just feel your brains getting bigger here!
+
+
+end hw_7
