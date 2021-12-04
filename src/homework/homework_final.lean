@@ -1,3 +1,4 @@
+import algebra.algebra.basic
 /-
 Read, understand (collaborating if necessary) the material
 in chapter 17 of Jeremy Avigad's *Logic and Proof.* It's here:
@@ -50,7 +51,18 @@ To test out of the final exam ...-/
 /-#3: Give a formal proof for #2 or #3.-/
 
 def P : ℕ → Prop :=
-_
+    λ n, 6 * n^3 = (n^2) * (n+1)^2
+
+def conjecture := ∀ n, P n 
+
+theorem stuff : conjecture :=
+begin
+    unfold conjecture,
+    assume n,
+    unfold P,
+    
+    
+end
 
 /-
 #4: Formal or detailed informal proofs #10
@@ -88,6 +100,10 @@ Show that multiplication distributes over addition. In other words,
 prove that for natural numbers 𝑚, 𝑛, and 𝑘, 𝑚(𝑛+𝑘)=𝑚𝑛+𝑚𝑘. You should 
 use the definitions of addition and multiplication and facts proved 
 in Section 17.4 (but nothing more).
+
+**Answer:**
+
+
 
 #6: Formal or detailed informal proofs #12
 
