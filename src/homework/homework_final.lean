@@ -49,7 +49,7 @@ To test out of the final exam ...
 
 #3: Give a formal proof for #2 or #3.
 
-#4: Formal or detailed informal proofs 10
+#4: Formal or detailed informal proofs #10
 
 **Answer:**
 
@@ -78,16 +78,24 @@ definition of multiplacation.
 
 QED.
 
-#5: Formal or detailed informal proofs 11
+#5: Formal or detailed informal proofs #11
 
 Show that multiplication distributes over addition. In other words, 
 prove that for natural numbers 𝑚, 𝑛, and 𝑘, 𝑚(𝑛+𝑘)=𝑚𝑛+𝑚𝑘. You should 
 use the definitions of addition and multiplication and facts proved 
 in Section 17.4 (but nothing more).
 
-#6: Formal or detailed informal proofs 12
+#6: Formal or detailed informal proofs #12
 
-#7: Formal or detailed informal proofs 13
+Prove the multiplication is associative, in the same way. You can use any 
+of the facts proved in Section 17.4 and the previous exercise.
+
+**Answer:**
+
+The proposition to be proven is the associativity of multiplacation,
+represented as m * (n * k) = (m * n) * k.
+
+#7: Formal or detailed informal proofs #13
 
 Prove that multiplication is commutative.
 
