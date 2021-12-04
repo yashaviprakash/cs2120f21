@@ -51,10 +51,6 @@ To test out of the final exam ...
 
 #4: Formal or detailed informal proofs 10
 
-Give an informal but detailed proof that for every natural number 𝑛, 
-1⋅𝑛=𝑛, using a proof by induction, the definition of multiplication, 
-and the theorems proved in
-
 **Answer:**
 
 We prove this by induction on n. To prove that the proposition 
@@ -84,9 +80,36 @@ QED.
 
 #5: Formal or detailed informal proofs 11
 
+Show that multiplication distributes over addition. In other words, 
+prove that for natural numbers 𝑚, 𝑛, and 𝑘, 𝑚(𝑛+𝑘)=𝑚𝑛+𝑚𝑘. You should 
+use the definitions of addition and multiplication and facts proved 
+in Section 17.4 (but nothing more).
+
 #6: Formal or detailed informal proofs 12
 
 #7: Formal or detailed informal proofs 13
+
+Prove that multiplication is commutative.
+
+**Answer:**
+
+The proposition to be proven is the commutativity of multiplacation,
+represented as n * m = m * n.
+
+To prove by induction, we fix n and use induction on m. To prove that
+the porposition holds of every natural number m, it will suffice to 
+prove that the proposition holds of zero, and whenever it holds of 
+some number m, it holds of m + 1.
+
+To prove the base case when m = 0, we use the first defining clause of 
+multiplacation to easily solve that 0 = 0. 
+
+In the inductive step, we have that:
+
+    n * succ(m) = n * m + n
+                = 
+
+
 
 #8: (Extra Credit): #5 or #9
 
