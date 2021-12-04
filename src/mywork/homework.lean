@@ -1,6 +1,13 @@
 import data.set
 import ..instructor.lectures.lecture_21
 
+namespace exam_1
+
+
+
+end exam_1
+
+
 namespace hw_5
 
 -- personal notes 
@@ -804,3 +811,4 @@ end
 end relation
 
 end hw_7
+

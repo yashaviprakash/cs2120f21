@@ -36,11 +36,7 @@ all propositions in Lean).
 -/
 
 def prop_1 : Prop := 
-<<<<<<< HEAD
   ∀ (T: Type) (x y z w: T) (e1: x = y) (e2: y = z) (e3: w = z), z = w 
-=======
-  ∀ (T : Type) (x y z w : T), x = y → y = z → w = z → z = w
->>>>>>> fcba5ad44160653f0c0421bdee35d9d0532b3390
 
 /- #3 (extra credit)
 Give a formal proof of the proposition from #2 by filling in
@@ -51,15 +47,9 @@ again, called eq.refl, eq.subst, eq.symm, eq.trans.
 
 theorem prop_1_proof : prop_1 := 
 begin
-<<<<<<< HEAD
-  assume T x y z w e1 e2 e3,
-  apply eq.symm,
-  exact e3,
-=======
   assume T x y z w,
   assume xy yz zw,
   exact eq.symm zw,
->>>>>>> fcba5ad44160653f0c0421bdee35d9d0532b3390
 end
 
 /-
@@ -130,12 +120,8 @@ your answer by filling the hole in the following definition.
 Hint: put parenthesis around "n + 1" in your answer.
 -/
 
-<<<<<<< HEAD
-def successor_of_even_is_odd : Prop := ∀ (n: ℕ), n % 2 = 0 → (n+1) % 2 = 1 
-=======
 def successor_of_even_is_odd : Prop := 
   ∀ (n : ℕ), ev n → odd (n + 1)
->>>>>>> fcba5ad44160653f0c0421bdee35d9d0532b3390
 
 /- #7
 Suppose that "its_raining" and "the_streets_are_wet" are
@@ -161,13 +147,7 @@ you are asked to use the elimination rule for →.
 axiom pf_raining : raining
 
 example : streets_wet :=
-<<<<<<< HEAD
-begin
-  apply if_raining_then_streets_wet pf_raining,
-end
-=======
  if_raining_then_streets_wet pf_raining
->>>>>>> fcba5ad44160653f0c0421bdee35d9d0532b3390
 
 /- 
 AND: ∧
@@ -214,14 +194,10 @@ theorem and_associative :
 begin
   intros P Q R h,
   have p : P := and.elim_left h,
-<<<<<<< HEAD
   have qr : Q ∧ R := and.elim_right h,
   have q : Q := and.elim_left qr,
   have r : R := and.elim_right qr,
   apply and.intro (and.intro p q) r,
-=======
-  have q : Q := (and.elim_right h).left
->>>>>>> fcba5ad44160653f0c0421bdee35d9d0532b3390
 end
 
 /- #11
