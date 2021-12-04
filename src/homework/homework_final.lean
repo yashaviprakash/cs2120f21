@@ -45,10 +45,14 @@ QED.
 -/
 
 /-
-To test out of the final exam ...
+To test out of the final exam ...-/
 
-#3: Give a formal proof for #2 or #3.
+/-#3: Give a formal proof for #2 or #3.-/
 
+def P : ℕ → Prop :=
+_
+
+/-
 #4: Formal or detailed informal proofs #10
 
 **Answer:**
