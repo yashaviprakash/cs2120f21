@@ -816,7 +816,7 @@ begin
   apply and.intro (and.intro p q) r,
 end 
 
-
+å
 end logical_connectives
 
 namespace hw_3

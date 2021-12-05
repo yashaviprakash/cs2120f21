@@ -71,7 +71,7 @@ do is to produce a proof of true. But it's an axiom
 that there is one: in Lean called true.intro. So
 it's true that false is true!
 -/
-example : false → true :=
+example : false → true := --**it's true that false is true**
 begin
   assume f,
   exact true.intro,

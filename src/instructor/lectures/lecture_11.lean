@@ -169,3 +169,4 @@ begin                 -- goal is to prove P
                       -- that's the essence of proof by contradiction
                       -- of course we have no information to finish this proof
 end
+

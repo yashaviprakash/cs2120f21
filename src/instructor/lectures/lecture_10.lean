@@ -197,7 +197,7 @@ begin
   have np := and.elim_right h, /-p implies false is what np means-/
   /-this is where p and np is a proof of p implies false-/
   have f:= np p, --*** core of today's lecture, when you have a contradiction, you end up with an object and a proof if you have that object you can obtain a proof of false
-  exact f,
+  apply false.elim f,
 -- NO CONTRADICTION
 end
 theorem no_contradiction : ∀ (P : Prop), ¬(P ∧ ¬P) :=

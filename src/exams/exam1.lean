@@ -292,6 +292,7 @@ ELIMINATION
 As with ∧, ↔ has two elimination rules. You can 
 see their statements here.
 -/
+#check @iff.intro
 #check @iff.elim_left
 #check @iff.elim_right
 
