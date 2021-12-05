@@ -76,7 +76,9 @@ inference rule notation.
 Give a brief English language explanation of
 the introduction rule for true.
 
--- [Anything true needs a proof of true.]
+**revised answer with help of jacqueline post exam**
+-- [The introduction rule for true provides that a proof
+of true is constructed by simply accepting that true is true.]
 
 ELIMINATION
 
@@ -300,6 +302,8 @@ put parentheses around each ↔ proposition,
 as → has higher precedence than ↔. Recall
 that iff has both elim_left and elim_right
 rules, just like ∧.
+
+**bi-implication associative?**
 -/
 
 example : ∀ (P Q: Prop), (P ↔ Q) → (Q ↔ P) :=

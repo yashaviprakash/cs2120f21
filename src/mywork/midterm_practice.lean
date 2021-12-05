@@ -170,7 +170,7 @@ a natural number, n, and returns the proposition, n = 3:
 a proposition about n. Here's how we might define this
 predicate/function in Lean.
 
-def e3 (n : nat) : Prop := n = 3
+def e3 (n : nat) : Prop := n = 3 **predicate that takes in a natural number, n, and produces a proposition that n = 3**
 
 The syntax is pretty simple. First, def introduces a
 new definition. What's being defined to have a value is
@@ -211,6 +211,17 @@ axiom eq_subst :    -- arguments are assumptions!
   P y               -- then we can have a proof of P y
 
 /-
+**you need five things for the axiom of substitutability**
+
+**First you need to be given a type T**
+**Second you need a property P of T objects (predicate)**
+**Third you need two objects of type T**
+**Fourth you need a proof that x=y**
+**Fifth a proof that x has property P**
+
+-/
+
+/-
 Given any type, T, ... and any *property*, P, of objects
 of this type, (P : T \to Prop), ... if you know that an
 object, x, of type T, has property P, i.e., (P x) and you
@@ -227,6 +238,7 @@ proof that, from the preceding axioms, we can prove
 
 example : P y := eq_subst T P x y e px
 
+**english language proof eq subst**
 English: From the assumptions that P x is true,
 and x = y, we can deduce that P y must be true
 by applying the axiom of the the substitutability
@@ -239,10 +251,12 @@ while visualizing what it really means.)
 Theorem: the equality relation (on objects of
 any given type) is symmetric.
 
+**eq symm**
 To prove that equality is symmetric, we must
 prove that, for *any* objects, x and y (of a
 given type), if x = y then y = x.
 
+**english language proof**
 Proof. We start by *assuming* that x and
 y are objects of some type T. We also then
 assume that x = y. On the assumption that
@@ -265,6 +279,7 @@ the original y = x must be true as well. QED.
 
 /- Theorem: Equality is transitive
 
+**english language proof**
 Proof. We are given as assumptions that T is a
 type; x, y, and z are values of this type; and
 that x = y and y = z. In this context, we are to
@@ -545,19 +560,7 @@ the hole in this next definition. Hint: Use Lean's versions of
 the axioms and basic theorems concerning equality. They are,
 again, called eq.refl, eq.subst, eq.symm, eq.trans.
 
-*in class note: proofs are data*
--/
-
-theorem prop_1_proof : prop_1 := 
-begin
-  assume T x y z w,
-  assume xy yz zw,
-  apply eq.symm zw,
-end
-
-/-
-FOR ALL: ∀. 
--/
+*in class note: proofs are data* 
 
 /- #4
 Give a very brief explanation in English of the introduction
@@ -724,7 +727,7 @@ the definitions we give in this file.
 -/
 #check @and.comm
 #check @and.assoc
-
+-/
 end hw1_2
 
 namespace logical_connectives
@@ -1051,7 +1054,7 @@ begin
 end
 
 end hw_3
-
+ 
 namespace hw_4
 
 -- 1
