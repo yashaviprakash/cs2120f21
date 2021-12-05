@@ -40,6 +40,8 @@ just a calculation as shown:
     (0^3 + 1^3 + ... + (n)^3) + (n+1)^3 = (1/4)(n+1)^2((n+1)+1)^2
     (1/4)𝑛^2(𝑛+1)^2 + (n+1)^3 = (1/4)(n+1)^2((n+1)+1)^2
 
+The rest is provable by simple algebra.
+
 QED.
 
 
@@ -61,7 +63,7 @@ begin
     assume n,
     unfold P,
     
-    
+
 end
 
 /-

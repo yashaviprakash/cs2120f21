@@ -152,4 +152,10 @@ To prove this we'll assume we're given n' and a proof that P n' to prove
 P (n' + 1). By the definition of s, we can simplify the current goal to
 using s and that allows us to rewrite the lefthand side. 
 
+Then by simple alegbra, the rest of the proof is true.
+
 -/
+
+def factorial : ℕ → ℕ 
+| 0 := 1
+| (nat.succ (n')) := factorial n' * (n'.succ)

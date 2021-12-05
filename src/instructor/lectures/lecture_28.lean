@@ -711,7 +711,6 @@ begin -- want to implement the function that sums up all of the numbers
 assume n,
 -- construct function by induction/recursion
 -- have to give partial answers for two cases
-<<<<<<< HEAD
 induction n,
 -- apply nat.rec_on n, -- apply induction principle to that n (reuqires one machien that gives an answer for zero, and another that gives any answer for n' and returns one for n' + 1)
 -- answer for base case, n = 0
@@ -723,15 +722,13 @@ exact 0, -- the answer for n = 0 is zero!
 -- assume result_for_n',   -- assume result for n' (ind. hypothesis) assume given answer for n' and show you can construct answer for (n' + 1)
 exact n_ih + (n_n + 1),   -- answer for n' + 1 (sum of all the numbers for 9 and the sum of the number for 1 + 9)
 -- need an answer given n' and an answer for n' + 1
-=======
-induction n with n' ih,
--- answer for base case, n = 0
-exact 0,
--- show if we have answer for n' we can derive answer one for n'+1
---assume n',              -- suppose n' is arbitrary
---assume result_for_n',   -- assume result for n' (ind. hypothesis)
-exact ih + (n'+1),  -- answer for n' + 1
->>>>>>> 6f27f36e4b709f7b78ff25e03754972eb8fa31f2
+-- induction n with n' ih,
+-- -- answer for base case, n = 0
+-- exact 0,
+-- -- show if we have answer for n' we can derive answer one for n'+1
+-- --assume n',              -- suppose n' is arbitrary
+-- --assume result_for_n',   -- assume result for n' (ind. hypothesis)
+-- exact ih + (n'+1),  -- answer for n' + 1
 end
 
 
