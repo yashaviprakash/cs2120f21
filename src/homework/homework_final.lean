@@ -136,6 +136,9 @@ of the facts proved in Section 17.4 and the previous exercise.
 The proposition to be proven is the associativity of multiplacation,
 represented as m * (n * k) = (m * n) * k.
 
+    m * succ (n * k) = m * (n * k) + m
+                     = 
+
 #7: Formal or detailed informal proofs #13
 
 Prove that multiplication is commutative.
