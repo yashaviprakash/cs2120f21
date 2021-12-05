@@ -115,6 +115,8 @@ We can understand this as:
 Thus, proving the proposition using the inductive hypothesis and the 
 definition of multiplacation.
 
+The rest is provable by simple algebra.
+
 QED.
 
 #5: Formal or detailed informal proofs #11
