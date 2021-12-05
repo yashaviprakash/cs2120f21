@@ -15,7 +15,7 @@ the chapter.
 #2. Solve at least one of #2 and #3. Give
     detailed but informal proofs. 
 
-**Answer:**
+**Answer for #3:**
 
 We prove this by induction on n. To prove that the proposition 
 holds of every natural number n, it would suffice to prove that 
@@ -52,17 +52,38 @@ To test out of the final exam ...-/
 
 /-#3: Give a formal proof for #2 or #3.-/
 
+def power : ℕ → ℕ → ℕ 
+| m 0 := nat.zero.succ 
+| m (nat.succ(n')) := m * (power m n')
+
+def s : ℕ → ℕ
+| nat.zero := (nat.zero)
+| (nat.succ(n')) := s n' + pow n'.succ 3
+
 def P : ℕ → Prop :=
-    λ n, 6 * n^3 = (n^2) * (n+1)^2
+    λ n, (s n) = (1/4) * (power n 2) * (power (n+1) 2)
 
 def conjecture := ∀ n, P n 
 
 theorem stuff : conjecture :=
-begin
-    unfold conjecture,
-    assume n,
-    unfold P,
-    
+begin  
+  assume n,
+  unfold P,
+  induction n with n' ih_n',
+
+  -- P 0
+  apply rfl,
+
+  -- inductive step
+  simp [s],
+  simp[power],
+  rw ih_n',
+  simp[power],
+  rw mul_add, 
+  rw nat.succ_eq_add_one,
+  
+  -- by simple arithmetic
+  sorry,
 
 end
 
