@@ -61,7 +61,7 @@ def s : ℕ → ℕ
 | (nat.succ(n')) := s n' + pow n'.succ 3
 
 def P : ℕ → Prop :=
-    λ n, (s n) = (1/4) * (power n 2) * (power (n+1) 2)
+    λ n, 4 * (s n) = (power n 2) * (power (n+1) 2)
 
 def conjecture := ∀ n, P n 
 
@@ -77,9 +77,9 @@ begin
   -- inductive step
   simp [s],
   simp[power],
+  rw mul_add, 
   rw ih_n',
   simp[power],
-  rw mul_add, 
   rw nat.succ_eq_add_one,
   
   -- by simple arithmetic
@@ -115,8 +115,6 @@ We can understand this as:
 Thus, proving the proposition using the inductive hypothesis and the 
 definition of multiplacation.
 
-The rest is provable by simple algebra.
-
 QED.
 
 #5: Formal or detailed informal proofs #11
@@ -127,8 +125,6 @@ use the definitions of addition and multiplication and facts proved
 in Section 17.4 (but nothing more).
 
 **Answer:**
-
-
 
 #6: Formal or detailed informal proofs #12
 
