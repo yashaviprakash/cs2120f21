@@ -133,12 +133,23 @@ begin
 
   simp[s, pow2, power],
   rw ih_n',
+  simp[pow2],
+  simp[power],
   
-
-
-  
-  
-  
-  
+  -- by simple arithmetic
+  sorry,
   
 end
+
+/-
+English Language proof:
+
+Let s(n) equal the sum of all the numbers from 2^0 to 2^n. Let P n
+be the property that s(n) equals 2^(n + 1) - 1. We're to prove that
+every natural number has this propert, ∀ n, P n. By induction for the
+natural numbers, it will suffice to show P 0 and ∀ n', P n' → P (n' + 1).
+To prove this we'll assume we're given n' and a proof that P n' to prove
+P (n' + 1). By the definition of s, we can simplify the current goal to
+using s and that allows us to rewrite the lefthand side. 
+
+-/
