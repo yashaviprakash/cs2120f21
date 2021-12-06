@@ -138,13 +138,21 @@ some number m, it holds of m + 1.
 To prove the base case when m = 0, we use the first defining clause of 
 multiplacation to easily solve that 0 = 0. 
 
-    0(n+k) = 0 * (n+k) + 0
-           = 0
+    (n+k) * 0 = 0
 
 In the inductive step, we have that:
 
-    m(n+k) = m * succ (n + k) + m
-           = 
+    (n+k) * succ(m) = (n+k) * m + (n+k)
+                    = (n+k) * (m + 1)
+                    = (n+k) * (succ(m))
+                    = (n * succ(m)) + (k * succ(m))
+                    = (n(succ(m))) + (k(succ(m)))
+
+                    [end goal]
+                    = mn + mk 
+                    = (n * m + n) + (k * m + k)
+                    = (n(m + 1)) + (k( m + 1))
+                    = (n(succ(m))) + (k(succ(m)))
            
 -/
 
@@ -160,6 +168,7 @@ The proposition to be proven is the associativity of multiplacation,
 represented as m * (n * k) = (m * n) * k.
 
     m * succ (n * k) = m * (n * k) + m
+                     = 
                      = 
 
 -/
@@ -187,8 +196,8 @@ multiplacation to easily solve that 0 = 0.
 In the inductive step, we have that:
 
     n * succ(m) = n * m + n
-                = m * n + n
-                = 
+                = n * (m + 1)
+                = n * succ(m)
                 = m * succ(n) [end goal]
 
 
