@@ -126,11 +126,26 @@ prove that for natural numbers 𝑚, 𝑛, and 𝑘, 𝑚(𝑛+𝑘)=𝑚𝑛+�
 use the definitions of addition and multiplication and facts proved 
 in Section 17.4 (but nothing more).
 
-m(n+k) = m * succ (n + k) + m
-       = 
-
 **Answer:**
 
+The proposition to be proven is the property of distributivity, m(n+k) = mn + mk.
+
+To prove by induction, we fix n and k and use induction on m. To prove that
+the proposition holds of every natural number m, it will suffice to 
+prove that the proposition holds of zero, and whenever it holds of 
+some number m, it holds of m + 1.
+
+To prove the base case when m = 0, we use the first defining clause of 
+multiplacation to easily solve that 0 = 0. 
+
+    0(n+k) = 0 * (n+k) + 0
+           = 0
+
+In the inductive step, we have that:
+
+    m(n+k) = m * succ (n + k) + m
+           = 
+           
 -/
 
 /-
@@ -160,7 +175,7 @@ The proposition to be proven is the commutativity of multiplacation,
 represented as n * m = m * n.
 
 To prove by induction, we fix n and use induction on m. To prove that
-the porposition holds of every natural number m, it will suffice to 
+the proposition holds of every natural number m, it will suffice to 
 prove that the proposition holds of zero, and whenever it holds of 
 some number m, it holds of m + 1.
 
