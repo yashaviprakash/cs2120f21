@@ -179,7 +179,7 @@ To prove the base case when m = 0, we use the first defining clause of
 multiplacation to easily solve that 0 = 0. 
 
     (n*k) * 0 = 0
-
+ 
 In the inductive step, we have that:
 
     (n*k) * succ(m) = (n*k) * m + (n*k)

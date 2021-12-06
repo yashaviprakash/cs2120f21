@@ -835,15 +835,24 @@ example : false := _    -- trick question? why?
 
 example : ∀ (P : Prop), P ∨ P ↔ P := 
 begin
+  -- assume P,
+  -- apply iff.intro _ _,
+  -- -- forward
+  --   assume porp,
+  --   cases porp with p p,
+  --   -- left disjunct
+  --   exact p,
+  --   -- right disjunct
+  --   exact p,
+  -- -- backward
+  --   assume p,
+  --   apply or.intro_left P p,
   assume P,
-  apply iff.intro _ _,
+  apply iff.intro _ _, 
   -- forward
-    assume porp,
-    cases porp with p p,
-    -- left disjunct
-    exact p,
-    -- right disjunct
-    exact p,
+    assume h,
+    cases h with p p,
+    repeat {exact p},
   -- backward
     assume p,
     apply or.intro_left P p,
@@ -990,16 +999,26 @@ end
 
 example : ∀ (P : Prop), P ∨ true ↔ true := 
 begin
+  -- assume P,
+  -- apply iff.intro _ _,
+  -- -- forward
+  --   assume h,
+  --   apply or.elim h,
+  --   -- left disjunct
+  --   assume p,
+  --   apply true.intro,
+  --   -- right disjunct
+  --   assume t,
+  --   exact t,
+  -- -- backward
+  --   assume t,
+  --   apply or.intro_right P t,
   assume P,
   apply iff.intro _ _,
   -- forward
     assume h,
-    apply or.elim h,
-    -- left disjunct
-    assume p,
-    apply true.intro,
-    -- right disjunct
-    assume t,
+    cases h with p t,
+    exact true.intro,
     exact t,
   -- backward
     assume t,
@@ -1060,41 +1079,50 @@ namespace hw_4
 -- 1
 example : 0 ≠ 1 :=
 begin
-  -- ¬ (0 = 1)
-  -- (0 = 1) → false
+  -- -- ¬ (0 = 1)
+  -- -- (0 = 1) → false
+  -- assume h,
+  -- cases h, -- how many different ways can h actually exist? 0
+  -- /-
+  -- can be solved using contradiction or trivial
+  -- -/
   assume h,
-  cases h, -- how many different ways can h actually exist? 0
-  /-
-  can be solved using contradiction or trivial
-  -/
+  cases h,
 end
 
 
 -- 2
 example : 0 ≠ 0 → 2 = 3 :=
 begin
+  -- assume h,
+  -- have zeqz := eq.refl 0,
+  -- contradiction, -- what's really going on with contradiction is the false elim strategy
+  -- /-
+  -- have f : false := h (eq.refl 0),
+  -- exact false.elim (f),
+  -- -/
   assume h,
-  have zeqz := eq.refl 0,
-  contradiction, -- what's really going on with contradiction is the false elim strategy
-  /-
   have f : false := h (eq.refl 0),
-  exact false.elim (f),
-  -/
+  apply false.elim f,
 end
 
 -- 3
 example : ∀ (P : Prop), P → ¬¬P :=
 begin
+  -- assume P,
+  -- assume p,
+  -- assume h,
+  -- contradiction,
+  -- -- ¬¬P
+  -- -- ¬P → false
+  -- -- (P → false) → false
+  -- -- assume h,
+  -- -- have f := h p,
+  -- -- exact f,
   assume P,
   assume p,
-  assume h,
+  assume np,
   contradiction,
-  -- ¬¬P
-  -- ¬P → false
-  -- (P → false) → false
-  -- assume h,
-  -- have f := h p,
-  -- exact f,
 end 
 
 -- We might need classical (vs constructive) reasoning 
@@ -1117,7 +1145,7 @@ proof by negation : trying to prove np
 how do you prove np by negation? assume p, show false, shows that p implies false which is the negation of np
 
 proof of contradiction : trying to prove p
-how do you prove p by contradiction? ssume np, show that that leads to a contradiction which shows nnp
+how do you prove p by contradiction? assume np, show that that leads to a contradiction which shows nnp
 
 classically proof by contradiction is valid through excluded middle of getting proof of disjunction and then perform case analysis
 -/
@@ -1142,6 +1170,35 @@ end
 -- 5
 theorem demorgan_1 : ∀ (P Q : Prop), ¬ (P ∧ Q) ↔ ¬ P ∨ ¬ Q :=
 begin
+  -- assume P Q,
+  -- apply iff.intro _ _,
+  -- -- forward
+  --   assume h,
+  --   have pornp := classical.em P,
+  --   cases pornp with p np,
+  --   have qornq := classical.em Q,
+  --   cases qornq with q nq,
+  --   -- case 1
+  --     have pandq := and.intro p q,
+  --     have f := h pandq,
+  --     apply false.elim f,
+  --   -- case 2
+  --     apply or.intro_right _ _,
+  --     assumption,
+  --   -- case 3
+  --     apply or.intro_left _ _,
+  --     assumption,
+  -- -- backward
+  --   assume h, -- why did we do this and not classical elim
+  --   assume pandq,
+  --   cases pandq with p q,
+  --   cases h,
+  --   -- case 1
+  --     have f := h p,
+  --     exact f,
+  --   -- case 2
+  --     have f := h q,
+  --     exact f,
   assume P Q,
   apply iff.intro _ _,
   -- forward
@@ -1150,56 +1207,75 @@ begin
     cases pornp with p np,
     have qornq := classical.em Q,
     cases qornq with q nq,
-    -- case 1
-      have pandq := and.intro p q,
-      have f := h pandq,
-      apply false.elim f,
-    -- case 2
-      apply or.intro_right _ _,
-      assumption,
-    -- case 3
-      apply or.intro_left _ _,
-      assumption,
+    -- case one
+    have pandq := and.intro p q,
+    contradiction,
+    -- case two
+    apply or.intro_right _ nq,
+    -- case three
+    apply or.intro_left _ np,
   -- backward
-    assume h, -- why did we do this and not classical elim
+    assume h,
     assume pandq,
     cases pandq with p q,
     cases h,
-    -- case 1
-      have f := h p,
-      exact f,
-    -- case 2
-      have f := h q,
-      exact f,
+    contradiction,
+    contradiction,
+
+  
+
+    
 end
 
 
 -- 6
 theorem demorgan_2 : ∀ (P Q : Prop), ¬ (P ∨ Q) → ¬P ∧ ¬Q :=
 begin
+  -- assume P Q,
+  -- assume h,
+  -- have pornp := classical.em P,
+  -- cases pornp with p np,
+  -- have qornq := classical.em Q,
+  -- cases qornq with q nq,
+  -- -- case 1
+  --   have porq := or.intro_left Q p,
+  --   have f := h porq,
+  --   apply false.elim f,
+  -- -- case 2
+  --   have porq := or.intro_left Q p,
+  --   have f := h porq,
+  --   apply false.elim f,
+  -- -- case 3
+  --   have qornq := classical.em Q,
+  --   cases qornq with q nq,
+  --   -- subgoal 1
+  --     have porq := or.intro_right P q,
+  --     have f := h porq,
+  --     apply false.elim f,
+  --   -- subgoal 2
+  --     apply and.intro np nq,
+
   assume P Q,
   assume h,
   have pornp := classical.em P,
   cases pornp with p np,
   have qornq := classical.em Q,
   cases qornq with q nq,
-  -- case 1
-    have porq := or.intro_left Q p,
-    have f := h porq,
-    apply false.elim f,
-  -- case 2
-    have porq := or.intro_left Q p,
-    have f := h porq,
-    apply false.elim f,
-  -- case 3
-    have qornq := classical.em Q,
-    cases qornq with q nq,
-    -- subgoal 1
-      have porq := or.intro_right P q,
-      have f := h porq,
-      apply false.elim f,
-    -- subgoal 2
-      apply and.intro np nq,
+  -- case one
+  have porq := or.intro_left Q p,
+  contradiction,
+  -- case two
+  have porq := or.intro_left Q p,
+  contradiction,
+  -- case three
+  have qornq := classical.em Q,
+  cases qornq with q nq,
+    -- subgoal one
+    have porq := or.intro_right P q,
+    contradiction,
+    -- subgoal two
+    apply and.intro np nq,
+
     
 end
 
@@ -1401,13 +1477,9 @@ begin
   assume P Q,
   assume h,
   assume nq,
-  have pornp := classical.em P,
-  cases pornp with p np,
-  -- case 1
-    have q := h p,
-    contradiction,
-  -- case 2
-    exact np,
+  assume p,
+  have q := h p,
+  contradiction,
 end
 
 -- 13
