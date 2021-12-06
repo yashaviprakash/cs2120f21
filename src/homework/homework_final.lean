@@ -184,10 +184,12 @@ In the inductive step, we have that:
 
     (n*k) * succ(m) = (n*k) * m + (n*k)
                     = (n*k) * succ(m)
-                    = 
+                    = (m) * succ(n*k)
 
    
 -/
+
+#check nat.mul
 
 /-
 #7: Formal or detailed informal proofs #13
