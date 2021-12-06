@@ -153,6 +153,9 @@ In the inductive step, we have that:
                     = (n * m + n) + (k * m + k)
                     = (n(m + 1)) + (k( m + 1))
                     = (n(succ(m))) + (k(succ(m)))
+
+
+QED.
            
 -/
 
