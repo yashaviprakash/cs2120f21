@@ -116,7 +116,9 @@ Thus, proving the proposition using the inductive hypothesis and the
 definition of multiplacation.
 
 QED.
+-/ 
 
+/-
 #5: Formal or detailed informal proofs #11
 
 Show that multiplication distributes over addition. In other words, 
@@ -124,8 +126,14 @@ prove that for natural numbers 𝑚, 𝑛, and 𝑘, 𝑚(𝑛+𝑘)=𝑚𝑛+�
 use the definitions of addition and multiplication and facts proved 
 in Section 17.4 (but nothing more).
 
+m(n+k) = m * succ (n + k) + m
+       = 
+
 **Answer:**
 
+-/
+
+/-
 #6: Formal or detailed informal proofs #12
 
 Prove the multiplication is associative, in the same way. You can use any 
@@ -139,6 +147,9 @@ represented as m * (n * k) = (m * n) * k.
     m * succ (n * k) = m * (n * k) + m
                      = 
 
+-/
+
+/-
 #7: Formal or detailed informal proofs #13
 
 Prove that multiplication is commutative.
@@ -162,7 +173,9 @@ In the inductive step, we have that:
                 = 
 
 
+-/
 
+/-
 #8: (Extra Credit): #5 or #9
 
 NOT FINALIZED. ADVISORY. 
