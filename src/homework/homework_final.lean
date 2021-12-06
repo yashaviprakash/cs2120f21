@@ -216,6 +216,7 @@ In the inductive step, we have that:
     n * succ(m) = n * m + n
                 = n * (m + 1)
                 = n * succ(m)
+                =
                 = m * succ(n) [end goal]
 
 

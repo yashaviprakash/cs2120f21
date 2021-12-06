@@ -46,11 +46,10 @@ example :
 What does this propositon say? Explain it in
 plain English. Here's a start: "If there's a 
 function that maps/takes every α value that ... 
--- If there's a function that maps/takes every α value that provides
-a proof for a β value, then a proof of q can be derived using that function
-given that every α value satisfies predicate p. Additionally, if there exists 
-a value of type α that satisfies predicate p, then there exists a value of type 
-β that satisfies predicate q. 
+-- If there’s a function that maps/takes every α value that yields a β value, t
+hen if any value of a of type α satisfies predicate p, then f applied to any value 
+a satisfies predicate q. Then if there exists a value a of type α that satisfies 
+predicate p, then there exists a value b of type β that satisfies predicate q.
 -/
 
 /- 
