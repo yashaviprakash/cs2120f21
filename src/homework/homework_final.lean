@@ -65,7 +65,7 @@ def P : ℕ → Prop :=
 
 def conjecture := ∀ n, P n 
 
-theorem stuff : conjecture :=
+theorem ind_proof : conjecture :=
 begin  
   assume n,
   unfold P,
@@ -167,10 +167,23 @@ of the facts proved in Section 17.4 and the previous exercise.
 The proposition to be proven is the associativity of multiplacation,
 represented as m * (n * k) = (m * n) * k.
 
-    m * succ (n * k) = m * (n * k) + m
-                     = 
-                     = 
+To prove by induction, we fix n and k and use induction on m. To prove that
+the proposition holds of every natural number m, it will suffice to 
+prove that the proposition holds of zero, and whenever it holds of 
+some number m, it holds of m + 1.
 
+To prove the base case when m = 0, we use the first defining clause of 
+multiplacation to easily solve that 0 = 0. 
+
+    (n*k) * 0 = 0
+
+In the inductive step, we have that:
+
+    (n*k) * succ(m) = (n*k) * m + (n*k)
+                    = (n*k) * succ(m)
+                    = 
+
+   
 -/
 
 /-
