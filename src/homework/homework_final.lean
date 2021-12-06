@@ -145,8 +145,8 @@ In the inductive step, we have that:
     (n+k) * succ(m) = (n+k) * m + (n+k)
                     = (n+k) * (m + 1)
                     = (n+k) * (succ(m))
-                    = (n * succ(m)) + (k * succ(m))
-                    = (n(succ(m))) + (k(succ(m)))
+                    = (n * succ(m)) + (k * succ(m)) [unsure]
+                    = (n(succ(m))) + (k(succ(m))) [end goal]
 
                     [end goal]
                     = mn + mk 
