@@ -82,7 +82,7 @@ begin
   simp[power],
   rw nat.succ_eq_add_one,
   
-  -- by simple arithmetic
+  -- by simple arithmetic using multiplacation and distributivity
   sorry,
 
 end
@@ -221,6 +221,10 @@ In the inductive step, we have that:
                 = (m + 1) * n
                 = succ(m) * n
 
+Thus, proving the proposition using the inductive hypothesis and the 
+definition of multiplacation.
+
+QED. 
 
 -/
 
