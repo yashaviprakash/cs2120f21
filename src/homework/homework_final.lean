@@ -145,10 +145,12 @@ In the inductive step, we have that:
     (n+k) * succ(m) = (n+k) * m + (n+k)
                     = (n+k) * (m + 1)
                     = (n+k) * (succ(m))
-                    = (n * succ(m)) + (k * succ(m)) [unsure]
+                    = (n * succ(m)) + (k * succ(m)) 
                     = (n(succ(m))) + (k(succ(m))) [end goal]
 
-                    [end goal]
+We can understand that this end goal is equivalent to our inductive step using 
+the second defining clause of multiplacation. This gives that:
+
                     = mn + mk 
                     = (n * m + n) + (k * m + k)
                     = (n(m + 1)) + (k( m + 1))
@@ -184,6 +186,7 @@ In the inductive step, we have that:
 
     (n*k) * succ(m) = (n*k) * m + (n*k)
                     = (n*k) * succ(m)
+                    = (succ(m) * n) * (succ(m) * k)
                     = (m) * succ(n*k)
 
    
@@ -214,10 +217,9 @@ multiplacation to easily solve that 0 = 0.
 In the inductive step, we have that:
 
     n * succ(m) = n * m + n
-                = n * (m + 1)
-                = n * succ(m)
-                =
-                = m * succ(n) [end goal]
+                = m * n + n
+                = (m + 1) * n
+                = succ(m) * n
 
 
 -/
