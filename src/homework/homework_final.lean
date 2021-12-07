@@ -40,7 +40,9 @@ just a calculation as shown:
     (0^3 + 1^3 + ... + (n)^3) + (n+1)^3 = (1/4)(n+1)^2((n+1)+1)^2
     (1/4)𝑛^2(𝑛+1)^2 + (n+1)^3 = (1/4)(n+1)^2((n+1)+1)^2
 
-The rest is provable by simple algebra.
+The rest is provable by simple algebra. Thus, the proof in the base case and the inductive
+step allows us to prove that the proposition is true in all natural numbers.
+
 
 QED.
 
@@ -113,7 +115,9 @@ We can understand this as:
     1 * succ(n) = 1 * n + 1 = succ(n)
 
 Thus, proving the proposition using the inductive hypothesis and the 
-definition of multiplacation.
+definition of multiplacation. The proof in the base case and the inductive
+step allows us to prove that the proposition is true in all natural numbers.
+
 
 QED.
 -/ 
@@ -156,6 +160,8 @@ the second defining clause of multiplacation. This gives that:
                     = (n(m + 1)) + (k( m + 1))
                     = (n(succ(m))) + (k(succ(m)))
 
+The proof in the base case and the inductive step allows us to prove 
+that the proposition is true in all natural numbers.
 
 QED.
            
@@ -187,9 +193,16 @@ In the inductive step, we have that:
     (n*k) * succ(m) = (n*k) * m + (n*k)
                     = (n*k) * succ(m)
                     = (succ(m) * n) * (succ(m) * k)
-                    = (m) * succ(n*k)
+                    = ((m + 1) * n) * ((m + 1) * k)
+                    = ((m*n) + n) * ((m*k) + k)
+                    = (m * succ(n)) * (m * succ(k))
+                    = 
 
-   
+The proof in the base case and the inductive step allows us to prove 
+that the proposition is true in all natural numbers.
+
+QED.
+
 -/
 
 #check nat.mul
@@ -222,7 +235,8 @@ In the inductive step, we have that:
                 = succ(m) * n
 
 Thus, proving the proposition using the inductive hypothesis and the 
-definition of multiplacation.
+definition of multiplacation. The proof in the base case and the inductive
+step allows us to prove that the proposition is true in all natural numbers.
 
 QED. 
 
