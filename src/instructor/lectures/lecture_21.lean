@@ -313,7 +313,7 @@ proofs.
 -/
 def transitive := ∀ ⦃x y z⦄, x ≺ y → y ≺ z → x ≺ z
 
-example : transitive (@eq α) :=
+example : transitive (@eq nat) :=
 begin
   unfold transitive,
   assume x y z h1 h2,
