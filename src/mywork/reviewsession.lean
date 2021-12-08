@@ -27,6 +27,8 @@ P 0
 
 -/
 
+def heygirl : ℕ → Prop := ∀ (n: ℕ), ∀ (P : Prop), (P(0) ∧ ∀ n (P(n) → P(n+1))) → ∀n P(n)
+
 #check @nat.rec
 
 /-

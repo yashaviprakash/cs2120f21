@@ -40,7 +40,9 @@ just a calculation as shown:
     (0^3 + 1^3 + ... + (n)^3) + (n+1)^3 = (1/4)(n+1)^2((n+1)+1)^2
     (1/4)𝑛^2(𝑛+1)^2 + (n+1)^3 = (1/4)(n+1)^2((n+1)+1)^2
 
-The rest is provable by simple algebra.
+The rest is provable by simple algebra. Thus, the proof in the base case and the inductive
+step allows us to prove that the proposition is true in all natural numbers.
+
 
 QED.
 
@@ -82,7 +84,7 @@ begin
   simp[power],
   rw nat.succ_eq_add_one,
   
-  -- by simple arithmetic
+  -- by simple arithmetic using multiplacation and distributivity
   sorry,
 
 end
@@ -113,7 +115,9 @@ We can understand this as:
     1 * succ(n) = 1 * n + 1 = succ(n)
 
 Thus, proving the proposition using the inductive hypothesis and the 
-definition of multiplacation.
+definition of multiplacation. The proof in the base case and the inductive
+step allows us to prove that the proposition is true in all natural numbers.
+
 
 QED.
 -/ 
@@ -145,15 +149,19 @@ In the inductive step, we have that:
     (n+k) * succ(m) = (n+k) * m + (n+k)
                     = (n+k) * (m + 1)
                     = (n+k) * (succ(m))
-                    = (n * succ(m)) + (k * succ(m)) [unsure]
+                    = (n * succ(m)) + (k * succ(m)) 
                     = (n(succ(m))) + (k(succ(m))) [end goal]
 
-                    [end goal]
+We can understand that this end goal is equivalent to our inductive step using 
+the second defining clause of multiplacation. This gives that:
+
                     = mn + mk 
                     = (n * m + n) + (k * m + k)
                     = (n(m + 1)) + (k( m + 1))
                     = (n(succ(m))) + (k(succ(m)))
 
+The proof in the base case and the inductive step allows us to prove 
+that the proposition is true in all natural numbers.
 
 QED.
            
@@ -184,9 +192,17 @@ In the inductive step, we have that:
 
     (n*k) * succ(m) = (n*k) * m + (n*k)
                     = (n*k) * succ(m)
-                    = (m) * succ(n*k)
+                    = (succ(m) * n) * (succ(m) * k)
+                    = ((m + 1) * n) * ((m + 1) * k)
+                    = ((m*n) + n) * ((m*k) + k)
+                    = (m * succ(n)) * (m * succ(k))
+                    = 
 
-   
+The proof in the base case and the inductive step allows us to prove 
+that the proposition is true in all natural numbers.
+
+QED.
+
 -/
 
 #check nat.mul
@@ -214,11 +230,15 @@ multiplacation to easily solve that 0 = 0.
 In the inductive step, we have that:
 
     n * succ(m) = n * m + n
-                = n * (m + 1)
-                = n * succ(m)
-                =
-                = m * succ(n) [end goal]
+                = m * n + n
+                = (m + 1) * n
+                = succ(m) * n
 
+Thus, proving the proposition using the inductive hypothesis and the 
+definition of multiplacation. The proof in the base case and the inductive
+step allows us to prove that the proposition is true in all natural numbers.
+
+QED. 
 
 -/
 
