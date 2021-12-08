@@ -35,6 +35,14 @@ related to y by r, and y is is related to z by r,
 then x must be related to z by r (otherwise r is
 not transitive).
 
+What does this mean for relations?
+
+What each proof shows is that as long as the axioms 
+of reflexivity and substitutivity axioms (the first 
+the introduction rule, the second the elimination rule) 
+are accepted, the relation must also be symmetric, 
+transitive, and and equivalence relation.
+
 -/
 
 /- For all (∀) (**special predicate**)
