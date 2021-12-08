@@ -252,6 +252,9 @@ that all balls in the remaining set, {}, are red.
 So we have that all balls are red if (red b1) ∧ 
 (red b2) ∧ "all balls in {} are red". 
 
+When applied to zero arguments, the answer 
+really has to be true, otherwise this operation would
+*always* produce propositions that are ultimately false.  
 
 -/
 
