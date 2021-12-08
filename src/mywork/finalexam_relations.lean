@@ -294,7 +294,7 @@ def ordering :=
 
 **Other Types of Ordering Relations**
 
-I apologize LMAO, I'M TIRED!!!
+I apologize for no explicit definitions LMAO, I'M TIRED!!!
 
 def partial_order :=    ordering r ∧ ¬strongly_connected r
 def total_order :=      ordering r ∧ strongly_connected r
@@ -338,7 +338,24 @@ argument value will be encountered for which no
 yet "smaller" value exits.
 -/
 
-/- Operations on Relations 
+/- Specific Terms and Concepts for Relations
+
+**Domain and Codomain**
+
+We will call the set of all α values the "domain"
+of the relation r, and we will call the set of all 
+β values the "codomain" of r.
+
+def dom (r : α → β → Prop) : set α := { a : α | true } 
+def codom (r : α → β → Prop) : set β := { b : β | true }
+
+**Domain of Definition and Codomain**
+
+-- subset of doman and codomain respectively
+def dom_of_def (r : α → β → Prop) : set α := { a : α | ∃ b, r a b } -- set of alpha values for which there's some b so that the given alpha value is related to that b in the codomain
+def range (r : α → β → Prop) : set β := { b : β | ∃ a , r a b  } 
+
+**Restriction of a Relation**
 
 
 
