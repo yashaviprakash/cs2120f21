@@ -113,6 +113,11 @@ there is a contradiction. This is proof by negation.
 
 It is *entirely* different from Proof by Contradiction!
 
+Proof by contradiction is different. Here you want to prove P. You 
+do this by using ¬P, and then you show that the assumption yields a 
+contradiction, thus showing ¬¬P. Negation elimination is used to 
+deduce P (from ¬¬P). 
+
 -/
 
 /- Proof by Contradiction
@@ -123,25 +128,15 @@ You can use this approach to a proposition, P, by assuming
 That proves ¬¬P. Then you use the *independent* axiom of negation
 elimination to infer P from ¬¬P
 
--/
+Negation elimination is a bit of a misnomer, in the sense it allows
+us to cancel double negations. In this sense it is the heart of what 
+we call proof by contradiction. 
 
-/- False Elimination
+The interesting fact, however is that ¬¬P → P is not a theorem in 
+the constructive logic of the Lean Prover. Here we accept a different
+axiom, the axiom of the excluded middle. It's a useful axiom that we 
+can add to our logic without causing any inconsistencies/contradictions.
 
-The second rule says that if you have a proof of false and any other
-proposition, P, the logic is useless and so you might as well just 
-admit that P is true.
-
-Why is the logic useless?
-
-Well if false is true then there's no longer a difference!
-
-A contradiction makes a logic inconsistent.
-
-  (P : Prop) (f : false)
-  ---------------------- (false_elim f)
-        (pf : P)
-
-This can be further expressed as: ∀ (P : Prop), false → P
 -/
 
 /- Excluded Middle
@@ -167,3 +162,84 @@ a proof of a disjunction? Answer: a case analysis.
 
 -/
 
+/- Proving Proof by Contradiction
+
+Finally we come to the principle of negation
+elimination and the directly related strategy
+of proof by contradiction. Remember: you want
+to prove P, so you assume ¬P, then show that
+this leads to a contradiction, proving ¬¬P,
+at which point you "go classical" and apply
+the theorem/axiom of negation elimination to
+conclude P.
+
+Remember, proof by contradiction is really (and 
+literally) just applying the axiom of negation
+elimination. You can see this priciple in action
+right here.
+-/
+
+/- In simple terms:
+
+In proof by contradiction, you want to prove P so you
+assume ¬P. This means that there are no proofs of P, so 
+you want to, at this point, show that that leads to a 
+contradiction, proving ¬¬P. At this point, this is no 
+longer valid in constructive logic, so you have to go to
+classical logic to be able to use the theorem/axiom of
+negation elimination to conclude P.
+
+Negation elimination uses the excluded middle which states
+that any proposition is true or false, which is a disjunction. 
+Because it is a disjunction, you want to use case analysis to 
+prove the proof in all the ways it can be true, if the proposition
+is true or if its not true. When it's true, you conclude the proof
+using the tactic *assumption*, and when it's not true you use the
+tactic *contradiction* because you cannot have a proof of ¬¬P, which
+we previously discussed means that it's not the case that you don't have
+a proof of P, and ¬P, which means that there isn't a proof of P. From
+here, you conclude the proof and you conclude P. 
+
+Notice how this proof contained negation elimination for the proof
+of contradiction. 
+
+-/
+
+-- negation elimination
+theorem neg_elim : ∀ (P : Prop), ¬¬P → P :=
+begin
+  assume P,
+  assume h,
+  have pornp := classical.em P,
+  cases pornp with p pn,
+  assumption,
+  contradiction,
+end
+
+-- proof by contradiction 
+axiom P : Prop
+theorem p : P :=
+begin                 -- goal is to prove P
+  apply neg_elim _,   -- with neg_elim it will suffice to prove ¬¬P
+  assume np,          -- this entails assuming ¬P and deriving a contradiction
+                      -- that's the essence of proof by contradiction
+                      -- of course we have no information to finish this proof
+end
+/- False Elimination
+
+The second rule says that if you have a proof of false and any other
+proposition, P, the logic is useless and so you might as well just 
+admit that P is true.
+
+Why is the logic useless?
+
+Well if false is true then there's no longer a difference!
+
+A contradiction makes a logic inconsistent.
+
+  (P : Prop) (f : false)
+  ---------------------- (false_elim f)
+        (pf : P)
+
+This can be further expressed as: ∀ (P : Prop), false → P
+-/
