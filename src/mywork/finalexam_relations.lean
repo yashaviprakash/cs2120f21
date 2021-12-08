@@ -268,3 +268,78 @@ begin
   cases h,             -- finish off this proof
 end
 
+/- Ordering Relations
+
+**Ordering**
+
+How do we define ordering? 
+
+An ordering is any relation in which 
+
+(1) every object a is related to itself 
+(think "less then or equal" to), and 
+
+(2) if an object a is "less than or equal to" 
+an object b, and b is less than or equal to c, 
+then a is "less than or equal to c", and 
+
+(3) crucially, if a is "less than or equal
+to b" then the only way b can also be "less than
+or equal to a is if and and b are in fact equal."
+It's the anti_symmetry that prevents the case in
+which you have both a ≺ b and b ≺ a where a ≠ b.
+
+def ordering := 
+  reflexive r ∧ transitive r ∧ anti_symmetric r
+
+**Other Types of Ordering Relations**
+
+I apologize LMAO, I'M TIRED!!!
+
+def partial_order :=    ordering r ∧ ¬strongly_connected r
+def total_order :=      ordering r ∧ strongly_connected r
+def strict_ordering :=  asymmetric r ∧ transitive r
+def well_order := total_order r ∧ (∀ (s : set β),       -- for every
+                                    ∃ (b : β), b ∈ s →  -- non-empty set s
+                                      ∃ (b : β),        -- there is an element
+                                        b ∈ s ∧         -- in s
+                                          ∀ b' : β,     -- smaller than every other element in s 
+                                            b' ∈ s →     
+                                            b ≺ b')  
+
+**Focus on Well-Order**       
+
+a well order, aka wellorder, wellordering.
+It's a combination of a total order (like ≤ but not
+⊆) and this property that in any set of values there
+is always a least element.
+
+The nats are well ordered under ≤. Intuitively, every
+possible set of natural numbers (even an infinite set)
+will have a least element. The very least element of 
+all is 0, so no matter what set one picks, it will have
+either zero or some direct or indirect successor of 0
+as its least element.
+
+This concept is important in enabling one to prove
+that recursive functions are well founded: that no
+matter what finite input they are given they will
+stop running after some finite number of steps: i.e.,
+they won't call themselves recursively without end.
+
+The idea will be to show that each recursive call 
+that a function makes is given an argument value 
+that is "smaller" than the one that the function
+received in the first place. As long as each time
+an argument from a well ordered set is passed it 
+is smaller than the one that was received, then in
+some finite number of recursive calls, a "least"
+argument value will be encountered for which no
+yet "smaller" value exits.
+-/
+
+/- Operations on Relations 
+
+
+
+-/
