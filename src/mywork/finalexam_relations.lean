@@ -357,6 +357,87 @@ def range (r : α → β → Prop) : set β := { b : β | ∃ a , r a b  }
 
 **Restriction of a Relation**
 
+It will often be useful to consider the
+subrelation obtained by restricting the
+domain of a relation to elements of a 
+set, s. 
 
+If a relation relates three cats, c1, c2, 
+and c3, to their ages, say a1, a2 and a3,
+respectively, then restricting the domain
+of r to the set, s = {c1, c3}, would give
+the relation associating c1 and c3 with
+corresponding ages, but there would be no
+(c2, a2) pair in the restricted relation
+because c2 ∉ s.
+
+def dom_res 
+  (r : α → β → Prop) 
+  (s : set α) : 
+  α → β → Prop := 
+λ a b, a ∈ s ∧ r a b   
+
+def ran_res 
+  (r : α → β → Prop) 
+  (s : set β) : 
+  α → β → Prop := 
+λ a b, b ∈ s ∧ r a b     -- homework
+
+-/
+
+-- circle relation gives back -1 and 1 if a = 0
+-- domain restriction gives me the pairs (0, 1) and (0, -1)
+-- if i apply relation r to a i get back set β 
+-- set of beta values for which a is related to b
+def image_val (a : α) : set β :=
+{ b : β | a ≺ b } 
+
+-- image of a set, s, under r
+-- get back a set of beta values for which there is some 
+-- alpha value in s such that r is related to a and b
+def image_set (s : set α) : set β :=
+{ b : β | ∃ a : α, a ∈ s ∧ a ≺ b }
+
+/-
+**Inverse**
+
+-- inverse of r
+def inverse : β → α → Prop :=
+λ (b : β) (a : α), r a b
+
+**Composition**
+
+Takes two relations as arguments and glues them
+together into a new end-to-end relation: the
+*composition* of s with r. 
+
+The result of applying this relation to an (a : α) 
+is the (c : γ) that is obtained by applying the 
+relation s to the result of applying the relation 
+r to a. We can thus call the resulting relation "s after r."
+
+def composition (s : β → γ → Prop) (r : α → β → Prop):=
+  λ a c, (∃ b, s b c ∧ r a b) -- names a new binary relation
+  -- have a pair alpha or a,c whenever there's some b in the middle
+  -- r on the left takes a to b and relation in middle takes it to c on the right
+
+example : 
+
+i : id → name
+s : id → salary
+
+x : name → salary --[Goal]
+
+How do we find the composition then?
+
+i inverse : name → id -- find the inverse
+s : id → salary
+
+-/
+
+/- Single Valued Binary Relation
+
+def single_valued := 
+  ∀ {x : α} {y z : β}, r x y → r x z → y = z
 
 -/
