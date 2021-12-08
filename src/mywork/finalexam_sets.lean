@@ -13,7 +13,7 @@ all and only the element values considered to be "in" s
 
 When we talk about sets, it's interesting that we refer to
 values being "in" a set. Now that we've defined set membership
-as being defined by their predicate, we can understnd that the
+as being defined by their predicate, we can understand that the
 action of being "in" a set is simply just a matter of satisfying 
 a predicate. Therefore, v ∈ pred can also be rewritten as 
 pred v (the predicate applied to v). 
@@ -179,7 +179,7 @@ Takeaway : To prove two sets equal, you can prove that each is a subset
 of the other. 
 
 There is a more clear way to express this conjunction, though. When we expand
-this definiton, we get:
+this definition, we get:
   ∀ x, 
     (x ∈ L → x ∈ X) ∧
     (x ∈ X → x ∈ L)
