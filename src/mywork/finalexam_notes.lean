@@ -130,3 +130,45 @@ Elimination Rule : ∀ {a b c : Prop}, a ∨ b → (a → c) → (b → c) → c
 -/
 
 
+/- Biimplication (↔)
+
+Introduction Rule : ∀ {a b : Prop}, (a → b) → (b → a) → (a ↔ b)
+
+                    For any arbitrary but specific propositions a and b,
+                    if given a proof that a proof of a yields a proof of b,
+                    then if given a proof that a proof of b yields a proof of b,
+                    a proof of a biimplication between a and b can be derived.
+
+                    If the introduction rule takes two proofs to construct a proof
+                    of a biimplication, how many ways can we consume this proof?
+
+Elimination Rule (Left): ∀ {a b : Prop}, (a ↔ b) → a → b
+
+                        For any arbitrary but specific propositions a and b, if given a proof 
+                        of a biimplication between a and b, then if given a proof of a, then a 
+                        proof of b can be derived. 
+
+Elimination Rule (Right) : ∀ {a b : Prop}, (a ↔ b) → b → a
+
+                        For any arbitrary but specific propositions a and b, if given a proof
+                        of a biimplication between a and b,then if given a proof of b, then a 
+                        proof of a can be derived. 
+
+-/
+
+/- True (tt)
+
+Introduction Rule : True has a proof, and is thus invariably logically true. (definition taken from notes)
+
+Elimination Rule : None
+
+-/
+
+/- False (ff)
+
+Introduction Rule : None
+
+Eliminaton Rule : Ex falso, from false everything follows. Another way to visualize this is if given a proof
+                  of false, then our logic there is inconsistent, therefore everything is true if false is true!
+
+-/
