@@ -41,7 +41,7 @@ What each proof shows is that as long as the axioms
 of reflexivity and substitutivity axioms (the first 
 the introduction rule, the second the elimination rule) 
 are accepted, the relation must also be symmetric, 
-transitive, and and equivalence relation.
+transitive, and equivalence relation.
 
 -/
 
@@ -178,5 +178,19 @@ Introduction Rule : None
 
 Eliminaton Rule : Ex falso, from false everything follows. Another way to visualize this is if given a proof
                   of false, then our logic there is inconsistent, therefore everything is true if false is true!
+
+-/
+
+/- Not (¬)
+
+Introduction Rule : ∀ (P : Prop), ¬P
+
+                    For any proposition, P, we *define* ¬P to be the 
+                    proposition, P → false. So ¬P is true exactly when
+                    P → false is true, and that is true exactly when P 
+                    is false, when there are no proofs of it. If you
+                    can produce a proof of P → false, then you can conclude
+                    ¬P. This is the introduction rule for ¬. 
+
 
 -/

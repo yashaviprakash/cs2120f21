@@ -138,6 +138,8 @@ axioms (p :P) (q : Q)
 
 example : P ∧ Q := and.intro p q
 
+#check @and.elim_left
+
 /-
 Prove that if arbitary propositions P and Q
 are true (which is to say that we have a proof
