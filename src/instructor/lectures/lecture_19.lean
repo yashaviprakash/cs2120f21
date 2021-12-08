@@ -260,6 +260,7 @@ to the problem of proving ∀ x, x ∈ L ↔
 x ∈ X. And that is what we see next. 
 -/
 
+-- if L is a subset of X then the intersection of L and X is L
 example : ∀ {α : Type} (L X : set α), L ⊆ X → ((L ∩ X) = L) := 
 begin
   intros α L X h,

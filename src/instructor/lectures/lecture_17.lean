@@ -198,7 +198,14 @@ Now let's state and prove some theorems.
 
 
 example : ∀ (n : ℕ), evens_union_ods n ↔ complete n := 
-_
+begin
+  assume n,
+  split,
+  -- forward
+  unfold evens_union_ods complete,
+  assume h,
+  
+end
 
 
 example : ∀ (n : ℕ), (n ∈ evens_union_ods) ↔ (n ∈ complete) := 
